@@ -5,10 +5,10 @@
 
 "Meriken's Tripcode Engine" is a cross-platform application designed to generate custom/vanity tripcodes at maximum speed. 
 It is arguably the fastest and most powerful program of its kind. It makes effecitive use of available computing power of CPUs and GPUs, 
-and the user can specify flexible regex patterns for tripcodes. It features highly optimized, extensively parallelized 
+and the user can specify flexible regex patterns for desired tripcodes. It features highly optimized, extensively parallelized 
 implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and Intel SSE2/AVX/AVX2.
 
-The Windows version of this program is available for free download here:
+Precompiled binaries of this program for Windows are available here:
 
 http://meriken.ygch.net/programming/merikens-tripcode-engine-english/
 
@@ -31,7 +31,7 @@ Currently [MTY CL][2] is the only practical alternative to this program, and thi
 
 ## Donations
 
-I would really appreciate donations as it is quite expensive to buy hardware for testing.
+I would really appreciate donations as it is quite expensive to keep buying hardware for testing.
 I am also working on the English version of my tripcode search service and would like to add more servers.
 
 * PayPal: `meriken.ygch.net@gmail.com`
@@ -44,7 +44,7 @@ You need the following tools to build Meriken's Tripcode Engine.
 * Visual Studio 2013 Community
 * CUDA Toolkit 7.5
 * AMD APP SDK 3.0
-* YASM 1.2.0
+* YASM **1.2.0** (Do not use YASM 1.3.0!)
 
 This program uses Boost and Boost.Process. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages\BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
@@ -79,11 +79,11 @@ You need the following tools to build Meriken's Tripcode Engine.
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later)
 * AMD APP SDK 3.0 (if you are using an AMD/NVIDIA video card.)
 
-You should be able to build everything with `BuildAll.sh'. If you are building the application manuallu, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
+You should be able to build everything with `BuildAll.sh`. If you are building the application manually, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
 
 ### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
 
-If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ )
+If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
