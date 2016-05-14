@@ -14,14 +14,6 @@ option(USE_YASM "USE_YASM" ON)
 option(ENABLE_OPENCL "ENABLE_OPENCL" ON)
 option(ENGLISH_VERSION "ENGLISH_VERSION" ON)
 
-if (CMAKE_COMPILER_IS_GNUCXX)
-	execute_process(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
-	if (NOT (GCC_VERSION VERSION_GREATER 5.0 OR GCC_VERSION VERSION_EQUAL 5.0))
-		message(FATAL_ERROR "g++ 5.0 or later is required.")
-		quit()
-	endif()
-endif()
-
 
 
 ##########
