@@ -1,0 +1,1385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_English_NVIDIA|Win32">
+      <Configuration>Release_English_NVIDIA</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_English_NVIDIA|x64">
+      <Configuration>Release_English_NVIDIA</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_English|Win32">
+      <Configuration>Release_English</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_English|x64">
+      <Configuration>Release_English</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_NVIDIA|Win32">
+      <Configuration>Release_NVIDIA</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_NVIDIA|x64">
+      <Configuration>Release_NVIDIA</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SourceFiles\CPU10.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_Kernel.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_Kernel_Common.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_0.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_1.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_10.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_11.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_12.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_13.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_14.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_15.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_16.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_17.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_18.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_19.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_2.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_20.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_21.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_22.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_23.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_24.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_25.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_26.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_27.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_28.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_29.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_3.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_30.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_31.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_32.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_33.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_34.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_35.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_36.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_37.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_38.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_39.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_4.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_40.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_41.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_42.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_43.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_44.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_45.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_46.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_47.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_48.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_49.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_5.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_50.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_51.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_52.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_53.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_54.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_55.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_56.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_57.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_58.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_59.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_6.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_60.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_61.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_62.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_63.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_7.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_8.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_9.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_S-boxes.h" />
+    <ClInclude Include="..\SourceFiles\MerikensTripcodeEngine.h" />
+    <ClInclude Include="..\SourceFiles\Constants.h" />
+    <ClInclude Include="..\SourceFiles\Macros.h" />
+    <ClInclude Include="..\SourceFiles\Types.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SourceFiles\CPU10_yasm.cpp">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <ClCompile Include="..\SourceFiles\CPU10_AVX2.cpp" />
+    <ClCompile Include="..\SourceFiles\CPU10_SSE2Intrinsics.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\SourceFiles\CPU12_SSE2Intrinsics.cpp">
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</WholeProgramOptimization>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</WholeProgramOptimization>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</WholeProgramOptimization>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">AnySuitable</InlineFunctionExpansion>
+      <InlineFunctionExpansion Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">AnySuitable</InlineFunctionExpansion>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</IntrinsicFunctions>
+      <IntrinsicFunctions Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</IntrinsicFunctions>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">Speed</FavorSizeOrSpeed>
+      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</WholeProgramOptimization>
+      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</WholeProgramOptimization>
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\SourceFiles\CPU12_yasm.cpp" />
+    <ClCompile Include="..\SourceFiles\OpenCL10.cpp" />
+    <ClCompile Include="..\SourceFiles\OpenCL12.cpp" />
+    <ClCompile Include="..\SourceFiles\Patterns.cpp" />
+    <ClCompile Include="..\SourceFiles\UtilityFunctions.cpp" />
+    <ClCompile Include="..\SourceFiles\Verification10.cpp" />
+    <ClCompile Include="..\SourceFiles\VerificationDuplicates.cpp" />
+    <ClCompile Include="..\SourceFiles\Verification12.cpp" />
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers.cu">
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher0.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher1.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher10.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher11.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher12.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher13.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher14.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher15.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher2.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher3.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher4.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher5.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher6.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher7.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher8.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher9.cu">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_50,sm_50;compute_52,sm_52;compute_53,sm_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_SharedMemory.cu">
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">42</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">42</MaxRegCount>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA12.cu">
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">0</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">0</MaxRegCount>
+    </CudaCompile>
+    <ClCompile Include="..\SourceFiles\Main.cpp">
+      <FileType>Document</FileType>
+    </ClCompile>
+    <CudaCompile Include="..\SourceFiles\Testing.cpp">
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_20,sm_20</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_20,sm_20</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_20,sm_20</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_20,sm_20</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_20,sm_20;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_20,sm_20;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_20,sm_20;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;</CodeGeneration>
+      <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_20,sm_20;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;</CodeGeneration>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <YASM Include="..\SourceFiles\OpenCL\bin\OpenCL10GCN.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\OpenCL\bin\OpenCL12GCN.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x64_AVX.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x64_AVX2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x64_SSE2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x64_SSE2_Nehalem.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x86_AVX.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x86_AVX2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x86_SSE2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU10_x86_SSE2_Nehalem.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x64_AVX.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x64_AVX2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x64_SSE2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x64_SSE2_Nehalem.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x86_AVX.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x86_AVX2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x86_SSE2.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+    <YASM Include="..\SourceFiles\CPU12_x86_Nehalem.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">true</ExcludedFromBuild>
+    </YASM>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SourceFiles\OpenCL\OpenCL10.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL10_AMD_VLIW.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL12.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL12_AMD_VLIW.cl" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DD13A840-16DE-4D22-9D2C-069440A352D6}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MERIKENsTripcodeFinderCUI</RootNamespace>
+    <ProjectName>MerikensTripcodeEngine</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\vsyasm.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\Win32\lib;$(AMDAPPSDKROOT)\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)64</TargetName>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\x64\lib;$(AMDAPPSDKROOT)\lib\x86_64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\Win32\lib;$(AMDAPPSDKROOT)\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\Win32\lib;$(AMDAPPSDKROOT)\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\Win32\lib;$(AMDAPPSDKROOT)\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)_NVIDIA</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\Win32\lib;$(AMDAPPSDKROOT)\lib\x86;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IntDir>$(Platform)\$(Configuration)\</IntDir>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)_NVIDIA</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)64</TargetName>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\x64\lib;$(AMDAPPSDKROOT)\lib\x86_64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)64</TargetName>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\x64\lib;$(AMDAPPSDKROOT)\lib\x86_64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)64_NVIDIA</TargetName>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\x64\lib;$(AMDAPPSDKROOT)\lib\x86_64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\..\WindowsBinaries</OutDir>
+    <TargetName>$(ProjectName)64_NVIDIA</TargetName>
+    <LibraryPath>$(SolutionDir)\..\BoostPackages\boost_1_61_0\stage\x64\lib;$(AMDAPPSDKROOT)\lib\x86_64;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>$(SolutionDir)\..\BoostPackages\include;$(SolutionDir)\..\BoostPackages\boost_1_61_0;$(AMDAPPSDKROOT)\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>Od</Optimization>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level1</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>Od</Optimization>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">
+    <ClCompile>
+      <WarningLevel>Level1</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <UseMSVC>true</UseMSVC>
+      <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>true</BufferSecurityCheck>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>winmm.lib;OpenCL.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <StackReserveSize>
+      </StackReserveSize>
+      <DelayLoadDLLs>OpenCL.dll;%(DelayLoadDLLs)</DelayLoadDLLs>
+    </Link>
+    <CudaCompile>
+      <CodeGeneration>compute_20,sm_20;compute_20,sm_21;compute_30,sm_30;compute_32,sm_32;compute_35,sm_35;compute_37,sm_37;compute_50,sm_50;compute_52,sm_52;compute_53,sm_53;compute_53,compute_53</CodeGeneration>
+    </CudaCompile>
+    <CudaCompile>
+      <PtxAsOptionV>true</PtxAsOptionV>
+      <Optimization>O3</Optimization>
+      <TargetMachinePlatform>64</TargetMachinePlatform>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+    </CudaCompile>
+    <YASM>
+      <ListFile>$(IntDir)$(TargetName).lst</ListFile>
+    </YASM>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)\..\SourceFiles\OpenCL\* $(ProjectDir)\..\WindowsBinaries\OpenCL /s /e /y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\vsyasm.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 7.5.targets" />
+  </ImportGroup>
+</Project>

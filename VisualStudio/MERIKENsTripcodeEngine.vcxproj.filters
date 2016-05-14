@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\SourceFiles\CPU10_AVX2.cpp" />
+    <ClCompile Include="..\SourceFiles\CPU10_SSE2Intrinsics.cpp" />
+    <ClCompile Include="..\SourceFiles\CPU12_SSE2Intrinsics.cpp" />
+    <ClCompile Include="..\SourceFiles\OpenCL10.cpp" />
+    <ClCompile Include="..\SourceFiles\OpenCL12.cpp" />
+    <ClCompile Include="..\SourceFiles\Patterns.cpp" />
+    <ClCompile Include="..\SourceFiles\Verification10.cpp" />
+    <ClCompile Include="..\SourceFiles\VerificationDuplicates.cpp" />
+    <ClCompile Include="..\SourceFiles\Verification12.cpp" />
+    <ClCompile Include="..\SourceFiles\Main.cpp" />
+    <ClCompile Include="..\SourceFiles\UtilityFunctions.cpp" />
+    <ClCompile Include="..\SourceFiles\CPU10_yasm.cpp" />
+    <ClCompile Include="..\SourceFiles\CPU12_yasm.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SourceFiles\CPU10.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_S-boxes.h" />
+    <ClInclude Include="..\SourceFiles\MerikensTripcodeEngine.h" />
+    <ClInclude Include="..\SourceFiles\Constants.h" />
+    <ClInclude Include="..\SourceFiles\Macros.h" />
+    <ClInclude Include="..\SourceFiles\Types.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_0.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_1.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_10.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_11.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_12.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_13.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_14.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_15.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_16.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_17.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_18.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_19.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_2.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_20.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_21.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_22.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_23.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_24.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_25.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_26.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_27.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_28.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_29.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_3.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_30.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_31.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_32.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_33.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_34.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_35.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_36.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_37.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_38.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_39.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_4.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_40.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_41.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_42.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_43.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_44.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_45.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_46.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_47.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_48.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_49.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_5.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_50.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_51.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_52.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_53.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_54.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_55.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_56.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_57.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_58.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_59.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_6.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_60.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_61.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_62.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_63.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_7.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_8.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\DES_Crypt_9.h">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_Kernel.h" />
+    <ClInclude Include="..\SourceFiles\CUDA10_Registers_Kernel_Common.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <YASM Include="..\SourceFiles\CPU10_x64_AVX.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x64_AVX2.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x64_SSE2.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x64_SSE2_Nehalem.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x86_AVX.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x86_AVX2.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x86_SSE2.asm" />
+    <YASM Include="..\SourceFiles\CPU10_x86_SSE2_Nehalem.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x64_AVX.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x64_AVX2.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x64_SSE2.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x64_SSE2_Nehalem.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x86_AVX.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x86_AVX2.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x86_SSE2.asm" />
+    <YASM Include="..\SourceFiles\CPU12_x86_Nehalem.asm" />
+    <YASM Include="..\SourceFiles\OpenCL\bin\OpenCL10GCN.asm" />
+    <YASM Include="..\SourceFiles\OpenCL\bin\OpenCL12GCN.asm" />
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers.cu" />
+    <CudaCompile Include="..\SourceFiles\CUDA10_SharedMemory.cu" />
+    <CudaCompile Include="..\SourceFiles\CUDA12.cu" />
+    <CudaCompile Include="..\SourceFiles\Testing.cpp" />
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher10.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher11.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher12.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher13.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher14.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher15.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher0.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher1.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher2.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher3.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher4.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher5.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher6.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher7.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher8.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+    <CudaCompile Include="..\SourceFiles\CUDA10_Registers_MultipleKernels\CUDA10_Registers_KernelLauncher9.cu">
+      <Filter>CUDA10_Registers_MultipleKernels</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CUDA10_Registers_MultipleKernels">
+      <UniqueIdentifier>{63751d56-bff4-42c1-870a-7ae51ce188e2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SourceFiles\OpenCL\OpenCL10.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL12.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL10_AMD_VLIW.cl" />
+    <None Include="..\SourceFiles\OpenCL\OpenCL12_AMD_VLIW.cl" />
+  </ItemGroup>
+</Project>
