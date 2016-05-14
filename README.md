@@ -46,9 +46,9 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM 1.2.0
 
-This program uses Boost and Boost.Process. Make sure to extract `BoostPackages/boost_1_61_0_b1.7z` and run `BoostPackages\BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
+This program uses Boost and Boost.Process. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages\BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
-There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and  64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
+There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
 ## Dependencies (Windows)
 
@@ -79,9 +79,11 @@ You need the following tools to build Meriken's Tripcode Engine.
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later)
 * AMD APP SDK 3.0 (if you are using an AMD/NVIDIA video card.)
 
-This program uses Boost and Boost.Process. Make sure to extract `BoostPackages/boost_1_61_0_b1.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
+You should be able to build everything with `BuildAll.sh'. If you are building the application manuallu, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
 
 ### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
+
+If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ )
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
