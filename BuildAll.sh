@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# CLRadeonExtender
 cd CLRadeonExtender/
 7z x -y CLRadeonExtender-*.zip 
 cd CLRX-mirror-master/
@@ -9,6 +10,7 @@ cmake ../
 make
 cd ../../../
 
+# Boost
 cd BoostPackages/
 7z x -y boost_1_61_0.7z
 cd boost_1_61_0
