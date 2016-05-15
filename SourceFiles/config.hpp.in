@@ -1,0 +1,3 @@
+/* Set to sizeof(void*) */ 
+@SIZEOF_VOID_P_CODE@ 
+	

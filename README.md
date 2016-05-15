@@ -69,7 +69,7 @@ Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" below.
 
-## Building (Linux; x86_64 only)
+## Building (Linux; 32/64-bit x86 only)
 
 **Note:** Linux support is preliminary. Only OpenCL, AMD GCN, and Intel SSE2 are supported. Support for NVIDIA graphics cards is experimental, and the speed is rather slow. (I am planning to port the CUDA implementation.) 
 
