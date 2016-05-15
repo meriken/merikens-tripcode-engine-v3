@@ -20,6 +20,6 @@ cd ../../
 
 mkdir CMakeBuild/
 cd CMakeBuild/
-cmake ../CMake/
+cmake ../SourceFiles/
 make
 echo TEST/ >> patterns.txt

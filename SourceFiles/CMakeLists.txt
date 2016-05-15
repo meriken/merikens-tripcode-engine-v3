@@ -1,7 +1,6 @@
 cmake_minimum_required(VERSION 2.8.4)
 project(MerikensTripcodeEngine CXX)
 
-set(MTE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../SourceFiles)
 set(MTE_BOOST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../BoostPackages)
 set(MTE_BOOST_PACKAGE "boost_1_61_0")
 
@@ -20,7 +19,7 @@ option(ENGLISH_VERSION "ENGLISH_VERSION" ON)
 # OpenCL #
 ##########
 
-file(COPY "${MTE_SOURCE_DIR}/OpenCL" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 set(CYGWIN_AMD_APP_SDK_DIR "/cygdrive/c/Program\ Files\ (x86)/AMD\ APP\ SDK/3.0")
 if(AMDAPPSDKROOT AND EXISTS ${AMDAPPSDKROOT})
 	set(UNIX_AMD_APP_SDK_DIR ${AMDAPPSDKROOT})
@@ -29,34 +28,23 @@ else()
 endif()
 set(UNIX_NVIDIA_OPENCL_SDK_DIR "/usr/local/cuda-7.5")
 if(ENABLE_OPENCL AND CYGWIN AND EXISTS ${CYGWIN_AMD_APP_SDK_DIR})
-    set(OPENCL_LINK_LIBRARIES
-        OpenCL)
-    set(OPENCL_INCLUDE_DIR
-        "${CYGWIN_AMD_APP_SDK_DIR}/include")
-    set(OPENCL_LINK_DIR
-        "${CYGWIN_AMD_APP_SDK_DIR}/lib/x86_64")
+    set(OPENCL_LINK_LIBRARIES OpenCL)
+    set(OPENCL_INCLUDE_DIR "${CYGWIN_AMD_APP_SDK_DIR}/include")
+    set(OPENCL_LINK_DIR "${CYGWIN_AMD_APP_SDK_DIR}/lib/x86_64")
 elseif(ENABLE_OPENCL AND UNIX AND EXISTS ${UNIX_NVIDIA_OPENCL_SDK_DIR})
-    set(OPENCL_LINK_LIBRARIES
-        OpenCL)
-    set(OPENCL_INCLUDE_DIR
-        "${UNIX_NVIDIA_OPENCL_SDK_DIR}/include")
-    set(OPENCL_LINK_DIR
-        "${UNIX_NVIDIA_OPENCL_SDK_DIR}/lib64")
+    set(OPENCL_LINK_LIBRARIES OpenCL)
+    set(OPENCL_INCLUDE_DIR "${UNIX_NVIDIA_OPENCL_SDK_DIR}/include")
+    set(OPENCL_LINK_DIR "${UNIX_NVIDIA_OPENCL_SDK_DIR}/lib64")
 elseif(ENABLE_OPENCL AND UNIX AND EXISTS ${UNIX_AMD_APP_SDK_DIR})
-    set(OPENCL_LINK_LIBRARIES
-        OpenCL)
-    set(OPENCL_INCLUDE_DIR
-        "${UNIX_AMD_APP_SDK_DIR}/include")
-    set(OPENCL_LINK_DIR
-        "${UNIX_AMD_APP_SDK_DIR}/lib/x86_64")
+    set(OPENCL_LINK_LIBRARIES OpenCL)
+    set(OPENCL_INCLUDE_DIR "${UNIX_AMD_APP_SDK_DIR}/include")
+    set(OPENCL_LINK_DIR "${UNIX_AMD_APP_SDK_DIR}/lib/x86_64")
 else()
     set(ENABLE_OPENCL FALSE)
 endif()
 if(ENABLE_OPENCL)
-    file(GLOB OPENCL_SOURCES
-        "${MTE_SOURCE_DIR}/OpenCL*.cpp")
-    set(MTE_COMPILE_FLAGS ${MTE_COMPILE_FLAGS}
-        -DENABLE_OPENCL)
+    file(GLOB OPENCL_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL*.cpp")
+    set(MTE_COMPILE_FLAGS ${MTE_COMPILE_FLAGS} -DENABLE_OPENCL)
 endif()
 
 
@@ -73,7 +61,7 @@ if(USE_YASM)
 	foreach(in_f ${ARGN})
 		set(out_f "${CMAKE_CURRENT_BINARY_DIR}/${in_f}")
 		string(REPLACE ".asm" ".o" out_f ${out_f})
-		set(in_f "${MTE_SOURCE_DIR}/${in_f}")
+		set(in_f "${CMAKE_CURRENT_SOURCE_DIR}/${in_f}")
 		add_custom_command(
 			OUTPUT ${out_f}
 			DEPENDS ${in_f}
@@ -99,22 +87,22 @@ endif()
 
 
 set(CORE_SOURCES
-	${MTE_SOURCE_DIR}/Main.cpp
-	${MTE_SOURCE_DIR}/Patterns.cpp
-	${MTE_SOURCE_DIR}/Testing.cpp
-	${MTE_SOURCE_DIR}/Verification10.cpp
-	${MTE_SOURCE_DIR}/Verification12.cpp
-	${MTE_SOURCE_DIR}/VerificationDuplicates.cpp
-	${MTE_SOURCE_DIR}/UtilityFunctions.cpp)
+	${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Patterns.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Testing.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Verification10.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/Verification12.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/VerificationDuplicates.cpp
+	${CMAKE_CURRENT_SOURCE_DIR}/UtilityFunctions.cpp)
 if (USE_YASM)
 	file(GLOB CPU_SOURCES
-		"${MTE_SOURCE_DIR}/CPU10_yasm.cpp"
-		"${MTE_SOURCE_DIR}/CPU10_AVX2.cpp"
-		"${MTE_SOURCE_DIR}/CPU12_yasm.cpp")
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_yasm.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_yasm.cpp")
 else()
 	file(GLOB CPU_SOURCES
-		"${MTE_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"
-		"${MTE_SOURCE_DIR}/CPU12_SSE2Intrinsics.cpp")
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_SSE2Intrinsics.cpp")
 endif()
 set(SOURCES
 	${CORE_SOURCES}
@@ -125,7 +113,7 @@ set(SOURCES
 
 LINK_LIBRARIES(${OPENCL_LINK_LIBRARIES} boost_system boost_iostreams)
 include_directories(
-    "${MTE_SOURCE_DIR}"
+    "${CMAKE_CURRENT_SOURCE_DIR}"
     "${MTE_BOOST_DIR}/include"
     "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
     ${OPENCL_INCLUDE_DIR})
@@ -155,7 +143,7 @@ set_target_properties(MerikensTripcodeEngine PROPERTIES LINKER_LANGUAGE CXX)
 #set(CMAKE_CXX_LINK_EXECUTABLE "<CMAKE_CXX_COMPILER> <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
 
 install_programs(/bin FILES ${CMAKE_CURRENT_BINARY_DIR}/MerikensTripcodeEngine)
-file(GLOB GCN_SOURCE_FILES "${MTE_SOURCE_DIR}/OpenCL/bin/*.asm")
+file(GLOB GCN_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/bin/*.asm")
 install(FILES ${GCN_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL/bin)
-file(GLOB OPENCL_SOURCE_FILES "${MTE_SOURCE_DIR}/OpenCL/*.cl")
+file(GLOB OPENCL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/*.cl")
 install(FILES ${OPENCL_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL)
