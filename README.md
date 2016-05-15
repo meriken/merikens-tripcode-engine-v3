@@ -88,7 +88,7 @@ You should be able to build everything with `BuildAll.sh`. If you are building t
 
 If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
 
-Note: Support for NVIDIA graphics cards are preliminary. If you would like to use an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
+**Note:** Support for NVIDIA graphics cards is preliminary, and the speed is rather slow. If you still want to use an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
@@ -96,12 +96,6 @@ $ ./BuildAll.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
 ```
-
-## Dependencies (Linux)
-
-You need the following software installed in order to run the application:
-
-* AMD fglrx Driver (if you are using an AMD graphics card)
 
 ## Usage (Linux)
 
