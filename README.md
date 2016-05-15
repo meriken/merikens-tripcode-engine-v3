@@ -1,6 +1,8 @@
 ﻿Meriken's Tripcode Engine
 =========================
 
+This repository was moved from https://github.com/meriken/merikens-tripcode-engine
+
 **I am currently working on a cross-platform version of this application. Donations are greatly appreciated.** 
 
 "Meriken's Tripcode Engine" is a cross-platform application designed to generate custom/vanity tripcodes at maximum speed. 
@@ -77,13 +79,16 @@ You need the following tools to build Meriken's Tripcode Engine.
 
 * CMake 2.8.4 or later
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later)
-* AMD APP SDK 3.0 (if you are using an AMD/NVIDIA video card.)
+* AMD APP SDK 3.0 (if you are using an AMD video card.)
+* CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
 
 You should be able to build everything with `BuildAll.sh`. If you are building the application manually, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
 
 ### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
 
 If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
+
+Note: Support for NVIDIA graphics cards are preliminary. If you would like to use an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 

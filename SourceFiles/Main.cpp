@@ -382,9 +382,9 @@ const char *GetErrorMessage(int32_t errorCode)
     case ERROR_CUDA:
 		return "CUDA fucnction call failed.";
     case ERROR_NO_MEMORY: 
-		return "ERROR_NO_MEMORY";
+		return "Not enough memory";
     case ERROR_PATTERN_FILE: 
-		return "ERROR_PATTERN_FILE";
+		return "Failed to load a pattern file";
     case ERROR_IGNORE_DIRECTIVE:
 		return "ERROR_IGNORE_DIRECTIVE";
     case ERROR_NO_TARGET_PATTERNS: 

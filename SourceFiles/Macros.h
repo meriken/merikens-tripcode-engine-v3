@@ -36,7 +36,10 @@
 // MACROS                                                                    //
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifndef _MSC_VER
+#ifdef _MSC_VER
+#define HIT_ANY_KEY "  Hit any key to exit."
+#else
+#define HIT_ANY_KEY ""
 #define _getch()
 #endif
 
@@ -50,7 +53,7 @@
 			fflush(stdout);                                       \
 		} else {                                                  \
 			reset_cursor_pos(prevLineCount);                        \
-			printf("\nERROR\n=====\n  %s\n\a\n  Hit any key to exit.", (msg));                \
+			printf("\nERROR\n=====\n  %s\n\a\n%s", (msg), HIT_ANY_KEY);                \
 			_getch();                                            \
 			show_cursor();                                         \
 		}                                                         \
@@ -72,7 +75,8 @@
 			reset_cursor_pos(prevLineCount);                        \
 			strcpy(line, "\nERROR\n=====\n  ");           \
 			strcat(line, (msg));                          \
-			strcat(line, "\n\a\n  Hit any key to exit.");                          \
+			strcat(line, "\n\a\n");                          \
+			strcat(line, HIT_ANY_KEY);                          \
 			printf(line, (arg1));                         \
 			_getch();                                    \
 			show_cursor();                                 \
@@ -97,8 +101,8 @@
 				for (; *p; ++p)                                                               \
 				    if (*p == '\\' || *p == '/')                                              \
 						file_name = p + 1;                                                    \
-				printf("\nERROR\n=====\n  CUDA Function Call Failed: %s [%d] (file '%s', line %d)\n  The video card may be low on resources.\n\a\n  Hit any key to exit.", \
-						cudaGetErrorString(_errorCode), (int32_t)_errorCode, file_name, __LINE__); \
+				printf("\nERROR\n=====\n  CUDA Function Call Failed: %s [%d] (file '%s', line %d)\n  The video card may be low on resources.\n\a\n%s", \
+						cudaGetErrorString(_errorCode), (int32_t)_errorCode, file_name, __LINE__, HIT_ANY_KEY); \
 				_getch();                                                                     \
 				show_cursor();                                                                 \
 			}                                                                                 \
@@ -123,8 +127,8 @@
 				for (; *p; ++p)                                                               \
 				    if (*p == '\\' || *p == '/')                                              \
 						file_name = p + 1;                                                    \
-				printf("\nERROR\n=====\n  OpenCL Function Call Failed: %s (file '%s', line %d)\n\a\n  Hit any key to exit.", \
-						ConvertOpenCLErrorCodeToString(_errorCode), file_name, __LINE__);          \
+				printf("\nERROR\n=====\n  OpenCL Function Call Failed: %s (file '%s', line %d)\n\a\n%s", \
+						ConvertOpenCLErrorCodeToString(_errorCode), file_name, __LINE__, HIT_ANY_KEY);          \
 				_getch();                                                                          \
 				show_cursor();                                                                      \
 			}                                                                                      \
@@ -142,7 +146,7 @@
 			fflush(stdout);                                                                    \
 		} else {                                                                                        \
 			reset_cursor_pos(prevLineCount);                        \
-			printf("\nERROR\n=====\n  Assertion Failed: file %s, line %d\n\a\n  Hit any key to exit.", __FILE__, __LINE__); \
+			printf("\nERROR\n=====\n  Assertion Failed: file %s, line %d\n\a\n%s", __FILE__, __LINE__, HIT_ANY_KEY); \
 			_getch();                                                                                  \
 			show_cursor();                                                                               \
 		}                                                                                               \
