@@ -278,9 +278,11 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 		strcat(commandLine, " -f ");
 		strcat(commandLine, patternFilePathArray[patternFileIndex]);
 	}
+#ifdef ENABLE_CUDA
 	if (options.useOpenCLForCUDADevices) {
 		strcat(commandLine, " --use-opencl-for-cuda-devices");
 	}
+#endif
 	if (!options.enableGCNAssembler) {
 		strcat(commandLine, " --disable-gcn-assembler");
 	}
@@ -512,8 +514,10 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 		args.push_back(CONVERT_FROM_BYTES("-f"));
 		args.push_back(CONVERT_FROM_BYTES(std::string(patternFilePathArray[patternFileIndex])));
 	}
+#ifdef ENABLE_CUDA
 	if (options.useOpenCLForCUDADevices)
 		args.push_back(CONVERT_FROM_BYTES("--use-opencl-for-cuda-devices"));
+#endif
 	if (!options.enableGCNAssembler)
 		args.push_back(CONVERT_FROM_BYTES("--disable-gcn-assembler"));
 	if (options.useOnlyASCIICharactersForKeys) {
