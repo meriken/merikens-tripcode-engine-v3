@@ -99,6 +99,8 @@ typedef int BOOL;
 
 // Boost
 #define BOOST_USE_WINDOWS_H
+#include <boost/iostreams/stream.hpp>
+#include <boost/process.hpp> // Boost.Process 0.5
 
 // For MMX/SSE/SSE2/SSSE3 Intrinsics
 //#include <nmmintrin.h>
@@ -296,6 +298,7 @@ extern const char     *GetProductNameForOpenCLDevice(char *vendor, char *name, c
 extern void            GetParametersForOpenCLDevice(cl_device_id deviceID, char *sourceFile, size_t *numWorkItemsPerComputeUnit, size_t *localWorkSize, char *options);
 extern const char     *ConvertOpenCLErrorCodeToString(cl_int openCLError);
 extern void __stdcall  OnOpenCLError(const char *errorInfo, const void *privateInfo, size_t sizePrivateInfo, void *userData);
+extern void            StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
 extern void            Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
 
 #endif

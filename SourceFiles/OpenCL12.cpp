@@ -42,7 +42,6 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "MerikensTripcodeEngine.h"
-#include <boost/iostreams/stream.hpp>
 #include <boost/locale.hpp>
 
 
@@ -240,7 +239,7 @@ void GetParametersForOpenCLDevice(cl_device_id deviceID, char *sourceFile, size_
 		*localWorkSize = options.openCLNumWorkItemsPerWG;
 }
 
-#ifdef __CYGWIN__
+#if FALSE
 
 void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 {
@@ -459,14 +458,9 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 
 #else
 
-#include <boost/process.hpp> // Boost.Process 0.5
-
-void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
+void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 {
-	// This thread may be restarted. See CheckSearchThreads().
-	double   prevTotalNumGeneratedTripcodes = info->totalNumGeneratedTripcodes;
-	uint32_t prevNumDiscardedTripcodes      = info->numDiscardedTripcodes;
-	UpdateOpenCLDeviceStatus_ChildProcess(info, "[process] Launching a child process...",  0, 0, prevTotalNumGeneratedTripcodes, prevNumDiscardedTripcodes);
+	UpdateOpenCLDeviceStatus_ChildProcess(info, "[process] Launching a child process...", 0, 0, info->totalNumGeneratedTripcodes, info->numDiscardedTripcodes);
 
 	size_t  numWorkItemsPerComputeUnit = OPENCL_SHA1_DEFAULT_NUM_WORK_ITEMS_PER_COMPUTE_UNIT;
 	size_t  localWorkSize = OPENCL_SHA1_DEFAULT_NUM_WORK_ITEMS_PER_WORK_GROUP;
@@ -478,7 +472,8 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 #ifdef _WIN32
 	if (strcmp(childProcessPath + applicationPathLen - 6, "64.exe") == 0) {
 		strcpy(childProcessPath + applicationPathLen - 6, ".exe"); // For 32-bit OpenCL binaries
-	} else if (strcmp(childProcessPath + applicationPathLen - 13, "64_NVIDIA.exe") == 0) {
+	}
+	else if (strcmp(childProcessPath + applicationPathLen - 13, "64_NVIDIA.exe") == 0) {
 		strcpy(childProcessPath + applicationPathLen - 13, ".exe"); // For 32-bit OpenCL binaries
 	}
 #endif
@@ -500,7 +495,7 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	args.push_back(CONVERT_FROM_BYTES("-l"));
 	args.push_back(CONVERT_FROM_BYTES(std::to_string(lenTripcode)));
 	args.push_back(CONVERT_FROM_BYTES("-g"));
-	args.push_back(CONVERT_FROM_BYTES("-d" ));
+	args.push_back(CONVERT_FROM_BYTES("-d"));
 	args.push_back(CONVERT_FROM_BYTES(std::to_string(info->deviceNo)));
 	args.push_back(CONVERT_FROM_BYTES("-y"));
 	args.push_back(CONVERT_FROM_BYTES(std::to_string(numWorkItemsPerComputeUnit)));
@@ -522,11 +517,14 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 		args.push_back(CONVERT_FROM_BYTES("--disable-gcn-assembler"));
 	if (options.useOnlyASCIICharactersForKeys) {
 		args.push_back(CONVERT_FROM_BYTES("--use-ascii-characters-for-keys"));
-	} else if (options.useOneByteCharactersForKeys) {
+	}
+	else if (options.useOneByteCharactersForKeys) {
 		args.push_back(CONVERT_FROM_BYTES("--use-one-byte-characters-for-keys"));
-	} else if (options.maximizeKeySpace) {
+	}
+	else if (options.maximizeKeySpace) {
 		args.push_back(CONVERT_FROM_BYTES("--maximize-key-space"));
-	} else {
+	}
+	else {
 		args.push_back(CONVERT_FROM_BYTES("--use-one-and-two-byte-characters-for-keys"));
 	}
 	if (pause_event.is_open()) {
@@ -542,21 +540,32 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	boost::iostreams::file_descriptor_sink stdout_sink(stdout_pipe.sink, boost::iostreams::close_handle);
 	boost::process::pipe stderr_pipe = boost::process::create_pipe();
 	boost::iostreams::file_descriptor_sink stderr_sink(stderr_pipe.sink, boost::iostreams::close_handle);
-	boost::process::child child_process = boost::process::execute(
+	info->child_process = new boost::process::child(boost::process::execute(
 		boost::process::initializers::set_args(args),
 		boost::process::initializers::bind_stdout(stdout_sink),
 		boost::process::initializers::bind_stderr(stderr_sink),
-		//boost::process::initializers::start_in_dir(applicationDirectory),
-		boost::process::initializers::inherit_env());
+		boost::process::initializers::inherit_env()));
 	boost::iostreams::file_descriptor_source source(stdout_pipe.source, boost::iostreams::close_handle);
-	boost::iostreams::stream<boost::iostreams::file_descriptor_source> input_stream(source);
+	info->input_stream = new boost::iostreams::stream<boost::iostreams::file_descriptor_source>(source);
 
 	boost_process_spinlock.unlock();
+}
 
-	while(!GetTerminationState())
+void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
+{
+	// This thread may be restarted. See CheckSearchThreads().
+	double   prevTotalNumGeneratedTripcodes = info->totalNumGeneratedTripcodes;
+	uint32_t prevNumDiscardedTripcodes = info->numDiscardedTripcodes;
+	UpdateOpenCLDeviceStatus_ChildProcess(info, "[process] Launching a child process...", 0, 0, prevTotalNumGeneratedTripcodes, prevNumDiscardedTripcodes);
+
+	size_t  numWorkItemsPerComputeUnit = OPENCL_SHA1_DEFAULT_NUM_WORK_ITEMS_PER_COMPUTE_UNIT;
+	size_t  localWorkSize = OPENCL_SHA1_DEFAULT_NUM_WORK_ITEMS_PER_WORK_GROUP;
+	GetParametersForOpenCLDevice(info->openCLDeviceID, NULL, &numWorkItemsPerComputeUnit, &localWorkSize, NULL);
+
+	while (!GetTerminationState())
 	{
 		std::string line;
-		if (!std::getline(input_stream, line))
+		if (!std::getline(*(info->input_stream), line))
 			break;
 		char line_buffer[65536];
 		strncpy(line_buffer, line.data(), sizeof(line_buffer) - 1);
@@ -622,6 +631,18 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 			}
 		}
 	}
+
+	if (info->input_stream)
+		delete info->input_stream;
+	info->input_stream = NULL;
+	try {
+		boost::process::terminate(*(info->child_process));
+	}
+	catch (const std::exception& e) {
+	}
+	if (info->child_process)
+		delete info->child_process;
+	info->child_process = NULL;
 }
 
 #endif

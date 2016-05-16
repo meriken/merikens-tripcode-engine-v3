@@ -40,6 +40,9 @@
 #include <random>
 #include <climits>
 #include <system_error>
+#if !(defined(_WIN32) || defined(__CYGWIN__))
+#include <unistd.h>
+#endif
 
 
 
@@ -822,7 +825,6 @@ void CheckSearchThreads()
 			// If we restart the search thread while the OpenCL kernel is running, amdocl64.dll may crash.
 			ERROR0(!info->runChildProcess, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
 
-#if defined(_WIN32) || defined(__CYGWIN__)
 			strcpy(info->status, "[process] Restarting search thread...");
 			try {
 			    if (opencl_device_search_threads[index]->get_id() != std::thread::id()) {
@@ -835,9 +837,20 @@ void CheckSearchThreads()
 			        pthread_cancel(native_handle);
 #endif
 			    }
-            } catch (const std::system_error& e) {
+            } catch (const std::exception& e) {
             }
 			delete opencl_device_search_threads[index];
+			if (info->input_stream)
+				delete info->input_stream;
+			info->input_stream = NULL;
+			if (info->child_process) {
+				try {
+					boost::process::terminate(*(info->child_process));
+				} catch (const std::exception& e) {
+				}
+				delete info->child_process;
+				info->child_process = NULL;
+			}
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
 			++info->numRestarts;
@@ -845,10 +858,6 @@ void CheckSearchThreads()
 																	       ? Thread_SearchForDESTripcodesOnOpenCLDevice
 													                       : Thread_SearchForSHA1TripcodesOnOpenCLDevice,
 																	   &(openCLDeviceSearchThreadInfoArray[index]));
-#else
-			strcpy(info->status, "[process] Thread became unresponsive.");
-			info->currentSpeed = 0;
-#endif
 		}
 		//*/
 	}
@@ -2107,7 +2116,7 @@ void StartOpenCLDeviceSearchThreads()
 			openCLDeviceSearchThreadInfoArray[i].openCLDeviceID  = openCLDeviceIDArray[openCLDeviceIDArrayIndex];
 			openCLDeviceSearchThreadInfoArray[i].index           = openCLDeviceIDArrayIndex;
 			openCLDeviceSearchThreadInfoArray[i].subindex        = -1;
-			openCLDeviceSearchThreadInfoArray[i].status[0]       = '\0';
+			openCLDeviceSearchThreadInfoArray[i].status[0] = '\0';
 			openCLDeviceSearchThreadInfoArray[i].runChildProcess = openCLRunChildProcesses;
 			//
 			openCLDeviceSearchThreadInfoArray[i].deviceNo                   = CUDADeviceCount + openCLDeviceIDArrayIndex;
@@ -2115,7 +2124,9 @@ void StartOpenCLDeviceSearchThreads()
 			openCLDeviceSearchThreadInfoArray[i].averageSpeed               = 0;
 			openCLDeviceSearchThreadInfoArray[i].totalNumGeneratedTripcodes = 0;
 			openCLDeviceSearchThreadInfoArray[i].numDiscardedTripcodes      = 0;
-			openCLDeviceSearchThreadInfoArray[i].numRestarts                = 0;
+			openCLDeviceSearchThreadInfoArray[i].numRestarts = 0;
+			openCLDeviceSearchThreadInfoArray[i].child_process = NULL;
+			openCLDeviceSearchThreadInfoArray[i].input_stream = NULL;
 			openCLDeviceSearchThreadInfoArray[i].timeLastUpdated            = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 			openCLDeviceSearchThreadInfoArray[i].subindex                   = 0;
 			if (!openCLRunChildProcesses) {
@@ -2129,6 +2140,8 @@ void StartOpenCLDeviceSearchThreads()
 					openCLDeviceSearchThreadInfoArray[i].status[0]      = '\0';
 					openCLDeviceSearchThreadInfoArray[i].runChildProcess = FALSE;
 					openCLDeviceSearchThreadInfoArray[i].numRestarts = 0;
+					openCLDeviceSearchThreadInfoArray[i].child_process = NULL;
+					openCLDeviceSearchThreadInfoArray[i].input_stream = NULL;
 					openCLDeviceSearchThreadInfoArray[i].timeLastUpdated = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 				}
 			} else {
@@ -2149,6 +2162,8 @@ void StartOpenCLDeviceSearchThreads()
 					openCLDeviceSearchThreadInfoArray[i].totalNumGeneratedTripcodes = 0;
 					openCLDeviceSearchThreadInfoArray[i].numDiscardedTripcodes      = 0;
 					openCLDeviceSearchThreadInfoArray[i].numRestarts = 0;
+					openCLDeviceSearchThreadInfoArray[i].child_process = NULL;
+					openCLDeviceSearchThreadInfoArray[i].input_stream = NULL;
 					openCLDeviceSearchThreadInfoArray[i].timeLastUpdated = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 				}
 			}
@@ -2170,6 +2185,8 @@ void StartOpenCLDeviceSearchThreads()
 		openCLDeviceSearchThreadInfoArray[0].totalNumGeneratedTripcodes = 0;
 		openCLDeviceSearchThreadInfoArray[0].numDiscardedTripcodes = 0;
 		openCLDeviceSearchThreadInfoArray[0].numRestarts = 0;
+		openCLDeviceSearchThreadInfoArray[0].child_process = NULL;
+		openCLDeviceSearchThreadInfoArray[0].input_stream = NULL;
 		openCLDeviceSearchThreadInfoArray[0].timeLastUpdated = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 		if (!openCLRunChildProcesses) {
 			ASSERT(numOpenCLDeviceSearchThreads == options.openCLNumThreads);
@@ -2180,6 +2197,8 @@ void StartOpenCLDeviceSearchThreads()
 				openCLDeviceSearchThreadInfoArray[j].subindex        = j;
 				openCLDeviceSearchThreadInfoArray[j].status[0]       = '\0';
 				openCLDeviceSearchThreadInfoArray[j].runChildProcess = FALSE;
+				openCLDeviceSearchThreadInfoArray[j].child_process = NULL;
+				openCLDeviceSearchThreadInfoArray[j].input_stream = NULL;
 				openCLDeviceSearchThreadInfoArray[j].timeLastUpdated = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 			}
 		} else {
@@ -2198,6 +2217,8 @@ void StartOpenCLDeviceSearchThreads()
 				openCLDeviceSearchThreadInfoArray[j].totalNumGeneratedTripcodes = 0;
 				openCLDeviceSearchThreadInfoArray[j].numDiscardedTripcodes = 0;
 				openCLDeviceSearchThreadInfoArray[j].numRestarts = 0;
+				openCLDeviceSearchThreadInfoArray[j].child_process = NULL;
+				openCLDeviceSearchThreadInfoArray[j].input_stream = NULL;
 				openCLDeviceSearchThreadInfoArray[j].timeLastUpdated = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 			}	
 		}
@@ -2205,6 +2226,8 @@ void StartOpenCLDeviceSearchThreads()
 
 	if (lenTripcode == 12) {
 		for (i = 0; i < numOpenCLDeviceSearchThreads; ++i) {
+			if (openCLDeviceSearchThreadInfoArray[i].runChildProcess)
+				StartChildProcessForOpenCLDevice(&(openCLDeviceSearchThreadInfoArray[i]));
 			opencl_device_search_threads[i] = new std::thread(
 				openCLDeviceSearchThreadInfoArray[i].runChildProcess ? Thread_RunChildProcessForOpenCLDevice : Thread_SearchForSHA1TripcodesOnOpenCLDevice,
 				&(openCLDeviceSearchThreadInfoArray[i]));
@@ -2213,6 +2236,8 @@ void StartOpenCLDeviceSearchThreads()
 	} else {
 		ASSERT(lenTripcode == 10);
 		for (i = 0; i < numOpenCLDeviceSearchThreads; ++i) {
+			if (openCLDeviceSearchThreadInfoArray[i].runChildProcess)
+				StartChildProcessForOpenCLDevice(&(openCLDeviceSearchThreadInfoArray[i]));
 			opencl_device_search_threads[i] = new std::thread(
 				openCLDeviceSearchThreadInfoArray[i].runChildProcess ? Thread_RunChildProcessForOpenCLDevice : Thread_SearchForDESTripcodesOnOpenCLDevice,
 				&(openCLDeviceSearchThreadInfoArray[i]));
@@ -2254,7 +2279,7 @@ void StartCPUSearchThreads()
 }
 
 #if defined(_WIN32) || defined(__CYGWIN__)
-int32_t GetParentProcessID()
+DWORD GetParentProcessID()
 {
 	DWORD processID = GetCurrentProcessId();
 	DWORD parentProcessID = 0xffffffff;
@@ -2284,6 +2309,12 @@ void ListExpandedPatterns()
 
 int main(int argc, char **argv)
 {
+#if defined(_WIN32) || defined(__CYGWIN__)
+	HANDLE parentProcess = OpenProcess(SYNCHRONIZE, FALSE, GetParentProcessID());
+#else
+	pid_t parent_process_id = getppid(); 
+#endif
+
 	// Some versions of OpenCL.dll are buggy.
 	// /DELAYLOAD:"OpenCL.dll" is also necessary.
 #if defined(_WIN64)
@@ -2352,13 +2383,13 @@ int main(int argc, char **argv)
 		StartGPUSearchThreads();
 	if (searchDevice == SEARCH_DEVICE_CPU || searchDevice == SEARCH_DEVICE_GPU_AND_CPU)
 		StartCPUSearchThreads();
-#if defined(_WIN32) || defined(__CYGWIN__)
-	HANDLE parentProcess = OpenProcess(SYNCHRONIZE, FALSE, GetParentProcessID());
-#endif
 	while (!UpdateTerminationState()) {
 #if defined(_WIN32) || defined(__CYGWIN__)
 		// Break the main loop if necessary.
 		if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
+			break;
+#else
+		if (parent_process_id != getppid())
 			break;
 #endif
 
