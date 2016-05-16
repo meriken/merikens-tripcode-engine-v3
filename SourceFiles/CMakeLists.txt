@@ -224,21 +224,21 @@ if(ENABLE_CUDA)
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
 		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
 		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		COMMENT "Building CUDA object CUDA10_Registers.cu.o")
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
 		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
 		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		COMMENT "Building CUDA object CUDA10_SharedMemory.cu.o")
 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
 		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
 		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		COMMENT "Building CUDA object CUDA12.cu.o")
     set(CUDA_FILES
