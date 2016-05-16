@@ -840,9 +840,6 @@ void CheckSearchThreads()
             } catch (const std::exception& e) {
             }
 			delete opencl_device_search_threads[index];
-			if (info->input_stream)
-				delete info->input_stream;
-			info->input_stream = NULL;
 			if (info->child_process) {
 				try {
 					boost::process::terminate(*(info->child_process));
@@ -851,6 +848,9 @@ void CheckSearchThreads()
 				delete info->child_process;
 				info->child_process = NULL;
 			}
+			if (info->input_stream)
+				delete info->input_stream;
+			info->input_stream = NULL;
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
 			++info->numRestarts;
