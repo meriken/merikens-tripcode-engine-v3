@@ -71,7 +71,7 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 
 ## Building (Linux; 32/64-bit x86 only)
 
-**Note:** Linux support is preliminary. Only OpenCL, AMD GCN, and Intel SSE2 are supported. Support for NVIDIA graphics cards is experimental, and the speed is rather slow. (I am planning to port the CUDA implementation.) 
+**Note:** Linux support is not complete yet. CPU support is limited, and the multiple kernels versions for NVIDIA are not available yet.  
 
 You need the following tools to build Meriken's Tripcode Engine.
 
