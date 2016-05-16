@@ -5,12 +5,14 @@ set(MTE_BOOST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../BoostPackages)
 set(MTE_BOOST_PACKAGE "boost_1_61_0")
 
 
+
 ###########
 # OPTIONS #
 ###########
 
 option(USE_YASM "USE_YASM" ON)
 option(ENABLE_OPENCL "ENABLE_OPENCL" ON)
+option(ENABLE_CUDA "ENABLE_CUDA" ON)
 option(ENGLISH_VERSION "ENGLISH_VERSION" ON)
 if(ENGLISH_VERSION)
     set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENGLISH_VERSION")
@@ -60,7 +62,7 @@ endif()
 
 
 ##########
-# OpenCL #
+# OPENCL #
 ##########
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
@@ -100,6 +102,10 @@ if(ENABLE_OPENCL)
 endif()
 
 
+
+########
+# YASM #
+########
 
 set(YASM_FILES)
 find_program(YASM_EXE NAMES yasm)
@@ -180,17 +186,21 @@ set(SOURCES
 
 
 
-LINK_LIBRARIES(${OPENCL_LINK_LIBRARIES} boost_system boost_iostreams)
-include_directories(
-    "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${MTE_BOOST_DIR}/include"
-    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
-    ${OPENCL_INCLUDE_DIR})
-link_directories(
-    "${MTE_BOOST_DIR}/lib/Cygwin64"
-    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-    ${OPENCL_LINK_DIR})
+##################
+# CUDA DETECTION #
+##################
 
+set(UNIX_NVIDIA_CUDA_SDK_DIR "/usr/local/cuda-7.5")
+if(ARCH_64BIT AND ENABLE_CUDA AND UNIX AND EXISTS ${UNIX_NVIDIA_CUDA_SDK_DIR})
+    set(CUDA_LINK_LIBRARIES cudart)
+    set(CUDA_INCLUDE_DIR "${UNIX_NVIDIA_CUDA_SDK_DIR}/include")
+    set(CUDA_LINK_DIR "${UNIX_NVIDIA_CUDA_SDK_DIR}/lib64")
+else()
+    set(ENABLE_CUDA FALSE)
+endif()
+if(ENABLE_CUDA)
+    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENABLE_CUDA")
+endif()
 
 
 if(UNIX AND NOT CYGWIN)
@@ -203,8 +213,58 @@ SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -std=c++11 -Wall -
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${MTE_COMPILE_FLAGS}")
 #SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} --enable-auto-import" )
 
+
+
+########
+# CUDA #
+########
+
+if(ENABLE_CUDA)
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+		COMMAND nvcc
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA10_Registers.cu.o")
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
+		COMMAND nvcc
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA10_SharedMemory.cu.o")
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
+		COMMAND nvcc
+		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA12.cu.o")
+    set(CUDA_FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
+        ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
+        ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o)
+endif()
+
+
+
+LINK_LIBRARIES(${OPENCL_LINK_LIBRARIES} ${CUDA_LINK_LIBRARIES} boost_system boost_iostreams)
+include_directories(
+    "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${MTE_BOOST_DIR}/include"
+    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
+    "${OPENCL_INCLUDE_DIR}"
+    "${CUDA_INCLUDE_DIR}")
+link_directories(
+    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+    "${OPENCL_LINK_DIR}"
+    "${CUDA_LINK_DIR}")
+
+
+
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
-add_executable(MerikensTripcodeEngine ${SOURCES} ${YASM_FILES})
+add_executable(MerikensTripcodeEngine ${SOURCES} ${YASM_FILES} ${CUDA_FILES})
 set_target_properties(MerikensTripcodeEngine PROPERTIES LINKER_LANGUAGE CXX)
 #set(CMAKE_CXX_LINK_EXECUTABLE "<CMAKE_CXX_COMPILER> <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
 
@@ -213,3 +273,4 @@ file(GLOB GCN_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/bin/*.asm")
 install(FILES ${GCN_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL/bin)
 file(GLOB OPENCL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/*.cl")
 install(FILES ${OPENCL_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL)
+

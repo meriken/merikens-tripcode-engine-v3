@@ -786,24 +786,27 @@ void CheckSearchThreads()
 		// if (deltaTime > 60 * 1000)
 		//	strcpy(info->status, "Search thread became unresponsive.");
 		//ERROR0(deltaTime > 1 * 60 * 1000, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
-		///*
 		if (deltaTime > 60 * 1000) {
 			strcpy(info->status, "Restarting search thread...");
-			auto native_handle = cuda_device_search_threads[index]->native_handle();
-			cuda_device_search_threads[index]->detach();
-			delete cuda_device_search_threads[index];
+			try {
+			    if (cuda_device_search_threads[index]->get_id() != std::thread::id()) {
+			        auto native_handle = cuda_device_search_threads[index]->native_handle();
+			        cuda_device_search_threads[index]->detach();
 #if defined(_WIN32) || defined(_WIN64)
-			TerminateThread(native_handle, 0);
+	    		    TerminateThread(native_handle, 0);
 #elif defined(_POSIX_THREADS)
-			pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
-			pthread_cancel(native_handle);
+		        	pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+		    	    pthread_cancel(native_handle);
 #endif
+                }
+            } catch (const std::system_error& e) {
+            }
+			delete cuda_device_search_threads[index];
 			cuda_device_search_threads[index] = new std::thread((lenTripcode == 10) 
 														          ? Thread_SearchForDESTripcodesOnCUDADevice
 															      : Thread_SearchForSHA1TripcodesOnCUDADevice,
 															    &(CUDADeviceSearchThreadInfoArray[index]));
 		}
-		//*/
 	}
 	cuda_device_search_thread_info_array_spinlock.unlock();
 #endif
@@ -815,12 +818,11 @@ void CheckSearchThreads()
 		uint64_t  currentTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 		uint64_t  deltaTime = currentTime - info->timeLastUpdated;
 		//ERROR0(deltaTime > 1 * 60 * 1000, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
-		///*
 		if (deltaTime > 60 * 1000) {
 			// If we restart the search thread while the OpenCL kernel is running, amdocl64.dll may crash.
 			ERROR0(!info->runChildProcess, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
 
-// #if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32) || defined(__CYGWIN__)
 			strcpy(info->status, "[process] Restarting search thread...");
 			try {
 			    if (opencl_device_search_threads[index]->get_id() != std::thread::id()) {
@@ -831,8 +833,8 @@ void CheckSearchThreads()
 #elif defined(_POSIX_THREADS)
 			        pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 			        pthread_cancel(native_handle);
-			    }
 #endif
+			    }
             } catch (const std::system_error& e) {
             }
 			delete opencl_device_search_threads[index];
@@ -843,9 +845,9 @@ void CheckSearchThreads()
 																	       ? Thread_SearchForDESTripcodesOnOpenCLDevice
 													                       : Thread_SearchForSHA1TripcodesOnOpenCLDevice,
 																	   &(openCLDeviceSearchThreadInfoArray[index]));
-//#else
-//			info->currentSpeed = 0;
-//#endif
+#else
+			info->currentSpeed = 0;
+#endif
 		}
 		//*/
 	}
