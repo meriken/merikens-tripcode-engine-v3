@@ -846,6 +846,7 @@ void CheckSearchThreads()
 													                       : Thread_SearchForSHA1TripcodesOnOpenCLDevice,
 																	   &(openCLDeviceSearchThreadInfoArray[index]));
 #else
+			strcpy(info->status, "[process] Thread became unresponsive.");
 			info->currentSpeed = 0;
 #endif
 		}
