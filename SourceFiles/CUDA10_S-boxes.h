@@ -906,8 +906,8 @@ DES_Vector * out1, DES_Vector * out2, DES_Vector * out3, DES_Vector * out4, DES_
 // The underlying mathematical formulas are NOT copyrighted.
 //
 
-#define LUT(a,b,c,d,e) DES_Vector a; asm("lop3.b32 %0, %1, %2, %3, "#e";" : "=r"(##a): "r"(##b), "r"(##c), "r"(##d));
-#define LUT_(a,b,c,d,e) asm("lop3.b32 %0, %1, %2, %3, "#e";" : "=r"(##a): "r"(##b), "r"(##c), "r"(##d));
+#define LUT(a,b,c,d,e) DES_Vector a; asm("lop3.b32 %0, %1, %2, %3, "#e";" : "=r"(a): "r"(b), "r"(c), "r"(d));
+#define LUT_(a,b,c,d,e) asm("lop3.b32 %0, %1, %2, %3, "#e";" : "=r"(a): "r"(b), "r"(c), "r"(d));
 
 __device__ __forceinline__ void
 s1(DES_Vector a1, DES_Vector a2, DES_Vector a3, DES_Vector a4, DES_Vector a5, DES_Vector a6,
