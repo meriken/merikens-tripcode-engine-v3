@@ -39,6 +39,7 @@
 #include "MerikensTripcodeEngine.h"
 #include <random>
 #include <climits>
+#include <system_error>
 
 
 
@@ -819,20 +820,22 @@ void CheckSearchThreads()
 			// If we restart the search thread while the OpenCL kernel is running, amdocl64.dll may crash.
 			ERROR0(!info->runChildProcess, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
 
+// #if defined(_WIN32) || defined(__CYGWIN__)
 			strcpy(info->status, "[process] Restarting search thread...");
-			// auto native_handle = opencl_device_search_threads[index]->native_handle();
-			opencl_device_search_threads[index]->detach();
-			delete opencl_device_search_threads[index];
+			try {
+			    if (opencl_device_search_threads[index]->get_id() != std::thread::id()) {
+    			    auto native_handle = opencl_device_search_threads[index]->native_handle();
+       		    	opencl_device_search_threads[index]->detach();
 #if defined(_WIN32) || defined(__CYGWIN__)
-			// Boost.Processs is happy with none of these lines below.
-#if 0
-#if defined(_WIN32) || defined(__CYGWIN__)
-			TerminateThread(native_handle, 0);
+			        TerminateThread(native_handle, 0);
 #elif defined(_POSIX_THREADS)
-			pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
-			pthread_cancel(native_handle);
+			        pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
+			        pthread_cancel(native_handle);
+			    }
 #endif
-#endif
+            } catch (const std::system_error& e) {
+            }
+			delete opencl_device_search_threads[index];
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
 			++info->numRestarts;
@@ -840,9 +843,9 @@ void CheckSearchThreads()
 																	       ? Thread_SearchForDESTripcodesOnOpenCLDevice
 													                       : Thread_SearchForSHA1TripcodesOnOpenCLDevice,
 																	   &(openCLDeviceSearchThreadInfoArray[index]));
-#else
-			info->currentSpeed = 0;
-#endif
+//#else
+//			info->currentSpeed = 0;
+//#endif
 		}
 		//*/
 	}
