@@ -318,15 +318,15 @@ endif()
 
 LINK_LIBRARIES(${OPENCL_LINK_LIBRARIES} ${CUDA_LINK_LIBRARIES} boost_system boost_iostreams)
 include_directories(
-    "${CMAKE_CURRENT_SOURCE_DIR}"
+    ${CMAKE_CURRENT_SOURCE_DIR}
     "${MTE_BOOST_DIR}/include"
     "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
-    "${OPENCL_INCLUDE_DIR}"
-    "${CUDA_INCLUDE_DIR}")
+    ${OPENCL_INCLUDE_DIR}
+    ${CUDA_INCLUDE_DIR})
 link_directories(
     "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-    "${OPENCL_LINK_DIR}"
-    "${CUDA_LINK_DIR}")
+    ${OPENCL_LINK_DIR}
+    ${CUDA_LINK_DIR})
 
 
 
