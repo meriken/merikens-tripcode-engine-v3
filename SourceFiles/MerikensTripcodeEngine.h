@@ -103,6 +103,7 @@ typedef int BOOL;
 #include <boost/process.hpp> // Boost.Process 0.5
 
 // For MMX/SSE/SSE2/SSSE3 Intrinsics
+//#ifdef ARCH_X86
 //#include <nmmintrin.h>
 //#include <smmintrin.h>
 #if defined(_MSC_VER) || defined(__CYGWIN__)
@@ -113,6 +114,7 @@ typedef int BOOL;
 #include <emmintrin.h> 
 #include <xmmintrin.h>
 #include <mmintrin.h>     
+//#endif
 
 // For CUDA and OpenCL
 #ifdef ENABLE_CUDA

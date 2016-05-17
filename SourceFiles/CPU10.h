@@ -422,13 +422,13 @@ static void DES_Crypt25_SSE2Intrinsics(DES_Context *context)
 	iterations = 25;
 
 start:
-	CPU_DES_SBoxes1_SSE2Intrinsics(context->expansionFunction, reinterpret_cast<__m128i *>(context->expandedKeySchedule), reinterpret_cast<__m128i *>(context->dataBlocks), keyScheduleIndexBase);
+	CPU_DES_SBoxes1_SSE2Intrinsics(context->expansionFunction, context->expandedKeySchedule, context->dataBlocks, keyScheduleIndexBase);
 
 	if (roundsAndSwapped == 0x100)
 		goto next;
 
 swap:
-	CPU_DES_SBoxes2_SSE2Intrinsics(context->expansionFunction, reinterpret_cast<__m128i *>(context->expandedKeySchedule), reinterpret_cast<__m128i *>(context->dataBlocks), keyScheduleIndexBase);
+	CPU_DES_SBoxes2_SSE2Intrinsics(context->expansionFunction, context->expandedKeySchedule, context->dataBlocks, keyScheduleIndexBase);
 
 	keyScheduleIndexBase += 96;
 

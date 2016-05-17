@@ -50,8 +50,10 @@
 #else
 #define VECTOR_ALIGNMENT __attribute__ ((aligned (16))) 
 #endif
-typedef union VECTOR_ALIGNMENT __DES_Vector {
+typedef union VECTOR_ALIGNMENT DES_Vector {
+#ifdef ARCH_X86
 	__m128i m128i;
+#endif
 	int8_t m128i_i8[16];
 	int16_t m128i_i16[8];
 	int32_t m128i_i32[4];
@@ -87,21 +89,119 @@ typedef union VECTOR_ALIGNMENT __DES_Vector {
 //
 // The effort has been sponsored by Rapid7: http://www.rapid7.com
 
-typedef VECTOR_ALIGNMENT __m128i vtype;
+typedef VECTOR_ALIGNMENT DES_Vector vtype;
 
-#define DES_VECTOR_XOR_FUNC           _mm_xor_si128
+#if ARCH_X86
 
-#define MOVDQA(op1, op2) (op2) = (op1)
-#define POR(op1, op2)    (op2) = _mm_or_si128    ((op2), (op1))
-#define PAND(op1, op2)   (op2) = _mm_and_si128   ((op2), (op1))
-#define PXOR(op1, op2)   (op2) = _mm_xor_si128   ((op2), (op1))
-#define PANDN(op1, op2)  (op2) = _mm_andnot_si128((op2), (op1))
+inline vtype vxor_func(vtype &a, vtype &b) 
+{
+    vtype ret;
 
-#define vnot(dst, a)     (dst) =  _mm_andnot_si128((a), _mm_set1_epi8(0xff))
-#define vand(dst, a, b)  (dst) =  _mm_and_si128((a), (b))
-#define vor(dst, a, b)   (dst) =  _mm_or_si128((a), (b))
-#define vxor(dst, a, b)  (dst) =  _mm_xor_si128((a), (b))
-#define vandn(dst, a, b) (dst) =  _mm_andnot_si128((b), (a))
+    ret.m128i = _mm_xor_si128((a).m128i, (b).m128i);
+    return ret;
+}
+
+#define vnot(dst, a)     (dst).m128i =  _mm_andnot_si128((a).m128i, _mm_set1_epi8(0xff))
+#define vand(dst, a, b)  (dst).m128i =  _mm_and_si128((a).m128i, (b).m128i)
+#define vor(dst, a, b)   (dst).m128i =  _mm_or_si128((a).m128i, (b).m128i)
+#define vxor(dst, a, b)  (dst).m128i =  _mm_xor_si128((a).m128i, (b).m128i)
+#define vandn(dst, a, b) (dst).m128i =  _mm_andnot_si128((b).m128i, (a).m128i)
+
+#elif defined(ARCH_64BIT)
+
+inline vtype vxor_func(vtype &a, vtype &b) 
+{
+    vtype ret;
+
+    ret.m128i_u64[0] = (a).m128i_u64[0] ^ (b).m128i_u64[0];
+    ret.m128i_u64[1] = (a).m128i_u64[1] ^ (b).m128i_u64[1];
+    return ret;
+}
+
+inline void vnot(vtype &dst, vtype &a) 
+{
+    dst.m128i_u64[0] = ~(a).m128i_u64[0];
+    dst.m128i_u64[1] = ~(a).m128i_u64[1];
+}
+
+inline void vand(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u64[0] = (a).m128i_u64[0] & (b).m128i_u64[0];
+    dst.m128i_u64[1] = (a).m128i_u64[1] & (b).m128i_u64[1];
+}
+
+inline void vor(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u64[0] = (a).m128i_u64[0] | (b).m128i_u64[0];
+    dst.m128i_u64[1] = (a).m128i_u64[1] | (b).m128i_u64[1];
+}
+
+inline void vxor(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u64[0] = (a).m128i_u64[0] ^ (b).m128i_u64[0];
+    dst.m128i_u64[1] = (a).m128i_u64[1] ^ (b).m128i_u64[1];
+}
+
+inline void vandn(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u64[0] = (a).m128i_u64[0] & ~(b).m128i_u64[0];
+    dst.m128i_u64[1] = (a).m128i_u64[1] & ~(b).m128i_u64[1];
+}
+
+#else
+
+inline vtype vxor_func(vtype &a, vtype &b) 
+{
+    vtype ret;
+
+    ret.m128i_u32[0] = (a).m128i_u32[0] ^ (b).m128i_u32[0];
+    ret.m128i_u32[1] = (a).m128i_u32[1] ^ (b).m128i_u32[1];
+    ret.m128i_u32[2] = (a).m128i_u32[2] ^ (b).m128i_u32[2];
+    ret.m128i_u32[3] = (a).m128i_u32[3] ^ (b).m128i_u32[3];
+    return ret;
+}
+
+inline void vnot(vtype &dst, vtype &a) 
+{
+    dst.m128i_u32[0] = ~(a).m128i_u32[0];
+    dst.m128i_u32[1] = ~(a).m128i_u32[1];
+    dst.m128i_u32[2] = ~(a).m128i_u32[2];
+    dst.m128i_u32[3] = ~(a).m128i_u32[3];
+}
+
+inline void vand(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u32[0] = (a).m128i_u32[0] & (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] & (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] & (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] & (b).m128i_u32[3];
+}
+
+inline void vor(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u32[0] = (a).m128i_u32[0] | (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] | (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] | (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] | (b).m128i_u32[3];
+}
+
+inline void vxor(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u32[0] = (a).m128i_u32[0] ^ (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] ^ (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] ^ (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] ^ (b).m128i_u32[3];
+}
+
+inline void vandn(vtype &dst, vtype &a, vtype &b) 
+{
+    dst.m128i_u32[0] = (a).m128i_u32[0] & ~(b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] & ~(b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] & ~(b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] & ~(b).m128i_u32[3];
+}
+
+#endif
 
 #define s1(a1, a2, a3, a4, a5, a6, out1, out2, out3, out4)\
 {\
@@ -586,11 +686,11 @@ typedef VECTOR_ALIGNMENT __m128i vtype;
 
 
 
-#define x(p)    DES_VECTOR_XOR_FUNC(dataBlocks[expansionFunction[p]], expandedKeySchedule[keyScheduleIndexBase + (p)])
-#define y(p, q) DES_VECTOR_XOR_FUNC(dataBlocks[p],                    expandedKeySchedule[keyScheduleIndexBase + (q)])
+#define x(p)    vxor_func(dataBlocks[expansionFunction[p]], expandedKeySchedule[keyScheduleIndexBase + (p)])
+#define y(p, q) vxor_func(dataBlocks[p],                    expandedKeySchedule[keyScheduleIndexBase + (q)])
 #define z(r)    (dataBlocks[r])
 
-void CPU_DES_SBoxes1_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *expandedKeySchedule, __m128i *dataBlocks, int32_t keyScheduleIndexBase)
+void CPU_DES_SBoxes1_SSE2Intrinsics(unsigned char *expansionFunction, vtype *expandedKeySchedule, vtype *dataBlocks, int32_t keyScheduleIndexBase)
 {
 	vtype var0;
 	vtype var1;
@@ -611,7 +711,6 @@ void CPU_DES_SBoxes1_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *e
 	vtype var16;
 	vtype var17;
 	vtype var18;
-	vtype pnot = _mm_set1_epi8(0xff);
 
 	s1(x(0), x(1), x(2), x(3), x(4), x(5), z(40), z(48), z(54), z(62));
 	s2(x(6), x(7), x(8), x(9), x(10), x(11), z(44), z(59), z(33), z(49));
@@ -623,7 +722,7 @@ void CPU_DES_SBoxes1_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *e
 	s8(y(27, 42), y(28, 43), y(29, 44), y(30, 45), y(31, 46), y(0, 47), z(36), z(58), z(46), z(52));
 }
 
-void CPU_DES_SBoxes2_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *expandedKeySchedule, __m128i *dataBlocks, int32_t keyScheduleIndexBase)
+void CPU_DES_SBoxes2_SSE2Intrinsics(unsigned char *expansionFunction, vtype *expandedKeySchedule, vtype *dataBlocks, int32_t keyScheduleIndexBase)
 {
 	vtype var0;
 	vtype var1;
@@ -644,7 +743,6 @@ void CPU_DES_SBoxes2_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *e
 	vtype var16;
 	vtype var17;
 	vtype var18;
-	vtype pnot = _mm_set1_epi8(0xff);
 
 	s1(x(48), x(49), x(50), x(51), x(52), x(53), z(8), z(16), z(22), z(30));
 	s2(x(54), x(55), x(56), x(57), x(58), x(59), z(12), z(27), z(1), z(17));
