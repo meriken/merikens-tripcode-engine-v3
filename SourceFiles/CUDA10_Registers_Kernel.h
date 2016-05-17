@@ -102,75 +102,6 @@
 
 
 
-#if defined(SALT) && __CUDA_ARCH__ >= 500
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_0.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_1.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_2.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_3.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_4.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_5.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_6.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_7.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_8.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_9.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_10.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_11.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_12.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_13.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_14.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_15.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_16.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_17.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_18.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_19.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_20.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_21.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_22.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_23.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_24.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_25.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_26.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_27.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_28.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_29.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_30.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_31.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_32.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_33.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_34.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_35.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_36.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_37.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_38.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_39.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_40.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_41.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_42.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_43.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_44.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_45.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_46.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_47.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_48.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_49.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_50.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_51.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_52.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_53.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_54.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_55.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_56.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_57.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_58.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_59.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_60.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_61.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_62.h"
-#include "CUDA10_Registers_MultipleKernels\DES_Crypt_63.h"
-#endif
-
-
-
 #define KERNEL_FUNC2(salt) CUDA_DES_PerformSearch_##salt
 #define KERNEL_FUNC(salt) KERNEL_FUNC2(salt)
 
@@ -476,3 +407,4 @@ quit_loops:
 #undef SALT
 #undef KERNEL_FUNC
 #undef KERNEL_FUNC2
+
