@@ -922,6 +922,7 @@
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
@@ -962,6 +963,7 @@
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 /DARCH_64BIT %(AdditionalOptions)</AdditionalOptions>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
     </ClCompile>
@@ -1003,6 +1005,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1050,6 +1053,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1097,6 +1101,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1144,6 +1149,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1191,6 +1197,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 /DARCH_64BIT %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1239,6 +1246,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 /DARCH_64BIT %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1287,6 +1295,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DENGLISH_VERSION /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 /DARCH_64BIT %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -1335,6 +1344,7 @@
       <UseMSVC>true</UseMSVC>
       <InterproceduralOptimization>NoIPO</InterproceduralOptimization>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>/Zm1000 /DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE /DENABLE_OPENCL /DENABLE_CUDA /DUSE_YASM /DARCH_X86 /DARCH_64BIT %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <BufferSecurityCheck>true</BufferSecurityCheck>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
