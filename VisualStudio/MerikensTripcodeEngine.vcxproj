@@ -1124,7 +1124,7 @@
     <CudaCompile>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Optimization>O3</Optimization>
-      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" -Xcompiler "/DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE" -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE %(AdditionalOptions)</AdditionalOptions>
     </CudaCompile>
     <YASM>
       <ListFile>$(IntDir)$(TargetName).lst</ListFile>
@@ -1172,7 +1172,7 @@
     <CudaCompile>
       <PtxAsOptionV>true</PtxAsOptionV>
       <Optimization>O3</Optimization>
-      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" -Xcompiler "/DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE" -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE %(AdditionalOptions)</AdditionalOptions>
     </CudaCompile>
     <YASM>
       <ListFile>$(IntDir)$(TargetName).lst</ListFile>
@@ -1319,7 +1319,7 @@
       <PtxAsOptionV>true</PtxAsOptionV>
       <Optimization>O3</Optimization>
       <TargetMachinePlatform>64</TargetMachinePlatform>
-      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" -Xcompiler "/DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE" -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE %(AdditionalOptions)</AdditionalOptions>
     </CudaCompile>
     <YASM>
       <ListFile>$(IntDir)$(TargetName).lst</ListFile>
@@ -1368,7 +1368,7 @@
       <PtxAsOptionV>true</PtxAsOptionV>
       <Optimization>O3</Optimization>
       <TargetMachinePlatform>64</TargetMachinePlatform>
-      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-Xcompiler "/wd4819" -Xcompiler "/DENABLE_CUDA" -Xcompiler "/DENABLE_OPENCL" -Xcompiler "/DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE" -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE %(AdditionalOptions)</AdditionalOptions>
     </CudaCompile>
     <YASM>
       <ListFile>$(IntDir)$(TargetName).lst</ListFile>
