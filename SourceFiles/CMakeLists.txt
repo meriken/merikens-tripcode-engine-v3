@@ -14,8 +14,13 @@ option(USE_YASM "USE_YASM" ON)
 option(ENABLE_OPENCL "ENABLE_OPENCL" ON)
 option(ENABLE_CUDA "ENABLE_CUDA" ON)
 option(ENGLISH_VERSION "ENGLISH_VERSION" ON)
+option(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE "ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE" OFF)
+
 if(ENGLISH_VERSION)
     set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENGLISH_VERSION")
+endif()
+if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
+    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE")
 endif()
 
 
@@ -115,47 +120,47 @@ endif()
 if(USE_YASM)
     set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DUSE_YASM")
     function(assemble_yasm_files out_var)
-	set(result)
-	foreach(in_f ${ARGN})
-		set(out_f "${CMAKE_CURRENT_BINARY_DIR}/${in_f}")
-		string(REPLACE ".asm" ".o" out_f ${out_f})
-		set(in_f "${CMAKE_CURRENT_SOURCE_DIR}/${in_f}")
-		if (ARCH_64BIT)
-		    set(YASM_FORMAT "Win64")
-		else()
-		    set(YASM_FORMAT "Win32")
-		endif()
-		add_custom_command(
-			OUTPUT ${out_f}
-			DEPENDS ${in_f}
-			COMMAND ${YASM_EXE}
-			ARGS -f ${YASM_FORMAT} -o ${out_f} ${in_f}
-			WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-      			COMMENT "Building YASM object ${out_f}")
-		list(APPEND result ${out_f})
-	endforeach()
-	set(${out_var} "${result}" PARENT_SCOPE)
+	    set(result)
+	    foreach(in_f ${ARGN})
+		    set(out_f "${CMAKE_CURRENT_BINARY_DIR}/${in_f}")
+		    string(REPLACE ".asm" ".o" out_f ${out_f})
+		    set(in_f "${CMAKE_CURRENT_SOURCE_DIR}/${in_f}")
+		    if (ARCH_64BIT)
+		        set(YASM_FORMAT "Win64")
+		    else()
+		        set(YASM_FORMAT "Win32")
+		    endif()
+		    add_custom_command(
+			    OUTPUT ${out_f}
+			    DEPENDS ${in_f}
+			    COMMAND ${YASM_EXE}
+			    ARGS -f ${YASM_FORMAT} -o ${out_f} ${in_f}
+			    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          			COMMENT "Building YASM object ${out_f}")
+		    list(APPEND result ${out_f})
+	    endforeach()
+	    set(${out_var} "${result}" PARENT_SCOPE)
     endfunction()
     if (ARCH_64BIT)
         assemble_yasm_files(YASM_FILES
-	    CPU10_x64_AVX.asm
-	    CPU10_x64_AVX2.asm
-	    CPU10_x64_SSE2.asm
-	    CPU10_x64_SSE2_Nehalem.asm
-	    CPU12_x64_AVX.asm
-	    CPU12_x64_AVX2.asm
-	    CPU12_x64_SSE2.asm
-	    CPU12_x64_SSE2_Nehalem.asm)
+	        CPU10_x64_AVX.asm
+	        CPU10_x64_AVX2.asm
+	        CPU10_x64_SSE2.asm
+	        CPU10_x64_SSE2_Nehalem.asm
+	        CPU12_x64_AVX.asm
+	        CPU12_x64_AVX2.asm
+	        CPU12_x64_SSE2.asm
+	        CPU12_x64_SSE2_Nehalem.asm)
     else()
         assemble_yasm_files(YASM_FILES
-	    CPU10_x86_AVX.asm
-	    CPU10_x86_AVX2.asm
-	    CPU10_x86_SSE2.asm
-	    CPU10_x86_SSE2_Nehalem.asm
-	    CPU12_x86_AVX.asm
-	    CPU12_x86_AVX2.asm
-	    CPU12_x86_SSE2.asm
-	    CPU12_x86_SSE2_Nehalem.asm)
+	        CPU10_x86_AVX.asm
+	        CPU10_x86_AVX2.asm
+	        CPU10_x86_SSE2.asm
+	        CPU10_x86_SSE2_Nehalem.asm
+	        CPU12_x86_AVX.asm
+	        CPU12_x86_AVX2.asm
+	        CPU12_x86_SSE2.asm
+	        CPU12_x86_SSE2_Nehalem.asm)
     endif()
 endif()
 
@@ -219,8 +224,8 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${MTE_COMP
 # CUDA #
 ########
 
-if(ENABLE_CUDA)
-	add_custom_command(
+if(ENABLE_CUDA AND NOT ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
+ 	add_custom_command(
 		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
 		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
 		COMMAND nvcc
@@ -241,10 +246,72 @@ if(ENABLE_CUDA)
 		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
 		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 		COMMENT "Building CUDA object CUDA12.cu.o")
+
+elseif(ENABLE_CUDA AND ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
+ 	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+		COMMAND nvcc
+		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA10_Registers.cu.o")
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
+		COMMAND nvcc
+		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA10_SharedMemory.cu.o")
+	add_custom_command(
+		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
+		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
+		COMMAND nvcc
+		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
+		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+		COMMENT "Building CUDA object CUDA12.cu.o")
+ 
+    function(compile_cuda_des_multiple_kernels_files out_var)
+        set(result)
+        foreach(in_f ${ARGN})
+	        set(out_f "${CMAKE_CURRENT_BINARY_DIR}/${in_f}")
+	        string(REPLACE ".cu" ".cu.o" out_f ${out_f})
+	        set(in_f "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/${in_f}")
+	        add_custom_command(
+		        OUTPUT ${out_f}
+		        DEPENDS ${in_f}
+		        COMMAND nvcc
+	            ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -I"${CMAKE_CURRENT_SOURCE_DIR}" -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o ${out_f} ${in_f}
+		        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+          		COMMENT "Building CUDA object ${out_f}")
+	        list(APPEND result ${out_f})
+        endforeach()
+        set(${out_var} "${result}" PARENT_SCOPE)
+    endfunction()
+    compile_cuda_des_multiple_kernels_files(CUDA_DES_MULTIPLE_KERNELS_FILES
+        CUDA10_Registers_KernelLauncher0.cu 
+        CUDA10_Registers_KernelLauncher1.cu 
+        CUDA10_Registers_KernelLauncher2.cu 
+        CUDA10_Registers_KernelLauncher3.cu 
+        CUDA10_Registers_KernelLauncher4.cu 
+        CUDA10_Registers_KernelLauncher5.cu 
+        CUDA10_Registers_KernelLauncher6.cu 
+        CUDA10_Registers_KernelLauncher7.cu 
+        CUDA10_Registers_KernelLauncher8.cu 
+        CUDA10_Registers_KernelLauncher9.cu 
+        CUDA10_Registers_KernelLauncher10.cu 
+        CUDA10_Registers_KernelLauncher11.cu 
+        CUDA10_Registers_KernelLauncher12.cu 
+        CUDA10_Registers_KernelLauncher13.cu 
+        CUDA10_Registers_KernelLauncher14.cu 
+        CUDA10_Registers_KernelLauncher15.cu)
+endif()
+
+if(ENABLE_CUDA)
     set(CUDA_FILES
         ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
         ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
-        ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o)
+        ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
+        ${CUDA_DES_MULTIPLE_KERNELS_FILES})
 endif()
 
 

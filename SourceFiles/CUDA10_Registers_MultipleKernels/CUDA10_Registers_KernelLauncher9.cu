@@ -36,6 +36,11 @@
 
 #ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
 
+#include "CUDA10_Registers_MultipleKernels/DES_Crypt_36.h"
+#include "CUDA10_Registers_MultipleKernels/DES_Crypt_37.h"
+#include "CUDA10_Registers_MultipleKernels/DES_Crypt_38.h"
+#include "CUDA10_Registers_MultipleKernels/DES_Crypt_39.h"
+
 #include "../CUDA10_Registers_Kernel_Common.h"
 
 #define SALT 2304
