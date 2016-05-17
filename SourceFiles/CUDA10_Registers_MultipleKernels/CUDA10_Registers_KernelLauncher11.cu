@@ -36,10 +36,10 @@
 
 #ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
 
-#include "CUDA10_Registers_MultipleKernels/DES_Crypt_44.h"
-#include "CUDA10_Registers_MultipleKernels/DES_Crypt_45.h"
-#include "CUDA10_Registers_MultipleKernels/DES_Crypt_46.h"
-#include "CUDA10_Registers_MultipleKernels/DES_Crypt_47.h"
+#include "DES_Crypt_44.h"
+#include "DES_Crypt_45.h"
+#include "DES_Crypt_46.h"
+#include "DES_Crypt_47.h"
 
 #include "../CUDA10_Registers_Kernel_Common.h"
 

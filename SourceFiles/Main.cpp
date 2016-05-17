@@ -2057,7 +2057,7 @@ void StartCUDADeviceSearchThreads()
 	ASSERT(numCUDADeviceSearchThreads > 0);
 
 	ERROR0((cuda_device_search_threads = new (std::nothrow) std::thread *[numCUDADeviceSearchThreads]) == NULL, ERROR_NO_MEMORY, GetErrorMessage(ERROR_NO_MEMORY));
-	ERROR0((CUDADeviceSearchThreadInfoArray = (struct CUDADeviceSearchThreadInfo *)malloc(sizeof(struct CUDADeviceSearchThreadInfo) * numCUDADeviceSearchThreads)) == NULL, ERROR_NO_MEMORY, GetErrorMessage(ERROR_NO_MEMORY));
+	ERROR0((CUDADeviceSearchThreadInfoArray = new (std::nothrow) struct CUDADeviceSearchThreadInfo[numCUDADeviceSearchThreads]) == NULL, ERROR_NO_MEMORY, GetErrorMessage(ERROR_NO_MEMORY));
 	if (options.GPUIndex == GPU_INDEX_ALL) {
 		int32_t CUDADeviceIndex;
 		for (CUDADeviceIndex = 0, i = 0; CUDADeviceIndex < CUDADeviceCount; ++CUDADeviceIndex) {
