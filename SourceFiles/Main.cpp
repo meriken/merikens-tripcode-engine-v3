@@ -1571,8 +1571,13 @@ void ObtainOptions(int32_t argCount, char **arguments)
 			       "The path of the pattern file `%s' is too long.",
 			       arguments[indexArg]);
 			ERROR0(numPatternFiles >= MAX_NUM_PATTERN_FILES, ERROR_PATTERN_FILE, "Too many pattern files were specified.");
-			strcpy(patternFilePathArray[numPatternFiles++], arguments[indexArg]);
-
+			if (arguments[indexArg][0]== '\"' && arguments[indexArg][strlen(arguments[indexArg]) - 1]== '\"') {
+			    strcpy(patternFilePathArray[numPatternFiles], arguments[indexArg] + 1);
+			    patternFilePathArray[numPatternFiles][strlen(patternFilePathArray[numPatternFiles]) - 1] = '\0';
+			    ++numPatternFiles;
+			} else  {
+			    strcpy(patternFilePathArray[numPatternFiles++], arguments[indexArg]);
+			}
 		} else if (strcmp(arguments[indexArg], "-d") == 0 && indexArg + 1 < argCount) {
 			options.GPUIndex = atoi(arguments[++indexArg]);
 
