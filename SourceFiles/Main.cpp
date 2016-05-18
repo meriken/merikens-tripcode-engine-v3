@@ -440,7 +440,7 @@ void ReleaseResources()
 	RELEASE_AND_SET_TO_NULL(expandedPatternArray, free);
 	RELEASE_AND_SET_TO_NULL(tripcodeChunkArray,   free);
 	RELEASE_AND_SET_TO_NULL(regexPatternArray,    free);
-	if (tripcodeFile) {
+    if (tripcodeFile) {
 		RELEASE_AND_SET_TO_NULL(tripcodeFile,     fclose);
 	}
 }
@@ -2451,39 +2451,37 @@ int main(int argc, char **argv)
 
 	// Terminate search threads.
 	SetTerminationState();
-	BOOL allThreadsHaveExited;
 	startingTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 	uint64_t currentTime, deltaTime;
+	bool allThreadsHaveExited;
 	do {
 		sleep_for_milliseconds(100);
-		allThreadsHaveExited = TRUE;
-#if defined(_WIN32) || defined(__CYGWIN__)
+		allThreadsHaveExited = true;
 		for (int32_t i = 0; i < numCUDADeviceSearchThreads; ++i) {
-			if (WaitForSingleObject(cuda_device_search_threads[i]->native_handle(), 0) != WAIT_OBJECT_0) {
-				allThreadsHaveExited = FALSE;
+		    if (cuda_device_search_threads[i]->get_id() != std::thread::id()) {
+				allThreadsHaveExited = false;
 				break;
 			}
 		}
 		for (int32_t i = 0; i < numOpenCLDeviceSearchThreads; ++i) {
-			if (WaitForSingleObject(opencl_device_search_threads[i]->native_handle(), 0) != WAIT_OBJECT_0) {
-				allThreadsHaveExited = FALSE;
+		    if (opencl_device_search_threads[i]->get_id() != std::thread::id()) {
+				allThreadsHaveExited = false;
 				break;
 			}
 		}
 		for (int32_t i = 0; i < numCPUSearchThreads; ++i) {
-			if (WaitForSingleObject(cpu_search_threads[i]->native_handle(), 0) != WAIT_OBJECT_0) {
-				allThreadsHaveExited = FALSE;
+		    if (cpu_search_threads[i]->get_id() != std::thread::id()) {
+				allThreadsHaveExited = false;
 				break;
 			}
 		}
-#endif
 		currentTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 		deltaTime = currentTime - startingTime;
 	} while (deltaTime < 10 * 1000 && !allThreadsHaveExited);	
 
-	ReleaseResources();
-
 	reset_cursor_pos(prevLineCount + 1);
+
+	ReleaseResources();
 
 	return 0;
 }

@@ -59,35 +59,190 @@
 #else
 #define VECTOR_ALIGNMENT __attribute__ ((aligned (16))) 
 #endif
+typedef union VECTOR_ALIGNMENT sha1_vector {
+	uint32_t m128i_u32[4];
+#ifdef ARCH_X86
+	__m128i m128i;
+#endif
+	int8_t m128i_i8[16];
+	int16_t m128i_i16[8];
+	int32_t m128i_i32[4];
+	int64_t m128i_i64[2];
+	uint8_t m128i_u8[16];
+	uint16_t m128i_u16[8];
+	uint64_t m128i_u64[2];
+} sha1_vector;
+
+#ifdef ARCH_X86
+
+inline sha1_vector vnot_func(const sha1_vector &a) 
+{
+    sha1_vector ret;
+
+    ret.m128i = _mm_andnot_si128(a.m128i, _mm_set1_epi8(0xff));
+    return ret;
+}
+
+inline sha1_vector vand_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector ret;
+
+    ret.m128i = _mm_and_si128((a).m128i, (b).m128i);
+    return ret;
+}
+
+inline sha1_vector vor_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector ret;
+
+    ret.m128i = _mm_or_si128((a).m128i, (b).m128i);
+    return ret;
+}
+
+inline sha1_vector vxor_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector ret;
+
+    ret.m128i = _mm_xor_si128((a).m128i, (b).m128i);
+    return ret;
+}
+
+inline sha1_vector vadd_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector ret;
+
+    ret.m128i = _mm_add_epi32((a).m128i, (b).m128i);
+    return ret;
+}
 
 // Circular left rotation of 32-bit value 'val' left by 'bits' bits
 // (assumes that 'bits' is always within range from 0 to 32)
 // #define ROTL( bits, val ) \
 //        ( ( ( val ) << ( bits ) ) | ( ( val ) >> ( 32 - ( bits ) ) ) )
-#define ROTL(bits, val) _mm_or_si128(_mm_slli_epi32((val), (bits)), _mm_srli_epi32((val), 32 - (bits)))
+// #define ROTL(bits, val) _mm_or_si128(_mm_slli_epi32((val), (bits)), _mm_srli_epi32((val), 32 - (bits)))
+inline sha1_vector ROTL(unsigned int bits, const sha1_vector &val) 
+{
+	sha1_vector ret;
+
+	ret.m128i = _mm_or_si128(_mm_slli_epi32((val).m128i, (bits)), _mm_srli_epi32((val).m128i, 32 - (bits)));
+	return ret;
+}
+
+#else
+
+inline sha1_vector vnot_func(const sha1_vector &a) 
+{
+    sha1_vector dst;
+
+    dst.m128i_u32[0] = ~(a).m128i_u32[0];
+    dst.m128i_u32[1] = ~(a).m128i_u32[1];
+    dst.m128i_u32[2] = ~(a).m128i_u32[2];
+    dst.m128i_u32[3] = ~(a).m128i_u32[3];
+    return dst;
+}
+
+inline sha1_vector vand_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector dst;
+
+    dst.m128i_u32[0] = (a).m128i_u32[0] & (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] & (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] & (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] & (b).m128i_u32[3];
+    return dst;
+}
+
+inline sha1_vector vor_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector dst;
+
+    dst.m128i_u32[0] = (a).m128i_u32[0] | (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] | (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] | (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] | (b).m128i_u32[3];
+    return dst;
+}
+
+inline sha1_vector vxor_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector dst;
+
+    dst.m128i_u32[0] = (a).m128i_u32[0] ^ (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] ^ (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] ^ (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] ^ (b).m128i_u32[3];
+    return dst;
+}
+
+inline sha1_vector vadd_func(const sha1_vector &a, const sha1_vector &b) 
+{
+    sha1_vector dst;
+
+    dst.m128i_u32[0] = (a).m128i_u32[0] + (b).m128i_u32[0];
+    dst.m128i_u32[1] = (a).m128i_u32[1] + (b).m128i_u32[1];
+    dst.m128i_u32[2] = (a).m128i_u32[2] + (b).m128i_u32[2];
+    dst.m128i_u32[3] = (a).m128i_u32[3] + (b).m128i_u32[3];
+    return dst;
+}
+
+// Circular left rotation of 32-bit value 'val' left by 'bits' bits
+// (assumes that 'bits' is always within range from 0 to 32)
+// #define ROTL( bits, val ) \
+//        ( ( ( val ) << ( bits ) ) | ( ( val ) >> ( 32 - ( bits ) ) ) )
+// #define ROTL(bits, val) _mm_or_si128(_mm_slli_epi32((val), (bits)), _mm_srli_epi32((val), 32 - (bits)))
+inline sha1_vector ROTL(unsigned int bits, const sha1_vector &val) 
+{
+	sha1_vector dst;
+
+    dst.m128i_u32[0] = (val.m128i_u32[0] << bits) + (val.m128i_u32[0] >> (32 - bits));
+    dst.m128i_u32[1] = (val.m128i_u32[1] << bits) + (val.m128i_u32[1] >> (32 - bits));
+    dst.m128i_u32[2] = (val.m128i_u32[2] << bits) + (val.m128i_u32[2] >> (32 - bits));
+    dst.m128i_u32[3] = (val.m128i_u32[3] << bits) + (val.m128i_u32[3] >> (32 - bits));
+	return dst;
+}
+
+#endif
 
 // Central routine for calculating the hash value. See the FIPS
 // 180-3 standard p. 17f for a detailed explanation.
 // #define f1 	( ( B & C ) ^ ( ( ~ B ) & D ) )
-#define f1 _mm_xor_si128(_mm_and_si128(B, C), _mm_and_si128(_mm_andnot_si128((B), _mm_set1_epi8(0xff)), D))
+// #define f1 _mm_xor_si128(_mm_and_si128(B, C), _mm_and_si128(_mm_andnot_si128((B), _mm_set1_epi8(0xff)), D))
+#define f1 f1_func(B, C, D)
+inline sha1_vector f1_func(const sha1_vector &B, const sha1_vector &C, const sha1_vector &D) 
+{
+	return vxor_func(vand_func(B, C), vand_func(vnot_func(B), D));
+}
+
 // #define f2  ( B ^ C ^ D )
-#define f2 _mm_xor_si128(_mm_xor_si128(B, C), D)
+// #define f2 _mm_xor_si128(_mm_xor_si128(B, C), D)
+#define f2 f2_func(B, C, D)
+inline sha1_vector f2_func(const sha1_vector &B, const sha1_vector &C, const sha1_vector &D) 
+{
+	return vxor_func(vxor_func(B, C), D);
+}
+
 // #define f3  ( ( B & C ) ^ ( B & D ) ^ ( C & D ) )
-#define f3 _mm_xor_si128(_mm_xor_si128(_mm_and_si128(B, C), _mm_and_si128(B, D)), _mm_and_si128(C, D))
+// #define f3 _mm_xor_si128(_mm_xor_si128(_mm_and_si128(B, C), _mm_and_si128(B, D)), _mm_and_si128(C, D))
+#define f3 f3_func(B, C, D)
+inline sha1_vector f3_func(const sha1_vector &B, const sha1_vector &C, const sha1_vector &D) 
+{
+	return vxor_func(vxor_func(vand_func(B, C), vand_func(B, D)), vand_func(C, D));
+}
+
 #define f4  f2
 
 // Initial hash values (see p. 14 of FIPS 180-3)
-VECTOR_ALIGNMENT __m128i H0 = _mm_set1_epi32(0x67452301);
-VECTOR_ALIGNMENT __m128i H1 = _mm_set1_epi32(0xefcdab89);
-VECTOR_ALIGNMENT __m128i H2 = _mm_set1_epi32(0x98badcfe);
-VECTOR_ALIGNMENT __m128i H3 = _mm_set1_epi32(0x10325476);
-VECTOR_ALIGNMENT __m128i H4 = _mm_set1_epi32(0xc3d2e1f0);
+VECTOR_ALIGNMENT sha1_vector H0 = {0x67452301, 0x67452301, 0x67452301, 0x67452301};
+VECTOR_ALIGNMENT sha1_vector H1 = {0xefcdab89, 0xefcdab89, 0xefcdab89, 0xefcdab89};
+VECTOR_ALIGNMENT sha1_vector H2 = {0x98badcfe, 0x98badcfe, 0x98badcfe, 0x98badcfe};
+VECTOR_ALIGNMENT sha1_vector H3 = {0x10325476, 0x10325476, 0x10325476, 0x10325476};
+VECTOR_ALIGNMENT sha1_vector H4 = {0xc3d2e1f0, 0xc3d2e1f0, 0xc3d2e1f0, 0xc3d2e1f0};
 
 // Constants required for hash calculation (see p. 11 of FIPS 180-3)
-VECTOR_ALIGNMENT __m128i K0 = _mm_set1_epi32(0x5a827999);
-VECTOR_ALIGNMENT __m128i K1 = _mm_set1_epi32(0x6ed9eba1);
-VECTOR_ALIGNMENT __m128i K2 = _mm_set1_epi32(0x8f1bbcdc);
-VECTOR_ALIGNMENT __m128i K3 = _mm_set1_epi32(0xca62c1d6);
+VECTOR_ALIGNMENT sha1_vector K0 = {0x5a827999, 0x5a827999, 0x5a827999, 0x5a827999};
+VECTOR_ALIGNMENT sha1_vector K1 = {0x6ed9eba1, 0x6ed9eba1, 0x6ed9eba1, 0x6ed9eba1};
+VECTOR_ALIGNMENT sha1_vector K2 = {0x8f1bbcdc, 0x8f1bbcdc, 0x8f1bbcdc, 0x8f1bbcdc};
+VECTOR_ALIGNMENT sha1_vector K3 = {0xca62c1d6, 0xca62c1d6, 0xca62c1d6, 0xca62c1d6};
 
 
 
@@ -265,11 +420,9 @@ inline void ConvertRaw12CharTripcodeIntoDisplayFormat(uint32_t *rawTripcodeArray
 		}                                                                                                       \
 	}                                                                                                           \
 
-#define XOR(x, y) (_mm_xor_si128((x), (y)))
-
 #define ROUND_00_TO_19(t, w)                                                                               \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f1), E), (w)), K0);  \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f1), E), (w)), K0);  \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL(30, B);                                                                               \
@@ -279,7 +432,7 @@ inline void ConvertRaw12CharTripcodeIntoDisplayFormat(uint32_t *rawTripcodeArray
 
 #define ROUND_20_TO_39(t, w)                                                                               \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f2), E), (w)), K1);  \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f2), E), (w)), K1);  \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -289,7 +442,7 @@ inline void ConvertRaw12CharTripcodeIntoDisplayFormat(uint32_t *rawTripcodeArray
 
 #define ROUND_40_TO_59(t, w)                                                                               \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f3), E), (w)), K2);  \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f3), E), (w)), K2);  \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -299,7 +452,7 @@ inline void ConvertRaw12CharTripcodeIntoDisplayFormat(uint32_t *rawTripcodeArray
 
 #define	ROUND_60_TO_79(t, w)                                                                               \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f4), E), (w)), K3);  \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f4), E), (w)), K3);  \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -327,26 +480,33 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 		break;
 	}
 
-	VECTOR_ALIGNMENT __m128i PW[80];
-	PW[0]  = _mm_set1_epi32(0);
-	PW[1]  = _mm_set1_epi32((key[4] << 24) | (key[5] << 16) | (key[ 6] << 8) | key[ 7]);
-	PW[2]  = _mm_set1_epi32((key[8] << 24) | (key[9] << 16) | (key[10] << 8) | key[11]);
-	PW[3]  = _mm_set1_epi32(0x80000000);
-	PW[4]  = _mm_set1_epi32(0);
-	PW[5]  = _mm_set1_epi32(0);
-	PW[6]  = _mm_set1_epi32(0);
-	PW[7]  = _mm_set1_epi32(0);
-	PW[8]  = _mm_set1_epi32(0);
-	PW[9]  = _mm_set1_epi32(0);
-	PW[10] = _mm_set1_epi32(0);
-	PW[11] = _mm_set1_epi32(0);
-	PW[12] = _mm_set1_epi32(0);
-	PW[13] = _mm_set1_epi32(0);
-	PW[14] = _mm_set1_epi32(0);
-	PW[15] = _mm_set1_epi32(12 * 8);
-	PW[16] = ROTL(1, _mm_xor_si128(_mm_xor_si128(PW[16 - 3], PW[16 - 8]), PW[16 - 14]));
+	VECTOR_ALIGNMENT sha1_vector PW[80] = {
+		{0, 0, 0, 0},
+		{(key[4] << 24) | (key[5] << 16) | (key[ 6] << 8) | key[ 7],
+         (key[4] << 24) | (key[5] << 16) | (key[ 6] << 8) | key[ 7],
+         (key[4] << 24) | (key[5] << 16) | (key[ 6] << 8) | key[ 7],
+         (key[4] << 24) | (key[5] << 16) | (key[ 6] << 8) | key[ 7]},
+        {(key[8] << 24) | (key[9] << 16) | (key[10] << 8) | key[11],
+         (key[8] << 24) | (key[9] << 16) | (key[10] << 8) | key[11],
+         (key[8] << 24) | (key[9] << 16) | (key[10] << 8) | key[11],
+         (key[8] << 24) | (key[9] << 16) | (key[10] << 8) | key[11]},
+		{0x80000000, 0x80000000, 0x80000000, 0x80000000},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{0, 0, 0, 0},
+		{12 * 8, 12 * 8, 12 * 8, 12 * 8},
+	};
+	PW[16] = ROTL(1, vxor_func(vxor_func(PW[16 - 3], PW[16 - 8]), PW[16 - 14]));
 	for (int32_t t = 17; t < 80; ++t)
-		PW[t] = ROTL(1, _mm_xor_si128(_mm_xor_si128(_mm_xor_si128(PW[(t) - 3], PW[(t) - 8]), PW[(t) - 14]), PW[(t) - 16]));
+		PW[t] = ROTL(1, vxor_func(vxor_func(vxor_func(PW[(t) - 3], PW[(t) - 8]), PW[(t) - 14]), PW[(t) - 16]));
 
 	for (int32_t indexKey1 = 0; indexKey1 <= CPU_SHA1_MAX_INDEX_FOR_KEYS; ++indexKey1) {
 		key[1] = keyCharTable_SecondByteAndOneByte[indexKey1];
@@ -357,51 +517,45 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 			for (int32_t indexKey3 = 0; indexKey3 <= CPU_SHA1_MAX_INDEX_FOR_KEYS; ++indexKey3) {
 				key[3] = keyCharTable_SecondByteAndOneByte[indexKey3];
 				
-				VECTOR_ALIGNMENT __m128i A = H0;
-				VECTOR_ALIGNMENT __m128i B = H1;
-				VECTOR_ALIGNMENT __m128i C = H2;
-				VECTOR_ALIGNMENT __m128i D = H3;
-				VECTOR_ALIGNMENT __m128i E = H4;
-				VECTOR_ALIGNMENT __m128i tmp;
-				VECTOR_ALIGNMENT __m128i W0;
+				VECTOR_ALIGNMENT sha1_vector A = H0;
+				VECTOR_ALIGNMENT sha1_vector B = H1;
+				VECTOR_ALIGNMENT sha1_vector C = H2;
+				VECTOR_ALIGNMENT sha1_vector D = H3;
+				VECTOR_ALIGNMENT sha1_vector E = H4;
+				VECTOR_ALIGNMENT sha1_vector tmp;
+				VECTOR_ALIGNMENT sha1_vector W0;
 
-				union {
-					__m128i v;
-					int a[4];
-				} converter;
+				W0.m128i_u32[0] = (((key[0] & 0xfc) | 0x00) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
+				W0.m128i_u32[1] = (((key[0] & 0xfc) | 0x01) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
+				W0.m128i_u32[2] = (((key[0] & 0xfc) | 0x02) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
+				W0.m128i_u32[3] = (((key[0] & 0xfc) | 0x03) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
 
-				converter.a[0] = (((key[0] & 0xfc) | 0x00) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
-				converter.a[1] = (((key[0] & 0xfc) | 0x01) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
-				converter.a[2] = (((key[0] & 0xfc) | 0x02) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
-				converter.a[3] = (((key[0] & 0xfc) | 0x03) << 24) | (key[1] << 16) | (key[2] << 8) | key[3];
-				W0 = converter.v;
-
-				VECTOR_ALIGNMENT __m128i W0_1 = ROTL(1, W0);
-				VECTOR_ALIGNMENT __m128i W0_2 = ROTL(2,  W0);
-				VECTOR_ALIGNMENT __m128i W0_3 = ROTL(3,  W0);
-				VECTOR_ALIGNMENT __m128i W0_4 = ROTL(4,  W0);
-				VECTOR_ALIGNMENT __m128i W0_5 = ROTL(5,  W0);
-				VECTOR_ALIGNMENT __m128i W0_6 = ROTL(6,  W0);
-				VECTOR_ALIGNMENT __m128i W0_7 = ROTL(7,  W0);
-				VECTOR_ALIGNMENT __m128i W0_8 = ROTL(8,  W0);
-				VECTOR_ALIGNMENT __m128i W0_9 = ROTL(9,  W0);
-				VECTOR_ALIGNMENT __m128i W010 = ROTL(10, W0);
-				VECTOR_ALIGNMENT __m128i W011 = ROTL(11, W0);
-				VECTOR_ALIGNMENT __m128i W012 = ROTL(12, W0);
-				VECTOR_ALIGNMENT __m128i W013 = ROTL(13, W0);
-				VECTOR_ALIGNMENT __m128i W014 = ROTL(14, W0);
-				VECTOR_ALIGNMENT __m128i W015 = ROTL(15, W0);
-				VECTOR_ALIGNMENT __m128i W016 = ROTL(16, W0);
-				VECTOR_ALIGNMENT __m128i W017 = ROTL(17, W0);
-				VECTOR_ALIGNMENT __m128i W018 = ROTL(18, W0);
-				VECTOR_ALIGNMENT __m128i W019 = ROTL(19, W0);
-				VECTOR_ALIGNMENT __m128i W020 = ROTL(20, W0);
-				VECTOR_ALIGNMENT __m128i W021 = ROTL(21, W0);
-				VECTOR_ALIGNMENT __m128i W022 = ROTL(22, W0);
-				VECTOR_ALIGNMENT __m128i W0_6___W0_4        = XOR(W0_6,        W0_4);
-				VECTOR_ALIGNMENT __m128i W0_6___W0_4___W0_7 = XOR(W0_6___W0_4, W0_7);
-				VECTOR_ALIGNMENT __m128i W0_8___W0_4        = XOR(W0_8,        W0_4);
-				VECTOR_ALIGNMENT __m128i W0_8___W012        = XOR(W0_8,        W012);
+				VECTOR_ALIGNMENT sha1_vector W0_1 = ROTL(1, W0);
+				VECTOR_ALIGNMENT sha1_vector W0_2 = ROTL(2,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_3 = ROTL(3,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_4 = ROTL(4,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_5 = ROTL(5,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_6 = ROTL(6,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_7 = ROTL(7,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_8 = ROTL(8,  W0);
+				VECTOR_ALIGNMENT sha1_vector W0_9 = ROTL(9,  W0);
+				VECTOR_ALIGNMENT sha1_vector W010 = ROTL(10, W0);
+				VECTOR_ALIGNMENT sha1_vector W011 = ROTL(11, W0);
+				VECTOR_ALIGNMENT sha1_vector W012 = ROTL(12, W0);
+				VECTOR_ALIGNMENT sha1_vector W013 = ROTL(13, W0);
+				VECTOR_ALIGNMENT sha1_vector W014 = ROTL(14, W0);
+				VECTOR_ALIGNMENT sha1_vector W015 = ROTL(15, W0);
+				VECTOR_ALIGNMENT sha1_vector W016 = ROTL(16, W0);
+				VECTOR_ALIGNMENT sha1_vector W017 = ROTL(17, W0);
+				VECTOR_ALIGNMENT sha1_vector W018 = ROTL(18, W0);
+				VECTOR_ALIGNMENT sha1_vector W019 = ROTL(19, W0);
+				VECTOR_ALIGNMENT sha1_vector W020 = ROTL(20, W0);
+				VECTOR_ALIGNMENT sha1_vector W021 = ROTL(21, W0);
+				VECTOR_ALIGNMENT sha1_vector W022 = ROTL(22, W0);
+				VECTOR_ALIGNMENT sha1_vector W0_6___W0_4        = vxor_func(W0_6,        W0_4);
+				VECTOR_ALIGNMENT sha1_vector W0_6___W0_4___W0_7 = vxor_func(W0_6___W0_4, W0_7);
+				VECTOR_ALIGNMENT sha1_vector W0_8___W0_4        = vxor_func(W0_8,        W0_4);
+				VECTOR_ALIGNMENT sha1_vector W0_8___W012        = vxor_func(W0_8,        W012);
 
 				ROUND_00_TO_19(0,  W0);
 				ROUND_00_TO_19(1,  PW[1]);
@@ -420,89 +574,93 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 				ROUND_00_TO_19(14, PW[14]);
 				ROUND_00_TO_19(15, PW[15]);
 
-				ROUND_00_TO_19(16, XOR(PW[16], W0_1));
+				ROUND_00_TO_19(16, vxor_func(PW[16], W0_1));
 				ROUND_00_TO_19(17, PW[17]);
 				ROUND_00_TO_19(18, PW[18]);
-				ROUND_00_TO_19(19, XOR(PW[19], W0_2));
+				ROUND_00_TO_19(19, vxor_func(PW[19], W0_2));
 
 				ROUND_20_TO_39(20, PW[20]);
 				ROUND_20_TO_39(21, PW[21]);
-				ROUND_20_TO_39(22, XOR(PW[22], W0_3));
+				ROUND_20_TO_39(22, vxor_func(PW[22], W0_3));
 				ROUND_20_TO_39(23, PW[23]);
-				ROUND_20_TO_39(24, XOR(PW[24], W0_2));
-				ROUND_20_TO_39(25, XOR(PW[25], W0_4));
+				ROUND_20_TO_39(24, vxor_func(PW[24], W0_2));
+				ROUND_20_TO_39(25, vxor_func(PW[25], W0_4));
 				ROUND_20_TO_39(26, PW[26]);
 				ROUND_20_TO_39(27, PW[27]);
-				ROUND_20_TO_39(28, XOR(PW[28], W0_5));
+				ROUND_20_TO_39(28, vxor_func(PW[28], W0_5));
 				ROUND_20_TO_39(29, PW[29]);
-				ROUND_20_TO_39(30, XOR(XOR(PW[30], W0_4), W0_2));
-				ROUND_20_TO_39(31, XOR(PW[31], W0_6));
-				ROUND_20_TO_39(32, XOR(XOR(PW[32], W0_3), W0_2));
+				ROUND_20_TO_39(30, vxor_func(vxor_func(PW[30], W0_4), W0_2));
+				ROUND_20_TO_39(31, vxor_func(PW[31], W0_6));
+				ROUND_20_TO_39(32, vxor_func(vxor_func(PW[32], W0_3), W0_2));
 				ROUND_20_TO_39(33, PW[33]);
-				ROUND_20_TO_39(34, XOR(PW[34], W0_7));
-				ROUND_20_TO_39(35, XOR(PW[35], W0_4));
-				ROUND_20_TO_39(36, XOR(PW[36], W0_6___W0_4));
-				ROUND_20_TO_39(37, XOR(PW[37], W0_8));
-				ROUND_20_TO_39(38, XOR(PW[38], W0_4));
+				ROUND_20_TO_39(34, vxor_func(PW[34], W0_7));
+				ROUND_20_TO_39(35, vxor_func(PW[35], W0_4));
+				ROUND_20_TO_39(36, vxor_func(PW[36], W0_6___W0_4));
+				ROUND_20_TO_39(37, vxor_func(PW[37], W0_8));
+				ROUND_20_TO_39(38, vxor_func(PW[38], W0_4));
 				ROUND_20_TO_39(39, PW[39]);
 	
-				ROUND_40_TO_59(40, XOR(XOR(PW[40], W0_4), W0_9));
+				ROUND_40_TO_59(40, vxor_func(vxor_func(PW[40], W0_4), W0_9));
 				ROUND_40_TO_59(41, PW[41]); 
-				ROUND_40_TO_59(42, XOR(XOR(PW[42], W0_6), W0_8));
-				ROUND_40_TO_59(43, XOR(PW[43], W010));
-				ROUND_40_TO_59(44, XOR(XOR(XOR(PW[44], W0_6), W0_3), W0_7));
+				ROUND_40_TO_59(42, vxor_func(vxor_func(PW[42], W0_6), W0_8));
+				ROUND_40_TO_59(43, vxor_func(PW[43], W010));
+				ROUND_40_TO_59(44, vxor_func(vxor_func(vxor_func(PW[44], W0_6), W0_3), W0_7));
 				ROUND_40_TO_59(45, PW[45]);
-				ROUND_40_TO_59(46, XOR(XOR(PW[46], W0_4), W011));
-				ROUND_40_TO_59(47, XOR(PW[47], W0_8___W0_4));
-				ROUND_40_TO_59(48, XOR(XOR(XOR(XOR(PW[48], W0_8___W0_4), W0_3), W010), W0_5));
-				ROUND_40_TO_59(49, XOR(PW[49], W012));
-				ROUND_40_TO_59(50, XOR(PW[50], W0_8));
-				ROUND_40_TO_59(51, XOR(PW[51], W0_6___W0_4));
-				ROUND_40_TO_59(52, XOR(XOR(PW[52], W0_8___W0_4), W013));
+				ROUND_40_TO_59(46, vxor_func(vxor_func(PW[46], W0_4), W011));
+				ROUND_40_TO_59(47, vxor_func(PW[47], W0_8___W0_4));
+				ROUND_40_TO_59(48, vxor_func(vxor_func(vxor_func(vxor_func(PW[48], W0_8___W0_4), W0_3), W010), W0_5));
+				ROUND_40_TO_59(49, vxor_func(PW[49], W012));
+				ROUND_40_TO_59(50, vxor_func(PW[50], W0_8));
+				ROUND_40_TO_59(51, vxor_func(PW[51], W0_6___W0_4));
+				ROUND_40_TO_59(52, vxor_func(vxor_func(PW[52], W0_8___W0_4), W013));
 				ROUND_40_TO_59(53, PW[53]);
-				ROUND_40_TO_59(54, XOR(XOR(XOR(PW[54], W0_7), W010), W012));
-				ROUND_40_TO_59(55, XOR(PW[55], W014));
-				ROUND_40_TO_59(56, XOR(XOR(XOR(PW[56], W0_6___W0_4___W0_7), W011), W010));
-				ROUND_40_TO_59(57, XOR(PW[57], W0_8));
-				ROUND_40_TO_59(58, XOR(XOR(PW[58], W0_8___W0_4), W015));
-				ROUND_40_TO_59(59, XOR(PW[59], W0_8___W012));
+				ROUND_40_TO_59(54, vxor_func(vxor_func(vxor_func(PW[54], W0_7), W010), W012));
+				ROUND_40_TO_59(55, vxor_func(PW[55], W014));
+				ROUND_40_TO_59(56, vxor_func(vxor_func(vxor_func(PW[56], W0_6___W0_4___W0_7), W011), W010));
+				ROUND_40_TO_59(57, vxor_func(PW[57], W0_8));
+				ROUND_40_TO_59(58, vxor_func(vxor_func(PW[58], W0_8___W0_4), W015));
+				ROUND_40_TO_59(59, vxor_func(PW[59], W0_8___W012));
 	
-				ROUND_60_TO_79(60, XOR(XOR(XOR(XOR(PW[60], W0_8___W012), W0_4), W0_7), W014));
-				ROUND_60_TO_79(61, XOR(PW[61], W016));
-				ROUND_60_TO_79(62, XOR(XOR(PW[62], W0_6___W0_4), W0_8___W012));
-				ROUND_60_TO_79(63, XOR(PW[63], W0_8));
-				ROUND_60_TO_79(64, XOR(XOR(XOR(PW[64], W0_6___W0_4___W0_7), W0_8___W012), W017));
+				ROUND_60_TO_79(60, vxor_func(vxor_func(vxor_func(vxor_func(PW[60], W0_8___W012), W0_4), W0_7), W014));
+				ROUND_60_TO_79(61, vxor_func(PW[61], W016));
+				ROUND_60_TO_79(62, vxor_func(vxor_func(PW[62], W0_6___W0_4), W0_8___W012));
+				ROUND_60_TO_79(63, vxor_func(PW[63], W0_8));
+				ROUND_60_TO_79(64, vxor_func(vxor_func(vxor_func(PW[64], W0_6___W0_4___W0_7), W0_8___W012), W017));
 				ROUND_60_TO_79(65, PW[65]);
-				ROUND_60_TO_79(66, XOR(XOR(PW[66], W014), W016));
-				ROUND_60_TO_79(67, XOR(XOR(PW[67], W0_8), W018));
-				ROUND_60_TO_79(68, XOR(XOR(XOR(PW[68], W011), W014), W015));
+				ROUND_60_TO_79(66, vxor_func(vxor_func(PW[66], W014), W016));
+				ROUND_60_TO_79(67, vxor_func(vxor_func(PW[67], W0_8), W018));
+				ROUND_60_TO_79(68, vxor_func(vxor_func(vxor_func(PW[68], W011), W014), W015));
 				ROUND_60_TO_79(69, PW[69]);
-				ROUND_60_TO_79(70, XOR(XOR(PW[70], W012), W019));
-				ROUND_60_TO_79(71, XOR(XOR(PW[71], W012), W016));
-				ROUND_60_TO_79(72, XOR(XOR(XOR(XOR(XOR(XOR(PW[72], W011), W012), W018), W013), W016), W0_5));
-				ROUND_60_TO_79(73, XOR(PW[73], W020));
-				ROUND_60_TO_79(74, XOR(XOR(PW[74], W0_8), W016));
-				ROUND_60_TO_79(75, XOR(XOR(XOR(PW[75], W0_6), W012), W014));
-				ROUND_60_TO_79(76, XOR(XOR(XOR(XOR(XOR(PW[76], W0_7), W0_8), W012), W016), W021));
+				ROUND_60_TO_79(70, vxor_func(vxor_func(PW[70], W012), W019));
+				ROUND_60_TO_79(71, vxor_func(vxor_func(PW[71], W012), W016));
+				ROUND_60_TO_79(72, vxor_func(vxor_func(vxor_func(vxor_func(vxor_func(vxor_func(PW[72], W011), W012), W018), W013), W016), W0_5));
+				ROUND_60_TO_79(73, vxor_func(PW[73], W020));
+				ROUND_60_TO_79(74, vxor_func(vxor_func(PW[74], W0_8), W016));
+				ROUND_60_TO_79(75, vxor_func(vxor_func(vxor_func(PW[75], W0_6), W012), W014));
+				ROUND_60_TO_79(76, vxor_func(vxor_func(vxor_func(vxor_func(vxor_func(PW[76], W0_7), W0_8), W012), W016), W021));
 				ROUND_60_TO_79(77, PW[77]);
-				ROUND_60_TO_79(78, XOR(XOR(XOR(XOR(XOR(PW[78], W0_7), W0_8), W015), W018), W020));
-				ROUND_60_TO_79(79, XOR(XOR(PW[79], W0_8), W022));
-	
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[0][0] = converter.a[0];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[0][1] = converter.a[0];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[0][2] = converter.a[0];
+				ROUND_60_TO_79(78, vxor_func(vxor_func(vxor_func(vxor_func(vxor_func(PW[78], W0_7), W0_8), W015), W018), W020));
+				ROUND_60_TO_79(79, vxor_func(vxor_func(PW[79], W0_8), W022));
+				
+                sha1_vector converter;
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[1][0] = converter.a[1];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[1][1] = converter.a[1];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[1][2] = converter.a[1];
+				converter = vadd_func(A, H0); 
+				rawTripcodeArray[0][0] = converter.m128i_u32[0];
+				rawTripcodeArray[1][0] = converter.m128i_u32[1];
+				rawTripcodeArray[2][0] = converter.m128i_u32[2];
+				rawTripcodeArray[3][0] = converter.m128i_u32[3];
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[2][0] = converter.a[2];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[2][1] = converter.a[2];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[2][2] = converter.a[2];
+				converter = vadd_func(B, H1); 
+ 				rawTripcodeArray[0][1] = converter.m128i_u32[0];
+				rawTripcodeArray[1][1] = converter.m128i_u32[1];
+				rawTripcodeArray[2][1] = converter.m128i_u32[2];
+				rawTripcodeArray[3][1] = converter.m128i_u32[3];
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[3][0] = converter.a[3];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[3][1] = converter.a[3];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[3][2] = converter.a[3];
+				converter = vadd_func(C, H2); 
+				rawTripcodeArray[0][2] = converter.m128i_u32[0];
+				rawTripcodeArray[1][2] = converter.m128i_u32[1];
+				rawTripcodeArray[2][2] = converter.m128i_u32[2];
+				rawTripcodeArray[3][2] = converter.m128i_u32[3];
 
 				numGeneratedTripcodes += 4;
 			
@@ -519,7 +677,7 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 #undef  ROUND_00_TO_15
 #define ROUND_00_TO_15(t)                                                                                  \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f1), E), W[t]), K0); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f1), E), W[t]), K0); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL(30, B);                                                                               \
@@ -530,7 +688,7 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 #undef  ROUND_16_TO_19
 #define ROUND_16_TO_19(t)                                                                                  \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f1), E), W[t]), K0); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f1), E), W[t]), K0); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -541,7 +699,7 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 #undef  ROUND_20_TO_39
 #define ROUND_20_TO_39(t)                                                                                  \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f2), E), W[t]), K1); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f2), E), W[t]), K1); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -552,7 +710,7 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 #undef  ROUND_40_TO_59
 #define ROUND_40_TO_59(t)                                                                                  \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f3), E), W[t]), K2); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f3), E), W[t]), K2); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -563,7 +721,7 @@ static uint32_t SearchForTripcodesWithMaximumOptimization()
 #undef  ROUND_60_TO_79
 #define	ROUND_60_TO_79(t)                                                                                  \
 		{                                                                                                  \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f4), E), W[t]), K3); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f4), E), W[t]), K3); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -768,21 +926,21 @@ static uint32_t SearchForTripcodesWithOptimization()
 				ROUND_60_TO_79(70); ROUND_60_TO_79(71); ROUND_60_TO_79(72); ROUND_60_TO_79(73); ROUND_60_TO_79(74);
 				ROUND_60_TO_79(75); ROUND_60_TO_79(76); ROUND_60_TO_79(77); ROUND_60_TO_79(78); ROUND_60_TO_79(79);
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[0][0] = converter.a[0];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[0][1] = converter.a[0];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[0][2] = converter.a[0];
+				converter.v = vadd_func(A, H0); rawTripcodeArray[0][0] = converter.a[0];
+				converter.v = vadd_func(B, H1); rawTripcodeArray[0][1] = converter.a[0];
+				converter.v = vadd_func(C, H2); rawTripcodeArray[0][2] = converter.a[0];
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[1][0] = converter.a[1];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[1][1] = converter.a[1];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[1][2] = converter.a[1];
+				converter.v = vadd_func(A, H0); rawTripcodeArray[1][0] = converter.a[1];
+				converter.v = vadd_func(B, H1); rawTripcodeArray[1][1] = converter.a[1];
+				converter.v = vadd_func(C, H2); rawTripcodeArray[1][2] = converter.a[1];
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[2][0] = converter.a[2];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[2][1] = converter.a[2];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[2][2] = converter.a[2];
+				converter.v = vadd_func(A, H0); rawTripcodeArray[2][0] = converter.a[2];
+				converter.v = vadd_func(B, H1); rawTripcodeArray[2][1] = converter.a[2];
+				converter.v = vadd_func(C, H2); rawTripcodeArray[2][2] = converter.a[2];
 
-				converter.v = _mm_add_epi32(A, H0); rawTripcodeArray[3][0] = converter.a[3];
-				converter.v = _mm_add_epi32(B, H1); rawTripcodeArray[3][1] = converter.a[3];
-				converter.v = _mm_add_epi32(C, H2); rawTripcodeArray[3][2] = converter.a[3];
+				converter.v = vadd_func(A, H0); rawTripcodeArray[3][0] = converter.a[3];
+				converter.v = vadd_func(B, H1); rawTripcodeArray[3][1] = converter.a[3];
+				converter.v = vadd_func(C, H2); rawTripcodeArray[3][2] = converter.a[3];
 
 				numGeneratedTripcodes += 4;
 			
@@ -798,7 +956,7 @@ static uint32_t SearchForTripcodesWithOptimization()
 #define ROUND_16_TO_19(t)                                                                                  \
 		{                                                                                                  \
 			W[t] = ROTL(1, _mm_xor_si128(_mm_xor_si128(_mm_xor_si128(W[(t) - 3], W[(t) - 8]), W[(t) - 14]), W[(t) - 16])); \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f1), E), W[t]), K0); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f1), E), W[t]), K0); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -810,7 +968,7 @@ static uint32_t SearchForTripcodesWithOptimization()
 #define ROUND_20_TO_39(t)                                                                                  \
 		{                                                                                                  \
 			W[t] = ROTL(1, _mm_xor_si128(_mm_xor_si128(_mm_xor_si128(W[(t) - 3], W[(t) - 8]), W[(t) - 14]), W[(t) - 16])); \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f2), E), W[t]), K1); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f2), E), W[t]), K1); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -822,7 +980,7 @@ static uint32_t SearchForTripcodesWithOptimization()
 #define ROUND_40_TO_59(t)                                                                                  \
 		{                                                                                                  \
 			W[t] = ROTL(1, _mm_xor_si128(_mm_xor_si128(_mm_xor_si128(W[(t) - 3], W[(t) - 8]), W[(t) - 14]), W[(t) - 16])); \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f3), E), W[t]), K2); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f3), E), W[t]), K2); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -834,7 +992,7 @@ static uint32_t SearchForTripcodesWithOptimization()
 #define	ROUND_60_TO_79(t)                                                                                  \
 		{                                                                                                  \
 			W[t] = ROTL(1, _mm_xor_si128(_mm_xor_si128(_mm_xor_si128(W[(t) - 3], W[(t) - 8]), W[(t) - 14]), W[(t) - 16])); \
-			tmp = _mm_add_epi32(_mm_add_epi32(_mm_add_epi32(_mm_add_epi32(ROTL(5, A), f4), E), W[t]), K3); \
+			tmp = vadd_func(vadd_func(vadd_func(vadd_func(ROTL(5, A), f4), E), W[t]), K3); \
 			E = D;                                                                                         \
 			D = C;                                                                                         \
 			C = ROTL( 30, B );                                                                             \
@@ -921,21 +1079,21 @@ static uint32_t SearchForTripcodesWithoutOptimization()
 				ROUND_60_TO_79(70); ROUND_60_TO_79(71); ROUND_60_TO_79(72); ROUND_60_TO_79(73); ROUND_60_TO_79(74);
 				ROUND_60_TO_79(75); ROUND_60_TO_79(76); ROUND_60_TO_79(77); ROUND_60_TO_79(78); ROUND_60_TO_79(79);
 	
-				rawTripcodeArray[0][0] = _mm_add_epi32(A, H0).m128i_u32[0];
-				rawTripcodeArray[0][1] = _mm_add_epi32(B, H1).m128i_u32[0];
-				rawTripcodeArray[0][2] = _mm_add_epi32(C, H2).m128i_u32[0];
+				rawTripcodeArray[0][0] = vadd_func(A, H0).m128i_u32[0];
+				rawTripcodeArray[0][1] = vadd_func(B, H1).m128i_u32[0];
+				rawTripcodeArray[0][2] = vadd_func(C, H2).m128i_u32[0];
 
-				rawTripcodeArray[1][0] = _mm_add_epi32(A, H0).m128i_u32[1];
-				rawTripcodeArray[1][1] = _mm_add_epi32(B, H1).m128i_u32[1];
-				rawTripcodeArray[1][2] = _mm_add_epi32(C, H2).m128i_u32[1];
+				rawTripcodeArray[1][0] = vadd_func(A, H0).m128i_u32[1];
+				rawTripcodeArray[1][1] = vadd_func(B, H1).m128i_u32[1];
+				rawTripcodeArray[1][2] = vadd_func(C, H2).m128i_u32[1];
 
-				rawTripcodeArray[2][0] = _mm_add_epi32(A, H0).m128i_u32[2];
-				rawTripcodeArray[2][1] = _mm_add_epi32(B, H1).m128i_u32[2];
-				rawTripcodeArray[2][2] = _mm_add_epi32(C, H2).m128i_u32[2];
+				rawTripcodeArray[2][0] = vadd_func(A, H0).m128i_u32[2];
+				rawTripcodeArray[2][1] = vadd_func(B, H1).m128i_u32[2];
+				rawTripcodeArray[2][2] = vadd_func(C, H2).m128i_u32[2];
 
-				rawTripcodeArray[3][0] = _mm_add_epi32(A, H0).m128i_u32[3];
-				rawTripcodeArray[3][1] = _mm_add_epi32(B, H1).m128i_u32[3];
-				rawTripcodeArray[3][2] = _mm_add_epi32(C, H2).m128i_u32[3];
+				rawTripcodeArray[3][0] = vadd_func(A, H0).m128i_u32[3];
+				rawTripcodeArray[3][1] = vadd_func(B, H1).m128i_u32[3];
+				rawTripcodeArray[3][2] = vadd_func(C, H2).m128i_u32[3];
 
 				numGeneratedTripcodes += 4;
 			

@@ -91,7 +91,7 @@ typedef union VECTOR_ALIGNMENT DES_Vector {
 
 typedef VECTOR_ALIGNMENT DES_Vector vtype;
 
-#if ARCH_X86
+#ifdef ARCH_X86
 
 inline vtype vxor_func(vtype &a, vtype &b) 
 {
