@@ -1751,6 +1751,7 @@ void ProcessValidTripcodePair(unsigned char *tripcode, unsigned char *key)
 	ASSERT(lenTripcode    == 10 || lenTripcode    == 12);
 	ASSERT(lenTripcodeKey == 10 || lenTripcodeKey == 12);
 	
+	current_state_spinlock.lock();
 	process_tripcode_pair_spinlock.lock();
 	if (!options.redirection) {
 #ifdef ENGLISH_VERSION
@@ -1813,10 +1814,8 @@ void ProcessValidTripcodePair(unsigned char *tripcode, unsigned char *key)
 		printf(")\n");
 	}
 	fflush(stdout);
-	process_tripcode_pair_spinlock.unlock();
-
-	current_state_spinlock.lock();
 	++numValidTripcodes;
+	process_tripcode_pair_spinlock.unlock();
 	current_state_spinlock.unlock();
 
 	if (!options.redirection)
@@ -1827,6 +1826,7 @@ void ProcessValidTripcodePair(unsigned char *tripcode, unsigned char *key)
 
 void ProcessInvalidTripcodePair(unsigned char *tripcode, unsigned char *key)
 {
+	current_state_spinlock.lock();
 	process_tripcode_pair_spinlock.lock();
 	if (options.outputInvalidTripcode && !options.redirection && !UpdateTerminationState() && !GetErrorState()) {
 #ifdef ENGLISH_VERSION
@@ -1873,10 +1873,8 @@ void ProcessInvalidTripcodePair(unsigned char *tripcode, unsigned char *key)
 		printf("\n");
 		fflush(stdout);
 	}
-	process_tripcode_pair_spinlock.unlock();
-
-	current_state_spinlock.lock();
 	++numDiscardedTripcodes;
+	process_tripcode_pair_spinlock.unlock();
 	current_state_spinlock.unlock();
 
 	if (options.outputInvalidTripcode && !options.redirection && !UpdateTerminationState() && !GetErrorState())
