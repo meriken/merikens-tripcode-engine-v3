@@ -46,7 +46,6 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
-This program uses Boost and Boost.Process. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages\BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
 There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
@@ -69,11 +68,9 @@ Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" below.
 
-## Building (Linux; 32/64-bit x86 only)
+## Building (Linux and Other POSIX-Compliant Operating Systems)
 
-**Note:** Linux support is not complete yet. CPU support is limited, and the multiple kernels versions for NVIDIA are not available yet.  
-
-You need the following tools to build Meriken's Tripcode Engine.
+You should be able to build and run this application on any POSIX-compliant operating systems. You need the following tools to build Meriken's Tripcode Engine.
 
 * CMake 2.8.4 or later
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later)
@@ -82,11 +79,9 @@ You need the following tools to build Meriken's Tripcode Engine.
 
 You should be able to build everything with `BuildAll.sh`. If you are building the application manually, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
 
+**Note:** AVX2 is not supported on POSIX-compliant operating systems.  
+
 ### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
-
-If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
-
-For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
@@ -94,6 +89,10 @@ $ ./BuildAll.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
 ```
+
+If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
+
+For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
 ## Usage (Linux)
 
