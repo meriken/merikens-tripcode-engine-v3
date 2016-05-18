@@ -481,67 +481,71 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	boost_process_spinlock.lock();
 
 #ifdef _WIN32
-	std::vector<std::wstring> args;
 	typedef std::codecvt_byname<wchar_t, char, std::mbstate_t> converter_type;
 	std::wstring_convert<converter_type> converter(new converter_type("cp" + std::to_string(GetACP())));
 #define CONVERT_FROM_BYTES(s) converter.from_bytes(s)
+	std::wstring command_line = CONVERT_FROM_BYTES(boost::process::shell_path().string() + " /C \"");
 #else
-	std::vector<std::string> args;
+	std::vector<std::string> command_line;
 #define CONVERT_FROM_BYTES(s) (s)
+	std::wstring command_line = CONVERT_FROM_BYTES(boost::process::shell_path().string() + " -c ");
 #endif
-	args.push_back(CONVERT_FROM_BYTES(childProcessPath));
-	args.push_back(CONVERT_FROM_BYTES("--output-for-redirection"));
-	args.push_back(CONVERT_FROM_BYTES("--disable-tripcode-checks"));
-	args.push_back(CONVERT_FROM_BYTES("-l"));
-	args.push_back(CONVERT_FROM_BYTES(std::to_string(lenTripcode)));
-	args.push_back(CONVERT_FROM_BYTES("-g"));
-	args.push_back(CONVERT_FROM_BYTES("-d"));
-	args.push_back(CONVERT_FROM_BYTES(std::to_string(info->deviceNo)));
-	args.push_back(CONVERT_FROM_BYTES("-y"));
-	args.push_back(CONVERT_FROM_BYTES(std::to_string(numWorkItemsPerComputeUnit)));
-	args.push_back(CONVERT_FROM_BYTES("-z"));
-	args.push_back(CONVERT_FROM_BYTES(std::to_string(localWorkSize)));
-	args.push_back(CONVERT_FROM_BYTES("-a"));
-	args.push_back(CONVERT_FROM_BYTES(std::to_string(options.openCLNumThreads)));
-	args.push_back(CONVERT_FROM_BYTES("-b"));
-	args.push_back(CONVERT_FROM_BYTES("1"));
+	command_line += (CONVERT_FROM_BYTES(std::string("\"") + childProcessPath + std::string("\"")));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--output-for-redirection"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--disable-tripcode-checks"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-l"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + std::to_string(lenTripcode)));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-g"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-d"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + std::to_string(info->deviceNo)));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-y"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + std::to_string(numWorkItemsPerComputeUnit)));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-z"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + std::to_string(localWorkSize)));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-a"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + std::to_string(options.openCLNumThreads)));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-b"));
+	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "1"));
 	for (int32_t patternFileIndex = 0; patternFileIndex < numPatternFiles; ++patternFileIndex) {
-		args.push_back(CONVERT_FROM_BYTES("-f"));
-		args.push_back(CONVERT_FROM_BYTES("\"" + std::string(patternFilePathArray[patternFileIndex]) + "\""));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-f"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "\"" + std::string(patternFilePathArray[patternFileIndex]) + "\""));
 	}
 #ifdef ENABLE_CUDA
 	if (options.useOpenCLForCUDADevices)
-		args.push_back(CONVERT_FROM_BYTES("--use-opencl-for-cuda-devices"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--use-opencl-for-cuda-devices"));
 #endif
 	if (!options.enableGCNAssembler)
-		args.push_back(CONVERT_FROM_BYTES("--disable-gcn-assembler"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--disable-gcn-assembler"));
 	if (options.useOnlyASCIICharactersForKeys) {
-		args.push_back(CONVERT_FROM_BYTES("--use-ascii-characters-for-keys"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--use-ascii-characters-for-keys"));
 	}
 	else if (options.useOneByteCharactersForKeys) {
-		args.push_back(CONVERT_FROM_BYTES("--use-one-byte-characters-for-keys"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--use-one-byte-characters-for-keys"));
 	}
 	else if (options.maximizeKeySpace) {
-		args.push_back(CONVERT_FROM_BYTES("--maximize-key-space"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--maximize-key-space"));
 	}
 	else {
-		args.push_back(CONVERT_FROM_BYTES("--use-one-and-two-byte-characters-for-keys"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--use-one-and-two-byte-characters-for-keys"));
 	}
 	if (pause_event.is_open()) {
-		args.push_back(CONVERT_FROM_BYTES("-e"));
-		args.push_back(CONVERT_FROM_BYTES(pause_event.name()));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-e"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + pause_event.name()));
 	}
 	if (termination_event.is_open()) {
-		args.push_back(CONVERT_FROM_BYTES("-E"));
-		args.push_back(CONVERT_FROM_BYTES(termination_event.name()));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-E"));
+		command_line += (CONVERT_FROM_BYTES(std::string(" ") + termination_event.name()));
 	}
+#ifdef _WIN32
+	command_line += (CONVERT_FROM_BYTES(std::string("\"")));
+#endif
 
 	boost::process::pipe stdout_pipe = boost::process::create_pipe();
 	boost::iostreams::file_descriptor_sink stdout_sink(stdout_pipe.sink, boost::iostreams::close_handle);
 	boost::process::pipe stderr_pipe = boost::process::create_pipe();
 	boost::iostreams::file_descriptor_sink stderr_sink(stderr_pipe.sink, boost::iostreams::close_handle);
 	info->child_process = new boost::process::child(boost::process::execute(
-		boost::process::initializers::set_args(args),
+		boost::process::initializers::set_cmd_line(command_line),
 		boost::process::initializers::bind_stdout(stdout_sink),
 		boost::process::initializers::bind_stderr(stderr_sink),
 		boost::process::initializers::inherit_env()));
