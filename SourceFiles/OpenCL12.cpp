@@ -507,7 +507,7 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	args.push_back(CONVERT_FROM_BYTES("1"));
 	for (int32_t patternFileIndex = 0; patternFileIndex < numPatternFiles; ++patternFileIndex) {
 		args.push_back(CONVERT_FROM_BYTES("-f"));
-		args.push_back(CONVERT_FROM_BYTES(std::string(patternFilePathArray[patternFileIndex])));
+		args.push_back(CONVERT_FROM_BYTES("\"" + std::string(patternFilePathArray[patternFileIndex]) + "\""));
 	}
 #ifdef ENABLE_CUDA
 	if (options.useOpenCLForCUDADevices)
