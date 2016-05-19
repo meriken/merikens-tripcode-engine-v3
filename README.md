@@ -14,12 +14,12 @@ Stable versions are available at the following links:
 
 ### Precompiled Binaries for Windows
 
-* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( https://goo.gl/3b2kT6 )
+* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )
 * [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )
 
 ### Source Codes
 
-* [v3.2.0.tar.gz]( https://goo.gl/otcMpi )
+* [v3.2.0.tar.gz]( http://j.mp/253gPuq )
 
 ## Performance
 
