@@ -12,8 +12,14 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 Stable versions are available at the following links:
 
-* [3.2.0 (Precompiled binaries for Windows)]( https://github.com/meriken/merikens-tripcode-engine-v3/releases/download/v3.2.0/MerikensTripcodeEngine_3.2.0_English_Windows.zip )
-* [3.2.0 (Source code for Linux and other POSIX-compliant operating systems)]( https://github.com/meriken/merikens-tripcode-engine-v3/archive/v3.2.0.tar.gz )
+### Precompiled Binaries for Windows
+
+* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( https://goo.gl/3b2kT6 )
+* [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )
+
+### Source Codes
+
+* [v3.2.0.tar.gz]( https://goo.gl/otcMpi )
 
 ## Performance
 
@@ -24,7 +30,21 @@ Here are some actual speeds the author achieved with this tripcode generator:
 * AMD Radeon HD 290X **647M tripcode/s** (descrypt; +100mV +50% 1074MHz)
 * AMD Radeon HD 7970 **408M tripcode/s** (descrypt; 1000MHz)
 
-Currently [MTY CL][2] is the only practical alternative to this program, and this program runs much faster than MTY CL in most cases.
+Currently [MTY CL][2] is the only practical alternative to this program, and this program runs much faster than MTY CL in most cases:
+
+```
+Hardware and Software Configuration:
+OS: Microsoft Windows 7 SP1 Professional
+CPU: Intel Core i7-3770K @ 3.5GHz
+GPU: Gigabyte Radeon HD 7970 @ 1060MHz
+Display Driver: AND Catalyst 15.7.1
+Target Pattern: ^TEST//
+
+Results:
+Tripcode Explorer: 16M tripcode/s
+MTY CL 0.52: 285M tripcode/s
+Meriken's Tripcode Engine 2.0.6: 427M tripcode/s
+```
 
 [2]: https://github.com/madsbuvi/MTY_CL
 
@@ -188,6 +208,23 @@ Lines between "#ignore" are "#endignore" will be ignored.
 
 **--disable-gcn-assembler** : Disable GCN assembler and use OpenCL kernels instead.
 
+## Support Threads
+
+I occasionaly create support threads for this program on 4chan to receive direct feedback from its users. The following are archives of the past support threads:
+
+* [Meriken's Tripcode Engine English (9/26/2013)]( http://archive.rebeccablacktech.com/g/thread/37003452 )
+* [Meriken's Tripcode Engine English No. 2 (10/2/2013)]( http://archive.rebeccablacktech.com/g/thread/37126997 )
+* [Meriken's Tripcode Engine English No. 3 (10/13/2015)]( http://archive.rebeccablacktech.com/g/thread/50803429 ) 
+* [Meriken's Tripcode Engine English No. 4 (10/17/2015)]( https://archive.rebeccablacktech.com/g/thread/50871258 )
+* [Meriken's Tripcode Engine English No. 5 (4/24/2016)]( https://archive.rebeccablacktech.com/g/thread/54208823 )
+* [Meriken's Tripcode Engine English No. 5 (5/14/2016)]( http://boards.4chan.org/g/thread/54553624 )
+
+## Source Code
+
+The source code is hosted on GitHub:
+
+[https://github.com/meriken/merikens-tripcode-engine-v3]( https://github.com/meriken/merikens-tripcode-engine-v3 )
+	  
 ## Miscellaneous Notes
 
 Please feel free to contact the author at [meriken.ygch.net@gmail.com]( mailto:meriken.ygch.net@gmail.com ) for feedback, bug reports, suggestions, etc.
