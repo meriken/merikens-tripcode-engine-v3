@@ -1562,7 +1562,12 @@ void ObtainOptions(int32_t argCount, char **arguments)
 			       ERROR_TRIPCODE_FILE,
 			       "The path of the tripcode file `%s' is too long.",
 			       arguments[indexArg]);
-			strcpy(tripcodeFilePath, arguments[indexArg]);
+			if (arguments[indexArg][0] == '\"' && arguments[indexArg][strlen(arguments[indexArg]) - 1] == '\"') {
+				strcpy(tripcodeFilePath, arguments[indexArg] + 1);
+				tripcodeFilePath[strlen(tripcodeFilePath) - 1] = '\0';
+			} else  {
+				strcpy(tripcodeFilePath, arguments[indexArg]);
+			}
 
 		} else if (strcmp(arguments[indexArg], "-f") == 0 && indexArg + 1 < argCount) {
 			++indexArg;
