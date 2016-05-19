@@ -30,20 +30,19 @@ Here are some actual speeds the author achieved with this tripcode generator:
 * AMD Radeon HD 290X **647M tripcode/s** (descrypt; +100mV +50% 1074MHz)
 * AMD Radeon HD 7970 **408M tripcode/s** (descrypt; 1000MHz)
 
-Currently [MTY CL][2] is the only practical alternative to this program, and this program runs much faster than MTY CL in most cases:
+Currently [MTY CL][2] is the only practical alternative to this program, and this program runs much faster than MTY CL in most cases as the folowing benchmarks show:
 
 ```
+Meriken's Tripcode Engine 2.0.6: 427M tripcode/s
+MTY CL 0.52: 285M tripcode/s
+Tripcode Explorer: 16M tripcode/s
+
 Hardware and Software Configuration:
 OS: Microsoft Windows 7 SP1 Professional
 CPU: Intel Core i7-3770K @ 3.5GHz
 GPU: Gigabyte Radeon HD 7970 @ 1060MHz
 Display Driver: AND Catalyst 15.7.1
 Target Pattern: ^TEST//
-
-Results:
-Tripcode Explorer: 16M tripcode/s
-MTY CL 0.52: 285M tripcode/s
-Meriken's Tripcode Engine 2.0.6: 427M tripcode/s
 ```
 
 [2]: https://github.com/madsbuvi/MTY_CL
