@@ -48,7 +48,7 @@
 
 #define _CRT_RAND_S
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 // For Win32
 #include <windows.h>
 #include <process.h>
@@ -67,7 +67,7 @@ typedef int BOOL;
 #define TYPE_COMMAND "cat"
 #endif
 
-#if defined(_WIN32) && !defined(__CYGWIN__)
+#if defined(_WIN32)
 #include <conio.h>
 #endif
 
@@ -89,7 +89,7 @@ typedef int BOOL;
 #include <locale>
 
 // Standard C libraries
-#if !defined(_WIN32) && !defined(__CYGWIN__)
+#if !defined(_WIN32)
 #include <string.h>
 #include <signal.h>
 #include <stdlib.h>
@@ -106,7 +106,7 @@ typedef int BOOL;
 #ifdef ARCH_X86
 //#include <nmmintrin.h>
 //#include <smmintrin.h>
-#if defined(_MSC_VER) || defined(__CYGWIN__)
+#if defined(_MSC_VER)
 #include <intrin.h>
 #else
 #include <x86intrin.h>

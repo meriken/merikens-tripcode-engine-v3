@@ -18,7 +18,7 @@ void spinlock::unlock()
 	flag.clear(std::memory_order_release);
 }
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 
 namespace mte {
 	named_event::named_event() : native_event_handle(NULL)

@@ -40,7 +40,7 @@
 #include <random>
 #include <climits>
 #include <system_error>
-#if !(defined(_WIN32) || defined(__CYGWIN__))
+#if !defined(_WIN32)
 #include <unistd.h>
 #endif
 
@@ -274,7 +274,7 @@ int execute_system_command(const char *command)
 {
 	int ret;
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 	std::string wrapped_command;
 	wrapped_command += "cmd /C \"";
 	wrapped_command += command;
@@ -454,7 +454,7 @@ void PrintUsage()
 
 void reset_cursor_pos(int n)
 {
-#if (defined(_WIN32) || defined(_WIN64)) && !(__CYGWIN__)
+#if defined(_WIN32)
 	CONSOLE_SCREEN_BUFFER_INFO scrnBufInfo;
 	COORD                      cursorPos;
 	if (!GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &scrnBufInfo))
@@ -830,9 +830,9 @@ void CheckSearchThreads()
 			    if (opencl_device_search_threads[index]->get_id() != std::thread::id()) {
     			    auto native_handle = opencl_device_search_threads[index]->native_handle();
        		    	opencl_device_search_threads[index]->detach();
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 			        TerminateThread(native_handle, 0);
-#elif defined(_POSIX_THREADS)
+#else
 			        pthread_setcanceltype(PTHREAD_CANCEL_ASYNCHRONOUS, NULL);
 			        pthread_cancel(native_handle);
 #endif
@@ -1124,7 +1124,7 @@ void PrintStatus(bool update_status = true)
 #undef NEXT_LINE
 }
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 
 BOOL WINAPI ControlHandler(_In_  DWORD dwCtrlType)
 {
@@ -1154,7 +1154,7 @@ void control_handler(int s)
 void InitProcess()
 {
 	hide_cursor();
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 	SetConsoleCtrlHandler(ControlHandler, true);
 #else
 	struct sigaction sigint_handler;
@@ -1485,7 +1485,7 @@ void InitSearchDevices(BOOL displayDeviceInformation)
 		} else 	if (displayDeviceInformation) {
 			printf("CPU\n");
 			printf("===\n");
-#if defined(_MSC_VER) || defined(__CYGWIN__)
+#if defined(_MSC_VER)
 			int32_t results[4];
 			__cpuid(results, 1);
 #ifdef USE_YASM
@@ -2287,7 +2287,7 @@ void StartCPUSearchThreads()
 	}
 }
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 DWORD GetParentProcessID()
 {
 	DWORD processID = GetCurrentProcessId();
@@ -2318,7 +2318,7 @@ void ListExpandedPatterns()
 
 int main(int argc, char **argv)
 {
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 	HANDLE parentProcess = OpenProcess(SYNCHRONIZE, FALSE, GetParentProcessID());
 #else
 	pid_t parent_process_id = getppid(); 
@@ -2393,7 +2393,7 @@ int main(int argc, char **argv)
 	if (searchDevice == SEARCH_DEVICE_CPU || searchDevice == SEARCH_DEVICE_GPU_AND_CPU)
 		StartCPUSearchThreads();
 	while (!UpdateTerminationState()) {
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 		// Break the main loop if necessary.
 		if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
 			break;
@@ -2412,7 +2412,7 @@ int main(int argc, char **argv)
 			if (UpdateTerminationState())
 				break;
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 			// Break the loop if the parent process has already quit.
 			if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
 				break;
@@ -2431,7 +2431,7 @@ int main(int argc, char **argv)
 				break;
 
 			// Break the loop if the parent process has already quit.
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 			if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
 				break;
 #endif
@@ -2452,7 +2452,7 @@ int main(int argc, char **argv)
 			printf("\a");
 	}
 
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 	// Close handles.
 	CloseHandle(parentProcess);
 #endif

@@ -156,7 +156,7 @@ public:
 namespace mte {
 	class named_event {
 		std::string data_name;
-#if defined(_WIN32) || defined(__CYGWIN__)
+#if defined(_WIN32)
 		/* HANDLE */ void *native_event_handle;
 #endif
 

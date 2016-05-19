@@ -356,7 +356,7 @@ static void CreateProgramFromGCNAssemblySource(cl_context *context, cl_program *
 	execute_system_command(assemblerCommand);
 #endif
 	sprintf(assemblerCommand, 
-#if defined(_WIN32) || defined(CYGWIN)
+#if defined(_WIN32)
 		    "\"%s\\CLRadeonExtender\\clrxasm\" -b %s -g %s -A %s -t %d%02d -o \"%s\" \"%s\"",
 			applicationDirectory,
 #else
