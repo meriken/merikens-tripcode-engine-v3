@@ -485,12 +485,11 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	std::wstring_convert<converter_type> converter(new converter_type("cp" + std::to_string(GetACP())));
 #define CONVERT_FROM_BYTES(s) converter.from_bytes(s)
 	std::wstring command_line = CONVERT_FROM_BYTES(boost::process::shell_path().string() + " /C \"");
-#else
-	std::vector<std::string> command_line;
-#define CONVERT_FROM_BYTES(s) (s)
-	std::wstring command_line = CONVERT_FROM_BYTES(boost::process::shell_path().string() + " -c ");
-#endif
 	command_line += (CONVERT_FROM_BYTES(std::string("\"") + childProcessPath + std::string("\"")));
+#else
+#define CONVERT_FROM_BYTES(s) (s)
+	std::string command_line = CONVERT_FROM_BYTES(std::string("\"") + childProcessPath + std::string("\""));
+#endif
 	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--output-for-redirection"));
 	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "--disable-tripcode-checks"));
 	command_line += (CONVERT_FROM_BYTES(std::string(" ") + "-l"));
@@ -545,6 +544,11 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	boost::process::pipe stderr_pipe = boost::process::create_pipe();
 	boost::iostreams::file_descriptor_sink stderr_sink(stderr_pipe.sink, boost::iostreams::close_handle);
 	info->child_process = new boost::process::child(boost::process::execute(
+#ifdef _WIN32
+		boost::process::initializers::run_exe(boost::process::shell_path().string()),
+#else
+		boost::process::initializers::run_exe(childProcessPath),
+#endif
 		boost::process::initializers::set_cmd_line(command_line),
 		boost::process::initializers::bind_stdout(stdout_sink),
 		boost::process::initializers::bind_stderr(stderr_sink),
