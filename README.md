@@ -12,8 +12,8 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 Stable versions are available at the following links:
 
-* [2.1.2 (Precompiled Binaries for Windows)]( http://j.mp/26rh3x7 )
-* [3.2.0 (Source Code for Linux and Other POSIX-Compliant Operating Systems)]( https://github.com/meriken/merikens-tripcode-engine-v3/releases/tag/v3.2.0 )
+* [3.2.0 (Precompiled binaries for Windows)]( https://github.com/meriken/merikens-tripcode-engine-v3/releases/download/v3.2.0/MerikensTripcodeEngine_3.2.0_English_Windows.zip )
+* [3.2.0 (Source code for Linux and other POSIX-compliant operating systems)]( https://github.com/meriken/merikens-tripcode-engine-v3/archive/v3.2.0.tar.gz )
 
 ## Performance
 
@@ -98,7 +98,7 @@ If you would like to use an AMD graphics card, you also need to run `sudo apt in
 
 For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
-You can reconfigure the application after you run `BuildAll`:
+You can reconfigure the application after you run `BuildAll.sh`:
 
 ```
 $ cd CMakeBuild
@@ -192,7 +192,7 @@ Lines between "#ignore" are "#endignore" will be ignored.
 
 Please feel free to contact the author at [meriken.ygch.net@gmail.com]( mailto:meriken.ygch.net@gmail.com ) for feedback, bug reports, suggestions, etc.
 
-"Meriken's Tripcode Engine" is part version of the GUI-based, network-capable [Meriken's Tripcode Generator]( http://meriken.ygch.net/programming/merikens-tripcode-generator/ ), which is intended primarily for users of 2ch.net in Japan. If Japanese does not discourage you, check out the original application as well as [Meriken's Tripcode Yggdrasil]( http://tripcode.ygch.net/yggdrasil/ ), a web-based distributed tripcode generation service :-)
+"Meriken's Tripcode Engine" is part of the GUI-based, network-capable [Meriken's Tripcode Generator]( http://meriken.ygch.net/programming/merikens-tripcode-generator/ ), which is intended primarily for users of 2ch.net in Japan. If Japanese does not discourage you, check out the original application as well as [Meriken's Tripcode Yggdrasil]( http://tripcode.ygch.net/yggdrasil/ ), a web-based distributed tripcode generation service.
 
 ## License
 
