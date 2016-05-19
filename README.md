@@ -19,7 +19,7 @@ Stable versions are available at the following links:
 
 ### Source Codes
 
-* [v3.2.0.tar.gz]( http://j.mp/253gPuq )
+* [v3.2.0.tar.gz]( http://j.mp/merikens-tripcode-engine-v3-v3_2_0_tar_gz )
 
 ## Performance
 
