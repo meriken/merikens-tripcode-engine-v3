@@ -216,7 +216,7 @@ I occasionaly create support threads for this program on 4chan to receive direct
 * [Meriken's Tripcode Engine English No. 3 (10/13/2015)]( http://archive.rebeccablacktech.com/g/thread/50803429 ) 
 * [Meriken's Tripcode Engine English No. 4 (10/17/2015)]( https://archive.rebeccablacktech.com/g/thread/50871258 )
 * [Meriken's Tripcode Engine English No. 5 (4/24/2016)]( https://archive.rebeccablacktech.com/g/thread/54208823 )
-* [Meriken's Tripcode Engine English No. 5 (5/14/2016)]( http://boards.4chan.org/g/thread/54553624 )
+* [Meriken's Tripcode Engine English No. 6 (5/14/2016)]( http://boards.4chan.org/g/thread/54553624 )
 
 ## Source Code
 
