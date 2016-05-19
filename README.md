@@ -8,13 +8,12 @@ It is arguably the fastest and most powerful program of its kind. It makes effec
 and the user can specify flexible regex patterns for desired tripcodes. It features highly optimized, extensively parallelized 
 implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and Intel SSE2/AVX/AVX2.
 
-Precompiled binaries of this program for Windows are available here:
+## Downloads
 
-http://meriken.ygch.net/programming/merikens-tripcode-engine-english/
+Stable versions are available at the following links:
 
-This program is part of "Meriken's Tripcode Generator," a GUI-based tripcode generator targeted primarily to users in Japan:
-
-http://meriken.ygch.net/programming/merikens-tripcode-generator/
+* [2.1.2 (Precompiled Binaries for Windows)]( http://j.mp/26rh3x7 )
+* [3.2.0 (Source Code for Linux and Other POSIX-Compliant Operating Systems)]( https://github.com/meriken/merikens-tripcode-engine-v3/releases/tag/v3.2.0 )
 
 ## Performance
 
@@ -69,7 +68,7 @@ You need the following software installed in order to run the application:
 Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine.exe`, if you are using a 32-bit operating system, or
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
-Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" below.
+Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" and "Options" below.
 
 ## Linux and Other POSIX-Compliant Operating Systems
 
@@ -114,7 +113,7 @@ Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_M
 
 Specify search patterns in `patterns.txt` and run `MerikensTripcodeEngine`.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`.
-See "Example of 'patterns.txt'" below.
+See "Example of 'patterns.txt'" and "Options" below.
 
 ## Example of "patterns.txt"
 
@@ -177,7 +176,9 @@ Lines between "#ignore" are "#endignore" will be ignored.
 
 **-l** [length of tripcodes] : Specify either 10 or 12. (Please note that you can use 12 character tripcodes only at 2ch.net.)
 
-**-t** [number of threads]   : Specify the number of CPU search threads.
+**-x** [number of blocks/SM] : Specify the number of blocks per SM (1 <= n <= 256) for CUDA devices.
+
+**-t** [number of threads] : Specify the number of CPU search threads.
 
 **-o** [output file] : Specify an output file.
 
@@ -186,6 +187,12 @@ Lines between "#ignore" are "#endignore" will be ignored.
 **--use-one-and-two-byte-characters-for-keys** : Use Shift-JIS characters for keys.
 
 **--disable-gcn-assembler** : Disable GCN assembler and use OpenCL kernels instead.
+
+## Miscellaneous Notes
+
+Please feel free to contact the author at [meriken.ygch.net@gmail.com]( mailto:meriken.ygch.net@gmail.com ) for feedback, bug reports, suggestions, etc.
+
+"Meriken's Tripcode Engine" is part version of the GUI-based, network-capable [Meriken's Tripcode Generator]( http://meriken.ygch.net/programming/merikens-tripcode-generator/ ), which is intended primarily for users of 2ch.net in Japan. If Japanese does not discourage you, check out the original application as well as [Meriken's Tripcode Yggdrasil]( http://tripcode.ygch.net/yggdrasil/ ), a web-based distributed tripcode generation service :-)
 
 ## License
 
