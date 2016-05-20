@@ -2,6 +2,7 @@
 
 # CLRadeonExtender
 cd CLRadeonExtender/
+echo Extracting CLRadeonExtender-*.zip...
 7z x -y CLRadeonExtender-*.zip > /dev/null
 cd CLRX-mirror-master/
 mkdir build/
