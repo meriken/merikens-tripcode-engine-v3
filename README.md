@@ -12,20 +12,18 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 ## Downloads
 
-Stable versions are available at the following links:
-
 ### Precompiled Binaries for Windows
 
 * [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )
 * [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )
 
 ### Source Codes
-
+* [merikens-tripcode-engine-v3-v3.2.1.tar.gz]( http://j.mp/merikens-tripcode-engine-v3-v3_2_1_tar_gz )
 * [merikens-tripcode-engine-v3-v3.2.0.tar.gz]( http://j.mp/merikens-tripcode-engine-v3-v3_2_0_tar_gz )
 
 ## Performance
 
-Here are some actual speeds the author achieved with this tripcode generator:
+Here are actual speeds the author achieved with this tripcode generator:
 
 * AMD Radeon HD 7990 **1022MH/s** (descrypt; 1250mV +20% 1180MHz)
 * NVIDIA GeForce GTX 980 Ti **996MH/s** (descrypt; 110% +250MHz)
@@ -136,6 +134,18 @@ You need to build the application with g++.
 $ sudo pkg install gcc
 $ sudo pkg install cmake
 $ sudo pkg install p7zip
+$ ./BuildAllWithGCC.sh
+$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
+$ sudo make -C CMakeBuild install
+```
+
+#### Build Instructions for Mac OS X 10.10
+
+Please install [Homebrew]( http://brew.sh/ ) if you want to follow these instructions.
+
+```
+$ brew install cmake
+$ brew install p7zip
 $ ./BuildAllWithGCC.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
