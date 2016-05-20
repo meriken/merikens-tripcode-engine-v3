@@ -2,18 +2,18 @@ language: cpp
 script: ./BuildAll.sh
 sudo: required
 dist: trusty
+compiler:
 - gcc
 os:
 - linux
 - osx
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-get -qq update
-      sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev
+    sudo apt-get -qq update
+    sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev
   else
-      sudo brew install -y cmake
-      sudo brew install -y p7zip-full
-      sudo brew install -y libbz2-dev
-      sudo brew install -y ython2.7-dev
-    fi
-q
+    sudo brew install -y cmake
+    sudo brew install -y p7zip-full
+    sudo brew install -y libbz2-dev
+    sudo brew install -y ython2.7-dev
+  fi
