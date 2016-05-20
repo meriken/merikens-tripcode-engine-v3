@@ -94,12 +94,14 @@ typedef int BOOL;
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
 #endif
 
 // Boost
 #define BOOST_USE_WINDOWS_H
 #include <boost/iostreams/stream.hpp>
+#if BOOST_OS_BSD
+extern char** environ;
+#endif
 #include <boost/process.hpp> // Boost.Process 0.5
 
 // For MMX/SSE/SSE2/SSSE3 Intrinsics
