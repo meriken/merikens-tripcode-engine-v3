@@ -97,6 +97,7 @@ typedef int BOOL;
 #endif
 
 // Boost
+#include <boost/predef.h>
 #define BOOST_USE_WINDOWS_H
 #include <boost/iostreams/stream.hpp>
 #if BOOST_OS_BSD

@@ -1505,7 +1505,6 @@ void InitSearchDevices(BOOL displayDeviceInformation)
 	}
 }
 
-#include <boost/predef.h>
 #if BOOST_OS_MACOS
 #include <mach-o/dyld.h>
 #elif BOOST_OS_BSD
