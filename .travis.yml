@@ -1,0 +1,11 @@
+language: cpp
+script: ./BuildAll
+sudo: required
+dist: trusty
+compiler:
+- gcc
+os:
+- linux
+before_install:
+- sudo apt-get -qq update
+- sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev
