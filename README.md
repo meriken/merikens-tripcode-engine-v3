@@ -106,7 +106,7 @@ You can reconfigure the application after you run `BuildAll.sh`:
 
 ```
 $ cd CMakeBuild
-$ cmake -DENABLE_OPENCL=ON -DENABLE_CUDA=ON -DENGLISH_VERSION=ON -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=OFF ..
+$ cmake -DENABLE_OPENCL=ON -DENABLE_CUDA=ON -DENGLISH_VERSION=ON -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=OFF ../SourceFiles
 $ make clean && make -j 8
 $ sudo make install
 ```
