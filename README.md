@@ -93,7 +93,7 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 
 ### Building
 
-You should be able to build and run this application on any POSIX-compliant operating systems. You need the following tools to build Meriken's Tripcode Engine.
+You should be able to build and run this application on any POSIX-compliant operating systems. (**Note:** AVX2 is not supported on them.) You need the following tools to build Meriken's Tripcode Engine.
 
 * CMake 2.8.4 or later
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later)
@@ -102,7 +102,16 @@ You should be able to build and run this application on any POSIX-compliant oper
 
 You should be able to build everything with `BuildAll.sh`. If you are building the application manually, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
 
-**Note:** AVX2 is not supported on POSIX-compliant operating systems.  
+You can reconfigure the application after you run `BuildAll.sh`:
+
+```
+$ cd CMakeBuild
+$ cmake -DENABLE_OPENCL=ON -DENABLE_CUDA=ON -DENGLISH_VERSION=ON -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=OFF ..
+$ make clean && make -j 8
+$ sudo make install
+```
+
+Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON) take **extremely** long time to build.
 
 #### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
 
@@ -117,16 +126,16 @@ If you would like to use an AMD graphics card, you also need to run `sudo apt in
 
 For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
-You can reconfigure the application after you run `BuildAll.sh`:
+#### Build Instructions for FreeBSD 10.3
 
 ```
-$ cd CMakeBuild
-$ cmake -DENABLE_OPENCL=ON -DENABLE_CUDA=ON -DENGLISH_VERSION=ON -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=OFF ..
-$ make clean && make -j 8
-$ sudo make install
+$ sudo pkg install cmake
+$ sudo pkg install p7zip
+$ ./BuildAll.sh
+$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
+$ sudo make -C CMakeBuild install
 ```
 
-Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON) take **extremely** long time to build.
 
 ### Usage
 
