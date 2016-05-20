@@ -1,5 +1,5 @@
 language: cpp
-script: ./BuildAll
+script: ./BuildAll.sh
 sudo: required
 dist: trusty
 compiler:
