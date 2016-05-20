@@ -9,4 +9,4 @@ os:
 - osx
 before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update; sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo brew install -y cmake; sudo brew install -y p7zip; sudo brew install -y python; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install -y cmake; brew install -y p7zip; brew install -y python; fi
