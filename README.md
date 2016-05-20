@@ -1,4 +1,6 @@
-﻿Meriken's Tripcode Engine
+
+
+Meriken's Tripcode Engine [![Build Status](https://travis-ci.org/meriken/merikens-tripcode-engine-v3.svg?branch=master)](https://travis-ci.org/meriken/merikens-tripcode-engine-v3)
 =========================
 
 This repository was moved from https://github.com/meriken/merikens-tripcode-engine
