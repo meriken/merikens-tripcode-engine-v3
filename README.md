@@ -41,7 +41,7 @@ Hardware and Software Configuration:
 OS: Microsoft Windows 7 SP1 Professional
 CPU: Intel Core i7-3770K @ 3.5GHz
 GPU: Gigabyte Radeon HD 7970 @ 1060MHz
-Display Driver: AND Catalyst 15.7.1
+Display Driver: AMD Catalyst 15.7.1
 Target Pattern: ^TEST//
 ```
 
@@ -95,7 +95,7 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 
 You should be able to build and run this application on any POSIX-compliant operating systems. (**Note:** AVX2 is not supported on them.) You need the following tools to build Meriken's Tripcode Engine.
 
-* CMake 2.8.4 or later
+* CMake 3.1 or later
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later; g++ is recommended.)
 * AMD APP SDK 3.0 (if you are using an AMD video card.)
 * CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
@@ -114,6 +114,16 @@ $ sudo make install
 Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON) take **extremely** long time to build.
 
 #### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
+
+If you are using Ubuntu 14.04 LTS, CMake must be upgraded first. For example:
+
+```
+curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt
+export PATH=/opt/cmake-3.5.2-Linux-x86_64/bin/:$PATH
+```
+
+Then:
+
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 

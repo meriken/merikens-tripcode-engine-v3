@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.4)
+cmake_minimum_required(VERSION 3.1)
 project(MerikensTripcodeEngine C CXX)
 
 set(MTE_BOOST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../BoostPackages)
@@ -77,31 +77,8 @@ endif()
 ##########
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-if(AMDAPPSDKROOT AND EXISTS ${AMDAPPSDKROOT})
-	set(UNIX_AMD_APP_SDK_DIR ${AMDAPPSDKROOT})
-else()
-	set(UNIX_AMD_APP_SDK_DIR "/opt/AMDAPPSDK-3.0")
-endif()
-set(UNIX_NVIDIA_OPENCL_SDK_DIR "/usr/local/cuda-7.5")
-if(NOT EXISTS ${UNIX_NVIDIA_OPENCL_SDK_DIR})
-	set(UNIX_NVIDIA_OPENCL_SDK_DIR "/usr/local/cuda")
-endif()
-if(ENABLE_OPENCL AND UNIX AND EXISTS "${UNIX_NVIDIA_OPENCL_SDK_DIR}/include/CL/cl.h")
-    set(OPENCL_LINK_LIBRARIES OpenCL)
-    set(OPENCL_INCLUDE_DIR "${UNIX_NVIDIA_OPENCL_SDK_DIR}/include")
-    set(OPENCL_LINK_DIR "${UNIX_NVIDIA_OPENCL_SDK_DIR}/lib64")
-    if(NOT EXISTS ${OPENCL_LINK_DIR})
-	set(OPENCL_LINK_DIR "${UNIX_NVIDIA_OPENCL_SDK_DIR}/lib")
-    endif()
-elseif(ARCH_X86 AND ENABLE_OPENCL AND UNIX AND EXISTS ${UNIX_AMD_APP_SDK_DIR})
-    set(OPENCL_LINK_LIBRARIES OpenCL)
-    set(OPENCL_INCLUDE_DIR "${UNIX_AMD_APP_SDK_DIR}/include")
-    if (ARCH_64BIT)
-        set(OPENCL_LINK_DIR "${UNIX_AMD_APP_SDK_DIR}/lib/x86_64")
-    else()
-        set(OPENCL_LINK_DIR "${UNIX_AMD_APP_SDK_DIR}/lib/x86")
-    endif()
-else()
+find_package(OpenCL)
+if(NOT OpenCL_FOUND)
     set(ENABLE_OPENCL FALSE)
 endif()
 if(ENABLE_OPENCL)
@@ -198,15 +175,8 @@ set(SOURCES
 # CUDA DETECTION #
 ##################
 
-set(UNIX_NVIDIA_CUDA_SDK_DIR "/usr/local/cuda-7.5")
-if(NOT EXISTS ${UNIX_NVIDIA_CUDA_SDK_DIR})
-	set(UNIX_NVIDIA_CUDA_SDK_DIR "/usr/local/cuda")
-endif()
-if(ARCH_64BIT AND ENABLE_CUDA AND UNIX AND EXISTS ${UNIX_NVIDIA_CUDA_SDK_DIR})
-    set(CUDA_LINK_LIBRARIES cudart)
-    set(CUDA_INCLUDE_DIR "${UNIX_NVIDIA_CUDA_SDK_DIR}/include")
-    set(CUDA_LINK_DIR "${UNIX_NVIDIA_CUDA_SDK_DIR}/lib64")
-else()
+find_package(CUDA 7.5)
+if(NOT CUDA_FOUND)
     set(ENABLE_CUDA FALSE)
 endif()
 if(ENABLE_CUDA)
@@ -230,109 +200,98 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${MTE_COMP
 # CUDA #
 ########
 
-if(ENABLE_CUDA AND NOT ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
- 	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
-		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA10_Registers.cu.o")
-	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
-		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA10_SharedMemory.cu.o")
-	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
-		COMMAND nvcc
-		ARGS -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA12.cu.o")
-
-elseif(ENABLE_CUDA AND ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
- 	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
-		COMMAND nvcc
-		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA10_Registers.cu.o")
-	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
-		COMMAND nvcc
-		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=42 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA10_SharedMemory.cu.o")
-	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
-		DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
-		COMMAND nvcc
-		ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE  -DENABLE_CUDA -std=c++11 -gencode=arch=compute_20,code=sm_20 -gencode=arch=compute_20,code=sm_21 -gencode=arch=compute_30,code=sm_30 -gencode=arch=compute_32,code=sm_32 -gencode=arch=compute_35,code=sm_35 -gencode=arch=compute_37,code=sm_37 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -gencode=arch=compute_53,code=compute_53 -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=0 --ptxas-options=-v --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o "${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o" "${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu"
-		WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-		COMMENT "Building CUDA object CUDA12.cu.o")
- 
-    function(compile_cuda_des_multiple_kernels_files out_var)
-        set(result)
-        foreach(in_f ${ARGN})
-	        set(out_f "${CMAKE_CURRENT_BINARY_DIR}/${in_f}")
-	        string(REPLACE ".cu" ".cu.o" out_f ${out_f})
-	        set(in_f "${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/${in_f}")
-	        add_custom_command(
-		        OUTPUT ${out_f}
-		        DEPENDS ${in_f}
-		        COMMAND nvcc
-	            ARGS -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE -DENABLE_CUDA -std=c++11 -gencode=arch=compute_50,code=sm_50 -gencode=arch=compute_52,code=sm_52 -gencode=arch=compute_53,code=sm_53 -I"${CMAKE_CURRENT_SOURCE_DIR}" -I"${CUDA_INCLUDE_DIR}" -I"${MTE_BOOST_DIR}/include" -I"${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/" --keep-dir "${CMAKE_CURRENT_BINARY_DIR}" -maxrregcount=168 --machine 64 --compile -cudart static -Xcompiler "${CMAKE_CXX_FLAGS}" -o ${out_f} ${in_f}
-		        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
-          		COMMENT "Building CUDA object ${out_f}")
-	        list(APPEND result ${out_f})
-        endforeach()
-        set(${out_var} "${result}" PARENT_SCOPE)
-    endfunction()
-    compile_cuda_des_multiple_kernels_files(CUDA_DES_MULTIPLE_KERNELS_FILES
-        CUDA10_Registers_KernelLauncher0.cu 
-        CUDA10_Registers_KernelLauncher1.cu 
-        CUDA10_Registers_KernelLauncher2.cu 
-        CUDA10_Registers_KernelLauncher3.cu 
-        CUDA10_Registers_KernelLauncher4.cu 
-        CUDA10_Registers_KernelLauncher5.cu 
-        CUDA10_Registers_KernelLauncher6.cu 
-        CUDA10_Registers_KernelLauncher7.cu 
-        CUDA10_Registers_KernelLauncher8.cu 
-        CUDA10_Registers_KernelLauncher9.cu 
-        CUDA10_Registers_KernelLauncher10.cu 
-        CUDA10_Registers_KernelLauncher11.cu 
-        CUDA10_Registers_KernelLauncher12.cu 
-        CUDA10_Registers_KernelLauncher13.cu 
-        CUDA10_Registers_KernelLauncher14.cu 
-        CUDA10_Registers_KernelLauncher15.cu)
-endif()
-
 if(ENABLE_CUDA)
+    cuda_include_directories(
+        CUDA_INCLUDE_DIR 
+        "${MTE_BOOST_DIR}/include" 
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/")
+    if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
+        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE)
+ 	cuda_compile(
+	    CUDA10_REGISTERS_CU_OUTPUT
+	    ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher0.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher1.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher2.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher3.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher4.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher5.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher6.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher7.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher8.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher9.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher10.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher11.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher12.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher13.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher14.cu 
+            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher15.cu
+            STATIC
+            OPTIONS
+                -gencode=arch=compute_50,code=sm_50 
+                -gencode=arch=compute_52,code=sm_52 
+                -gencode=arch=compute_53,code=sm_53 
+                -gencode=arch=compute_53,code=compute_53 
+                -maxrregcount=168)
+    else()
+        set(CUDA_NVCC_FLAGS -DENABLE_CUDA)
+ 	cuda_compile(
+	    CUDA10_REGISTERS_CU_OUTPUT
+	    ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+            STATIC
+            OPTIONS
+                -gencode=arch=compute_50,code=sm_50 
+                -gencode=arch=compute_52,code=sm_52 
+                -gencode=arch=compute_53,code=sm_53 
+                -gencode=arch=compute_53,code=compute_53 
+                -maxrregcount=168)
+    endif()
+
+    cuda_compile(
+        CUDA10_SHAREDMEMORY_CU_OUTPUT
+        ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
+	OPTIONS 
+            -gencode=arch=compute_20,code=sm_20 
+            -gencode=arch=compute_20,code=sm_21 
+            -gencode=arch=compute_30,code=sm_30 
+            -gencode=arch=compute_32,code=sm_32 
+            -gencode=arch=compute_35,code=sm_35 
+            -gencode=arch=compute_37,code=sm_37 
+            -maxrregcount=42)
+    cuda_compile(
+        CUDA12_CU_OUTPUT
+        ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
+	OPTIONS 
+            -gencode=arch=compute_20,code=sm_20 
+            -gencode=arch=compute_20,code=sm_21 
+            -gencode=arch=compute_30,code=sm_30 
+            -gencode=arch=compute_32,code=sm_32 
+            -gencode=arch=compute_35,code=sm_35 
+            -gencode=arch=compute_37,code=sm_37
+            -gencode=arch=compute_50,code=sm_50 
+            -gencode=arch=compute_52,code=sm_52 
+            -gencode=arch=compute_53,code=sm_53 
+            -gencode=arch=compute_53,code=compute_53)
+
     set(CUDA_FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_Registers.cu.o
-        ${CMAKE_CURRENT_BINARY_DIR}/CUDA10_SharedMemory.cu.o
-        ${CMAKE_CURRENT_BINARY_DIR}/CUDA12.cu.o
-        ${CUDA_DES_MULTIPLE_KERNELS_FILES})
+        ${CUDA10_REGISTERS_CU_OUTPUT} 
+        ${CUDA10_SHAREDMEMORY_CU_OUTPUT}
+        ${CUDA12_CU_OUTPUT})
 endif()
 
 
 
-LINK_LIBRARIES(${OPENCL_LINK_LIBRARIES} ${CUDA_LINK_LIBRARIES} boost_system boost_iostreams)
+LINK_LIBRARIES(${OpenCL_LIBRARIES} ${CUDA_LIBRARIES} boost_system boost_iostreams)
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
     "${MTE_BOOST_DIR}/include"
     "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
-    ${OPENCL_INCLUDE_DIR}
+    ${OpenCL_INCLUDE_DIR}
     ${CUDA_INCLUDE_DIR})
 link_directories(
     "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-    ${OPENCL_LINK_DIR}
-    ${CUDA_LINK_DIR})
+    ${OpenCL_LIBRARY}
+    ${CUDA_LIBRARY})
 
 
 
