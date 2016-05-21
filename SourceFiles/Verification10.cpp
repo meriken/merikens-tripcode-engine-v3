@@ -50,8 +50,6 @@ static spinlock descrypt_spinlock;
 
 BOOL VerifyDESTripcode(unsigned char *tripcode, unsigned char *key)
 {
-        descrypt_spinlock.lock();
-
         if (strlen((char *)tripcode) != lenTripcode || strlen((char *)key) != lenTripcodeKey)
                 return FALSE;
         
@@ -66,8 +64,9 @@ BOOL VerifyDESTripcode(unsigned char *tripcode, unsigned char *key)
                         fillRestWithZero = TRUE;
                 }
         }
-        BOOL result = strcmp((char *)tripcode, crypt((char *)actualKey, (char *)(actualKey + 1)) + 3) == 0;
-
+		
+		descrypt_spinlock.lock();
+		BOOL result = strcmp((char *)tripcode, crypt((char *)actualKey, (char *)(actualKey + 1)) + 3) == 0;
 #if FALSE
         if (!result) {
                 printf("key:       `%s'\n", key);
@@ -77,7 +76,6 @@ BOOL VerifyDESTripcode(unsigned char *tripcode, unsigned char *key)
         }
         fflush(stdout);
 #endif
-
         descrypt_spinlock.unlock();
 
         return result;
@@ -85,7 +83,6 @@ BOOL VerifyDESTripcode(unsigned char *tripcode, unsigned char *key)
 
 void GenerateDESTripcode(unsigned char *tripcode, unsigned char *key)
 {
-    descrypt_spinlock.lock();
 
     char actualKey[MAX_LEN_TRIPCODE_KEY + 1];
     BOOL fillRestWithZero = FALSE;
@@ -99,10 +96,10 @@ void GenerateDESTripcode(unsigned char *tripcode, unsigned char *key)
                     fillRestWithZero = TRUE;
             }
     }
-    strncpy((char *)tripcode, crypt((char *)actualKey, (char *)(actualKey + 1)) + 3, 10);
+	descrypt_spinlock.lock();
+	strncpy((char *)tripcode, crypt((char *)actualKey, (char *)(actualKey + 1)) + 3, 10);
 	tripcode[10] = '\0';
-
-    descrypt_spinlock.unlock();
+	descrypt_spinlock.unlock();
 }
 
 
