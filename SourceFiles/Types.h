@@ -106,6 +106,7 @@ struct Options {
 	int32_t  openCLNumProcesses;
 	BOOL checkTripcodes;
 	BOOL enableGCNAssembler;
+	int search_duration;
 };
 
 #ifdef ENABLE_CUDA

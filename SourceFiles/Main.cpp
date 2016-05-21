@@ -79,6 +79,7 @@ Options options = {
 	DEFAULT_OPTION_OPENCL_NUM_PROCESSES_PER_AMD_GPU, // int32_t  openCLNumProcesses;
 	DEFAULT_OPTION_CHECK_TRIPCODES,                  // BOOL checkTripcodes;
 	DEFAULT_OPTION_ENABLE_GCN_ASSEMBLER,             // BOOL enableGCNAssembler;
+	DEFAULT_OPTION_SEARCH_DURATION,
 };
 
 // Search Parameters
@@ -1744,6 +1745,9 @@ void ObtainOptions(int32_t argCount, char **arguments)
 				   || strcmp(arguments[indexArg], "--gpu-list"                  ) == 0) {
 			// Ignore the option.
 
+		} else if (strcmp(arguments[indexArg], "-u") == 0 && indexArg + 1 < argCount) {
+			options.search_duration = atoi(arguments[++indexArg]);
+
 		} else {
 			ERROR0(TRUE, ERROR_INVALID_OPTION, "An invalid option was specified.");
 		}
@@ -2421,7 +2425,9 @@ int main(int argc, char **argv)
 		}
 		if (UpdateTerminationState())
 			break;
-		UpdateCurrentStatus(startingTime);
+		double delta_time = UpdateCurrentStatus(startingTime);
+		if (options.search_duration && delta_time > options.search_duration)
+			break;
 		
 		// Pause searching if necessary.
 		while (UpdatePauseState()) {
@@ -2490,5 +2496,5 @@ int main(int argc, char **argv)
 
 	ReleaseResources();
 
-	return 0;
+	return options.search_duration && !prevNumValidTripcodes;
 }

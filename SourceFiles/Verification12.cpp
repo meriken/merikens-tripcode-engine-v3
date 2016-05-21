@@ -185,7 +185,7 @@ BOOL VerifySHA1Tripcode(unsigned char *tripcode, unsigned char *key)
 	              && (tripcode[10] == base64CharTable[(B <<  2 | C >> 30) & 0x3f])
 	              && (tripcode[11] == base64CharTable[(C >> 24          ) & 0x3f]);
 
-#if TRUE
+#if FALSE
 	if (!result) {
 		printf("key:      `%s'\n", key);
 		printf("tripcode: `%s'\n", tripcode);
