@@ -25,6 +25,7 @@ mkdir CMakeBuild/
 cd CMakeBuild/
 cmake ../SourceFiles/
 if ! make
+then
     cmake -DENABLE_OPENCL=OFF ../SourceFiles/
     make
 fi
