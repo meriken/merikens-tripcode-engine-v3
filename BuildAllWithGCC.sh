@@ -24,11 +24,8 @@ cd ../../
 mkdir CMakeBuild/
 cd CMakeBuild/
 cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ../SourceFiles/
-if ! make
-then
-    cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ -DENABLE_OPENCL=OFF ../SourceFiles/
-    make
-fi
+make
+
 echo "#regex" > patterns.txt
 echo "^TEST." >> patterns.txt
 echo Testing MerikensTripcodeEngine...
