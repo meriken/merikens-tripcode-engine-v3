@@ -125,7 +125,11 @@ extern char** environ;
 #include <cuda_runtime.h>
 #endif
 #ifdef ENABLE_OPENCL
+#if BOOST_OS_MACOS
+#include <OpenCL/OpenCL.h>
+#else
 #include <CL/cl.h>
+#endif
 #endif
 
 // MTE
