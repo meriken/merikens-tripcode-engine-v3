@@ -1968,6 +1968,8 @@ double GetNumGeneratedTripcodesByGPU()
 
 double UpdateCurrentStatus(uint64_t startingTime)
 {
+    double ret;
+  
 	current_state_spinlock.lock();
 	
 	double numGeneratedTripcodes_GPU = GetNumGeneratedTripcodesByGPU();
@@ -1978,7 +1980,7 @@ double UpdateCurrentStatus(uint64_t startingTime)
 	totalNumGeneratedTripcodes     += numGeneratedTripcodes_GPU + numGeneratedTripcodes_CPU;
 	totalNumGeneratedTripcodes_GPU += numGeneratedTripcodes_GPU;
 	totalNumGeneratedTripcodes_CPU += numGeneratedTripcodes_CPU;
-	totalTime += deltaTime;
+	ret = totalTime += deltaTime;
 	currentSpeed_thisProcess     = ((double)(numGeneratedTripcodes_GPU + numGeneratedTripcodes_CPU) / deltaTime);
 	currentSpeed_thisProcess_GPU = ((double) numGeneratedTripcodes_GPU                              / deltaTime);
 	currentSpeed_CPU        = ((double)numGeneratedTripcodes_CPU        / deltaTime);
@@ -1992,7 +1994,7 @@ double UpdateCurrentStatus(uint64_t startingTime)
 
 	current_state_spinlock.unlock();
 
-	return deltaTime;
+	return ret;
 }
 
 BOOL IsFirstByteSJIS(unsigned char ch)
@@ -2440,8 +2442,8 @@ int main(int argc, char **argv)
 		}
 		if (UpdateTerminationState())
 			break;
-		double delta_time = UpdateCurrentStatus(startingTime);
-		if (options.search_duration && delta_time > options.search_duration)
+		double total_time = UpdateCurrentStatus(startingTime);
+		if (options.search_duration && total_time > options.search_duration)
 			break;
 		
 		// Pause searching if necessary.
