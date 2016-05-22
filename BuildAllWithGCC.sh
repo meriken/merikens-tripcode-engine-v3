@@ -25,4 +25,17 @@ mkdir CMakeBuild/
 cd CMakeBuild/
 cmake -DCMAKE_C_COMPILER=gcc -DCMAKE_CXX_COMPILER=g++ ../SourceFiles/
 make
-echo TEST/ >> patterns.txt
+echo "#regex" > patterns.txt
+echo "^TEST." >> patterns.txt
+echo Testing MerikensTripcodeEngine...
+if ! ./MerikensTripcodeEngine -l 10 -u 60 > /dev/null
+then
+    echo >&2 \"MerikensTripcodeEngine -l 10\" failed.
+    exit 1
+fi
+if ! ./MerikensTripcodeEngine -l 12 -u 60 > /dev/null
+then
+    echo >&2 \"MerikensTripcodeEngine -l 12\" failed.
+    exit 1
+fi
+echo Tests were successful.
