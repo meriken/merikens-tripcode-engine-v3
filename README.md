@@ -159,7 +159,7 @@ Please install [Homebrew]( http://brew.sh/ ) first if you want to follow these i
 $ curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Darwin-x86_64.tar.gz | sudo tar -xzC /opt
 $ export PATH=/opt/cmake-3.5.2-Darwin-x86_64/CMake.app/Contents/bin:$PATH
 $ brew install p7zip
-$ ./BuildAllWithGCC.sh
+$ ./BuildAll.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
 ```
