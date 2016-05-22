@@ -281,19 +281,59 @@ endif()
 
 
 
-LINK_LIBRARIES(${OpenCL_LIBRARIES} ${CUDA_LIBRARIES} boost_system boost_iostreams)
-include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    "${MTE_BOOST_DIR}/include"
-    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
-    ${OpenCL_INCLUDE_DIR}
-    ${CUDA_INCLUDE_DIR})
-link_directories(
-    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-    ${OpenCL_LIBRARY}
-    ${CUDA_LIBRARY})
-
-
+if (ENABLE_OPENCL AND ENABLE_CUDA)
+    LINK_LIBRARIES(
+        ${OpenCL_LIBRARIES}
+        ${CUDA_LIBRARIES}
+        boost_system
+        boost_iostreams)
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        "${MTE_BOOST_DIR}/include"
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
+        ${OpenCL_INCLUDE_DIR}
+        ${CUDA_INCLUDE_DIR})
+    link_directories(
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+        ${OpenCL_LIBRARY}
+        ${CUDA_LIBRARY})
+elseif(ENABLE_OPENCL)
+    LINK_LIBRARIES(
+        ${OpenCL_LIBRARIES}
+        boost_system
+        boost_iostreams)
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        "${MTE_BOOST_DIR}/include"
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
+        ${OpenCL_INCLUDE_DIR})
+    link_directories(
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+        ${OpenCL_LIBRARY})
+elseif(ENABLE_CUDA)
+    LINK_LIBRARIES(
+        ${CUDA_LIBRARIES}
+        boost_system
+        boost_iostreams)
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        "${MTE_BOOST_DIR}/include"
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
+        ${CUDA_INCLUDE_DIR})
+    link_directories(
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+        ${CUDA_LIBRARY})
+else()
+    LINK_LIBRARIES(
+        boost_system
+        boost_iostreams)
+    include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}
+        "${MTE_BOOST_DIR}/include"
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/")
+    link_directories(
+        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/")
+endif()
 
 #set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_executable(MerikensTripcodeEngine ${SOURCES} ${YASM_FILES} ${CUDA_FILES})
