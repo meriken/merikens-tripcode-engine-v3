@@ -116,7 +116,7 @@ Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_M
 
 #### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
 
-If you are using Ubuntu 14.04 LTS, CMake must be upgraded first. For example:
+If you are using Ubuntu 14.04 LTS, CMake must be upgraded first:
 
 ```
 curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt
@@ -152,10 +152,12 @@ $ sudo make -C CMakeBuild install
 
 #### Build Instructions for Mac OS X 10.10
 
-Please install [Homebrew]( http://brew.sh/ ) if you want to follow these instructions.
+Please install [Homebrew]( http://brew.sh/ ) first if you want to follow these instructions.
 
 ```
-$ brew install cmake
+
+$ curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Darwin-x86_64.tar.gz | sudo tar -xzC /opt
+$ export PATH=/opt/cmake-3.5.2-Darwin-x86_64/bin:$PATH
 $ brew install p7zip
 $ ./BuildAllWithGCC.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
