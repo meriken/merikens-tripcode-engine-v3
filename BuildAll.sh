@@ -24,11 +24,8 @@ cd ../../
 mkdir CMakeBuild/
 cd CMakeBuild/
 cmake ../SourceFiles/
-if ! make
-then
-    cmake -DENABLE_OPENCL=OFF ../SourceFiles/
-    make
-fi
+make
+
 echo "#regex" > patterns.txt
 echo "^TEST." >> patterns.txt
 echo Testing MerikensTripcodeEngine...
