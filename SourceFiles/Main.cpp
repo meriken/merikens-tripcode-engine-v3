@@ -495,6 +495,21 @@ void show_cursor()
 	SetConsoleCursorInfo((HWND)GetStdHandle(STD_OUTPUT_HANDLE), &info); 
 }
 
+#elif BOOST_OS_UNIX
+
+void hide_cursor()
+{
+    execute_system_command("tput clear");
+    execute_system_command("tput rmam");
+    execute_system_command("tput civis");
+}
+
+void show_cursor()
+{
+    execute_system_command("tput cnorm");
+    execute_system_command("tput smam");
+}
+
 #else
 
 void hide_cursor()
@@ -2493,7 +2508,8 @@ int main(int argc, char **argv)
 	} while (deltaTime < 10 * 1000 && !allThreadsHaveExited);	
 
 	reset_cursor_pos(prevLineCount + 1);
-
+	show_cursor();
+	
 	ReleaseResources();
 
 	return options.search_duration && !prevNumValidTripcodes;
