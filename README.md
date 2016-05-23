@@ -91,7 +91,7 @@ Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" and "Options" below.
 
-## Linux and Other POSIX-Compliant Operating Systems
+## Linux, Mac OS X,  and Other POSIX Systems
 
 ### Building
 
