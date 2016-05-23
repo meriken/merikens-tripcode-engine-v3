@@ -124,7 +124,7 @@ $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
 ```
 
-If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev`.
+Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you cannot use AMD video cards with this application. If you would like to use an AMD graphics card, please stick to Ubuntu 14.04 LTS.
 
 #### Build Instructions for Ubuntu 14.04 LTS
 
