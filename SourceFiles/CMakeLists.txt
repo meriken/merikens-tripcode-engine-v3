@@ -116,7 +116,7 @@ endif()
 ##########
 
 file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL" DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
-find_package(OpenCL)
+find_package(OpenCL 1.2)
 if(NOT OpenCL_FOUND)
     set(ENABLE_OPENCL FALSE)
 endif()
@@ -184,6 +184,9 @@ if(USE_YASM)
 endif()
 
 
+#######
+# C++ #
+#######
 
 set(CORE_SOURCES
 	${CMAKE_CURRENT_SOURCE_DIR}/Main.cpp
@@ -208,8 +211,6 @@ set(SOURCES
 	${CPU_SOURCES}
 	${OPENCL_SOURCES})
 
-
-
 if(UNIX)
     SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -pthread")
 endif()
@@ -218,7 +219,6 @@ if(ARCH_X86)
 endif()
 SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -std=c++11 -Wall -Wno-deprecated-declarations -O3")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${MTE_COMPILE_FLAGS}")
-#SET( CMAKE_EXE_LINKER_FLAGS  "${CMAKE_EXE_LINKER_FLAGS} --enable-auto-import" )
 
 
 
@@ -308,6 +308,10 @@ endif()
 
 
 
+##############
+# EXECUTABLE #
+##############
+
 if (ENABLE_OPENCL AND ENABLE_CUDA)
     LINK_LIBRARIES(
         ${OpenCL_LIBRARIES}
@@ -362,16 +366,21 @@ else()
         "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/")
 endif()
 
-#set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_executable(MerikensTripcodeEngine ${SOURCES} ${YASM_FILES} ${CUDA_FILES})
 set_target_properties(MerikensTripcodeEngine PROPERTIES LINKER_LANGUAGE CXX)
-#set(CMAKE_CXX_LINK_EXECUTABLE "<CMAKE_CXX_COMPILER> <FLAGS> <CMAKE_CXX_LINK_FLAGS> <LINK_FLAGS> <OBJECTS> -o <TARGET> <LINK_LIBRARIES>")
+
+
+
+###########
+# INSTALL #
+###########
 
 install_programs(/bin FILES ${CMAKE_CURRENT_BINARY_DIR}/MerikensTripcodeEngine)
 file(GLOB GCN_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/bin/*.asm")
 install(FILES ${GCN_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL/bin)
 file(GLOB OPENCL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/*.cl")
 install(FILES ${OPENCL_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL)
+
 
 
 #############
