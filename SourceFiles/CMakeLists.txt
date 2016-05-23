@@ -72,6 +72,45 @@ endif()
 
 
 
+##################
+# CUDA DETECTION #
+##################
+
+# Workaround for CUDA Toolki 7.5 and Ubuntu 16.04 LTS
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES") 
+
+find_package(CUDA 7.5)
+if(NOT CUDA_FOUND)
+    set(ENABLE_CUDA FALSE)
+endif()
+if (ENABLE_CUDA AND CMAKE_COMPILER_IS_GNUCC)
+    execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion
+                    OUTPUT_VARIABLE GCC_VERSION)
+    string(REGEX MATCHALL "[0-9]+" GCC_VERSION_COMPONENTS ${GCC_VERSION})
+    list(GET GCC_VERSION_COMPONENTS 0 GCC_MAJOR)
+    list(GET GCC_VERSION_COMPONENTS 1 GCC_MINOR)
+    
+    if(CUDA_VERSION VERSION_EQUAL "7.5" AND (GCC_VERSION VERSION_EQUAL "5.0.0" OR GCC_VERSION VERSION_GREATER "5.0.0"))
+        if (EXISTS "/usr/bin/gcc-4.8" AND EXISTS "/usr/bin/g++-4.8")
+            message(WARNING "CUDA Toolkit 7.5 does not support GCC ${GCC_MAJOR}.${GCC_MINOR}. GCC 4.8 will be used instead.")
+	    set(CMAKE_C_COMPILER "/usr/bin/gcc-4.8")
+	    set(CMAKE_CXX_COMPILER "/usr/bin/g++-4.8")
+	elseif (EXISTS "/usr/bin/gcc-4.9" AND EXISTS "/usr/bin/g++-4.9")
+            message(WARNING "CUDA Toolkit 7.5 does not support GCC ${GCC_MAJOR}.${GCC_MINOR}. GCC 4.9 will be used instead.")
+	    set(CMAKE_C_COMPILER "/usr/bin/gcc-4.9")
+	    set(CMAKE_CXX_COMPILER "/usr/bin/g++-4.9")
+	else()
+            message(WARNING "CUDA Toolkit 7.5 does not support GCC ${GCC_MAJOR}.${GCC_MINOR}. CUDA support is disabled.")
+            set(ENABLE_CUDA FALSE)
+	endif()
+    endif()
+endif()
+if(ENABLE_CUDA)
+    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENABLE_CUDA")
+endif()
+
+
+
 ##########
 # OPENCL #
 ##########
@@ -171,31 +210,6 @@ set(SOURCES
 
 
 
-##################
-# CUDA DETECTION #
-##################
-
-find_package(CUDA 7.5)
-if(NOT CUDA_FOUND)
-    set(ENABLE_CUDA FALSE)
-endif()
-if (ENABLE_CUDA AND CMAKE_COMPILER_IS_GNUCC)
-    execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion
-                    OUTPUT_VARIABLE GCC_VERSION)
-    string(REGEX MATCHALL "[0-9]+" GCC_VERSION_COMPONENTS ${GCC_VERSION})
-    list(GET GCC_VERSION_COMPONENTS 0 GCC_MAJOR)
-    list(GET GCC_VERSION_COMPONENTS 1 GCC_MINOR)
-    
-    if(CUDA_VERSION VERSION_EQUAL "7.5" AND (GCC_VERSION VERSION_EQUAL "5.0.0" OR GCC_VERSION VERSION_GREATER "5.0.0"))
-        message(WARNING "CUDA Toolkit 7.5 does not support GCC ${GCC_MAJOR}.${GCC_MINOR}. CUDA support is disabled.")
-	set(ENABLE_CUDA FALSE)
-    endif()
-endif()
-if(ENABLE_CUDA)
-    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENABLE_CUDA")
-endif()
-
-
 if(UNIX)
     SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -pthread")
 endif()
@@ -217,6 +231,7 @@ if(ENABLE_CUDA)
         CUDA_INCLUDE_DIR 
         "${MTE_BOOST_DIR}/include" 
         "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/")
+    set(CUDA_HOST_COMPILER ${CMAKE_CXX_COMPILER})
     if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
         set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE)
  	cuda_compile(

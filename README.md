@@ -115,19 +115,24 @@ $ sudo make install
 
 Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON) take **extremely** long time to build.
 
-#### Build Instructions for Ubuntu 14.04 LTS/16.04 LTS
-
-If you are using Ubuntu 14.04 LTS, CMake must be upgraded first:
+#### Build Instructions for Ubuntu 16.04 LTS
 
 ```
-curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt
-export PATH=/opt/cmake-3.5.2-Linux-x86_64/bin:$PATH
+$ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev 
+$ ./BuildAll.sh
+$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
+$ sudo make -C CMakeBuild install
 ```
 
-Then:
+If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev`.
 
+#### Build Instructions for Ubuntu 14.04 LTS
+
+If you are using Ubuntu 14.04 LTS, CMake must be upgraded first.
 
 ```
+$ curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt
+$ export PATH=/opt/cmake-3.5.2-Linux-x86_64/bin:$PATH
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
 $ ./BuildAll.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
