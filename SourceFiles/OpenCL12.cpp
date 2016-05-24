@@ -250,6 +250,7 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	char childProcessPath[MAX_LEN_COMMAND_LINE + 1];
 	strcpy(childProcessPath, applicationPath);
 #ifdef _WIN32
+	auto applicationPathLen = strlen(applicationPath);
 	if (strcmp(childProcessPath + applicationPathLen - 6, "64.exe") == 0) {
 		strcpy(childProcessPath + applicationPathLen - 6, ".exe"); // For 32-bit OpenCL binaries
 	}
