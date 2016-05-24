@@ -145,11 +145,13 @@ For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https:
 
 #### Build Instructions for FreeBSD 10.3
 
+You need to build the application with GCC.
+
 ```
 $ sudo pkg install gcc
 $ sudo pkg install cmake
 $ sudo pkg install p7zip
-$ ./BuildAll.sh
+$ ./BuildAll.sh --with-toolset=gcc
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
 $ sudo make -C CMakeBuild install
 ```
