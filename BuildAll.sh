@@ -75,14 +75,7 @@ case $OS in
     ;;
 esac
 ./bootstrap.sh $BOOTSTRAP_OPTIONS
-case $OS in
-  'FreeBSD')
-	./b2 $B2_OPTIONS link=static -j 8
-    ;;
-  *) 
-	./b2 $B2_OPTIONS link=static runtime-link=static -j 8
-    ;;
-esac
+./b2 $B2_OPTIONS link=static -j 8
 cd ../../
 
 mkdir -p CMakeBuild/
