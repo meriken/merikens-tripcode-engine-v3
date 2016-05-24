@@ -75,7 +75,7 @@ case $OS in
     ;;
 esac
 ./bootstrap.sh $BOOTSTRAP_OPTIONS
-./b2 $B2_OPTIONS link=static -j 8
+./b2 $B2_OPTIONS link=static
 cd ../../
 
 mkdir -p CMakeBuild/
