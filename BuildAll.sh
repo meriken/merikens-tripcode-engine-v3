@@ -42,6 +42,7 @@ case $key in
 	;;
    	*)
 	echo "Unknown option: $key"
+	exit 1
     ;;
 esac
 shift
