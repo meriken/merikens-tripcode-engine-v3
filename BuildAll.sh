@@ -3,7 +3,7 @@ set -e
 
 # CLRadeonExtender
 cd CLRadeonExtender/
-echo Extracting CLRadeonExtender-*.zip...
+echo Extracting CLRadeonExtender...
 7z x -y CLRadeonExtender-*.zip > /dev/null
 cd CLRX-mirror-master/
 mkdir -p build/
@@ -28,6 +28,7 @@ case $OS in
     ;;
 esac
 ./bootstrap.sh 
+[ -f ./b2 ] || ./bootstrap.sh --with-toolset=clang
 # ./b2 link=static runtime-link=static -j 8 # FreeBSD is not happy.
 ./b2 link=static -j 8
 cd ../../
