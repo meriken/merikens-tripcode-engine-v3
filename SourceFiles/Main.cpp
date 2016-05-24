@@ -589,7 +589,7 @@ BOOL IsValidKey(unsigned char *key)
 {
 	int32_t i;
 	BOOL isSecondByteSJIS = FALSE;
-	char results[13] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+//	char results[13] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 	
 	if (key[0] == '#' || key[0] == '$') {
 #ifdef DEBUG_PRINT_INVALID_KEY_INFO
@@ -601,10 +601,10 @@ BOOL IsValidKey(unsigned char *key)
 	for (i = 0; i < lenTripcode; ++i) {
 		if (!isSecondByteSJIS && IS_ONE_BYTE_KEY_CHAR(key[i])) {
 			// Don't do anything
-			results[i] = 'O';
+//			results[i] = 'O';
 		} else if (!isSecondByteSJIS && i < lenTripcode - 1 && IS_FIRST_BYTE_SJIS_FULL(key[i])) {
 			isSecondByteSJIS = TRUE;
-			results[i] = '1';
+//			results[i] = '1';
 		} else if (isSecondByteSJIS && IS_SECOND_BYTE_SJIS(key[i])) {
 		    isSecondByteSJIS = FALSE;
 		    if (!IS_VALID_SJIS_CHAR(key[i - 1], key[i])) {
@@ -614,7 +614,7 @@ BOOL IsValidKey(unsigned char *key)
 #endif
 				return FALSE;
 			}
-			results[i] = '2';
+//			results[i] = '2';
 		} else {
 #ifdef DEBUG_PRINT_INVALID_KEY_INFO
 			printf("  results: %sX                                                     \n", results);
@@ -1007,7 +1007,7 @@ void PrintStatus(bool update_status = true)
 	double averageSpeed_CPU;
 	double timeForOneMatch;
 	double actualMatchingProb;
-	double matchingProbDiff;
+	double matchingProbDiff = 0;
 	double invalidTripcodeRatio = (prevNumValidTripcodes + prevNumDiscardedTripcodes > 0)
 			                            ? ((double)(prevNumDiscardedTripcodes) / (prevNumValidTripcodes + prevNumDiscardedTripcodes))
 										: 0;
@@ -2080,7 +2080,6 @@ void SetCharactersInTripcodeKeyForSHA1Tripcode(unsigned char *key)
 void StartCUDADeviceSearchThreads()
 {
 	int32_t    i;
-	uint32_t winThreadID;
 	
 	ASSERT(numCUDADeviceSearchThreads > 0);
 

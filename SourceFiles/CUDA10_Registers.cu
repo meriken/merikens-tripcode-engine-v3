@@ -164,6 +164,8 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 
 	keyAndRandomBytes[lenTripcode] = '\0';
 	salt[2] = '\0';
+	for (int i = 0; i < MAX_LEN_TRIPCODE + 1; ++i)
+	    prevKeyAndRandomBytes[i] = '\0';
 	
 	CUDA_ERROR(cudaSetDevice(info->CUDADeviceIndex));
 	CUDA_ERROR(cudaGetDeviceProperties(&CUDADeviceProperties, info->CUDADeviceIndex));
@@ -323,9 +325,9 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 
 		// Process the output.
 		TripcodeKeyPair tripcodes[32];
-		int32_t numTripcodes = 0;
+		uint32_t numTripcodes = 0;
 		if (prevDataExists) {
-			for (int32_t i = 0; i < numThreadsPerGrid; i++){
+			for (uint32_t i = 0; i < numThreadsPerGrid; i++){
 				if (prevPassCountArray[i] < CUDA_DES_MAX_PASS_COUNT) {
 					unsigned char key[MAX_LEN_TRIPCODE_KEY + 1];
 					key[0] = prevKey0Array[prevPassCountArray[i]];
@@ -348,7 +350,7 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 				}
 				if (numTripcodes > 0 && (numTripcodes >= sizeof(tripcodes) / sizeof(TripcodeKeyPair) || i >= numThreadsPerGrid - 1)) {
 					Generate10CharTripcodes(tripcodes, numTripcodes);
-					for (int32_t j = 0; j < numTripcodes; j++){
+					for (uint32_t j = 0; j < numTripcodes; j++){
 						ERROR0(!IsTripcodeChunkValid(tripcodes[j].tripcode.c), 
 							   ERROR_TRIPCODE_VERIFICATION_FAILED, 
 							   GetErrorMessage(ERROR_TRIPCODE_VERIFICATION_FAILED));
@@ -360,7 +362,7 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 		}
 		CUDA_ERROR(cudaStreamSynchronize(currentStream));
 		uint32_t numGeneratedTripcodesThisTime = 0;
-		for (int32_t i = 0; i < numThreadsPerGrid; i++)
+		for (uint32_t i = 0; i < numThreadsPerGrid; i++)
 			numGeneratedTripcodesThisTime += CUDA_DES_BS_DEPTH * passCountArray[i];
 		AddToNumGeneratedTripcodesByGPU(numGeneratedTripcodesThisTime);
 		numGeneratedTripcodes += numGeneratedTripcodesThisTime;

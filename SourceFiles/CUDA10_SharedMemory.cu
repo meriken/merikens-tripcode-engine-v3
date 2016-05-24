@@ -1340,20 +1340,6 @@ quit_loops:\
 		output->numGeneratedTripcodes = CUDA_DES_BS_DEPTH * passCount;\
 }
 
-CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_ForwardOrBackwardMatching_Simple)
-	uint32_t tripcodeChunk;
-CUDA_DES_BEFORE_SEARCHING
-	DES_GetTripcodeChunks(tripcodeIndex, &tripcodeChunk, searchMode);
-	if (CUDA_smallChunkBitmap[tripcodeChunk >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)])
-		continue;
-	for (int32_t j = 0; j < numTripcodeChunk; ++j){
-		if (tripcodeChunkArray[j] == tripcodeChunk) {
-			found = TRUE;
-			goto quit_loops;
-		}
-	}
-CUDA_DES_END_OF_SEAERCH_FUNCTION
-
 CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_ForwardOrBackwardMatching)
 	uint32_t tripcodeChunk;
 CUDA_DES_BEFORE_SEARCHING
@@ -1372,58 +1358,6 @@ CUDA_DES_BEFORE_SEARCHING
 	if (tripcodeChunk == tripcodeChunkArray[middle]) {
 		found = TRUE;
 		goto quit_loops;
-	}
-CUDA_DES_END_OF_SEAERCH_FUNCTION
-
-CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_ForwardMatching_1Chunk)
-	uint32_t tripcodeChunk0 = tripcodeChunkArray[0];
-CUDA_DES_BEFORE_SEARCHING
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 63, 31, 38,  6, 46, 14, 0) != ((tripcodeChunk0 >> (6 * 4)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 54, 22, 62, 30, 37,  5, 0) != ((tripcodeChunk0 >> (6 * 3)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 45, 13, 53, 21, 61, 29, 0) != ((tripcodeChunk0 >> (6 * 2)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 36,  4, 44, 12, 52, 20, 0) != ((tripcodeChunk0 >> (6 * 1)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 60, 28, 35,  3, 43, 11, 0) != ((tripcodeChunk0 >> (6 * 0)) & 0x3f))
-		goto skip_final_permutation;
-	found = TRUE;
-	goto quit_loops;
-skip_final_permutation:
-CUDA_DES_END_OF_SEAERCH_FUNCTION
-
-CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_BackwardMatching_1Chunk)
-	uint32_t tripcodeChunk0 = tripcodeChunkArray[0];
-CUDA_DES_BEFORE_SEARCHING
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 51, 19, 59, 27, 34,  2, 0) != ((tripcodeChunk0 >> (6 * 4)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 42, 10, 50, 18, 58, 26, 0) != ((tripcodeChunk0 >> (6 * 3)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 33,  1, 41,  9, 49, 17, 0) != ((tripcodeChunk0 >> (6 * 2)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX(dataBlocks, tripcodeIndex, 57, 25, 32,  0, 40,  8, 0) != ((tripcodeChunk0 >> (6 * 1)) & 0x3f))
-		goto skip_final_permutation;
-	if (GET_TRIPCODE_CHAR_INDEX_LAST(dataBlocks, tripcodeIndex, 48, 16, 56, 24) != ((tripcodeChunk0 >> (6 * 0)) & 0x3f))
-		goto skip_final_permutation;
-	found = TRUE;
-	goto quit_loops;
-skip_final_permutation:
-CUDA_DES_END_OF_SEAERCH_FUNCTION
-
-CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_Flexible_Simple)
-	uint32_t generatedTripcodeChunkArray[6];
-CUDA_DES_BEFORE_SEARCHING
-	DES_GetTripcodeChunks(tripcodeIndex, generatedTripcodeChunkArray, searchMode);
-	for (int32_t pos = 0; pos < 6; ++pos) {
-		if (CUDA_smallChunkBitmap[generatedTripcodeChunkArray[pos] >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)])
-			continue;
-		for (int32_t j = 0; j < numTripcodeChunk; ++j){
-			if (tripcodeChunkArray[j] == generatedTripcodeChunkArray[pos]) {
-				found = TRUE;
-				goto quit_loops;
-			}
-		}
 	}
 CUDA_DES_END_OF_SEAERCH_FUNCTION
 
@@ -1448,30 +1382,6 @@ CUDA_DES_BEFORE_SEARCHING
 		if (generatedTripcodeChunk == tripcodeChunkArray[middle]) {
 			found = TRUE;
 			goto quit_loops;
-		}
-	}
-CUDA_DES_END_OF_SEAERCH_FUNCTION
-
-CUDA_DES_DEFINE_SEARCH_FUNCTION(CUDA_PerformSearching_DES_ForwardAndBackwardMatching_Simple)
-	uint32_t generatedTripcodeChunkArray[6];
-CUDA_DES_BEFORE_SEARCHING
-	DES_GetTripcodeChunks(tripcodeIndex, generatedTripcodeChunkArray, searchMode);
-	//
-	if (!CUDA_smallChunkBitmap[generatedTripcodeChunkArray[0] >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)]) {
-		for (int32_t j = 0; j < numTripcodeChunk; ++j){
-			if (tripcodeChunkArray[j] == generatedTripcodeChunkArray[0]) {
-				found = TRUE;
-				goto quit_loops;
-			}
-		}
-	}
-	//
-	if (!CUDA_smallChunkBitmap[generatedTripcodeChunkArray[1] >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)]) {
-		for (int32_t j = 0; j < numTripcodeChunk; ++j){
-			if (tripcodeChunkArray[j] == generatedTripcodeChunkArray[1]) {
-				found = TRUE;
-				goto quit_loops;
-			}
 		}
 	}
 CUDA_DES_END_OF_SEAERCH_FUNCTION
@@ -1645,109 +1555,41 @@ void Thread_SearchForDESTripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info)
 		dim3 dimBlock(numBitsliceDESPerBlock, NUM_THREADS_PER_BITSICE_DES);
 		dim3 dimGrid(numBlocksPerGrid);
 		if (searchMode == SEARCH_MODE_FLEXIBLE) {
-			if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_PerformSearching_DES_Flexible_Simple<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			} else {
-				CUDA_PerformSearching_DES_Flexible<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			}
+			CUDA_PerformSearching_DES_Flexible<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+				CUDA_key,
+				CUDA_expansionFunction,
+				CUDA_key0Array,
+				CUDA_key7Array,
+				CUDA_keyFrom49To55Array,
+				searchMode);
 		} else if (searchMode == SEARCH_MODE_FORWARD_AND_BACKWARD_MATCHING) {
-			if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_PerformSearching_DES_ForwardAndBackwardMatching_Simple<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			} else {
-				CUDA_PerformSearching_DES_ForwardAndBackwardMatching<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			}
+			CUDA_PerformSearching_DES_ForwardAndBackwardMatching<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+				CUDA_key,
+				CUDA_expansionFunction,
+				CUDA_key0Array,
+				CUDA_key7Array,
+				CUDA_keyFrom49To55Array,
+				searchMode);
 		} else {
-			if (numTripcodeChunk == 1) {
-				if (searchMode == SEARCH_MODE_FORWARD_MATCHING) {
-					CUDA_PerformSearching_DES_ForwardMatching_1Chunk<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-						CUDA_outputArray,
-						CUDA_chunkBitmap,
-						CUDA_tripcodeChunkArray,
-						numTripcodeChunk,
-						CUDA_key,
-						CUDA_expansionFunction,
-						CUDA_key0Array,
-						CUDA_key7Array,
-						CUDA_keyFrom49To55Array,
-						searchMode);
-				} else {
-					CUDA_PerformSearching_DES_BackwardMatching_1Chunk<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-						CUDA_outputArray,
-						CUDA_chunkBitmap,
-						CUDA_tripcodeChunkArray,
-						numTripcodeChunk,
-						CUDA_key,
-						CUDA_expansionFunction,
-						CUDA_key0Array,
-						CUDA_key7Array,
-						CUDA_keyFrom49To55Array,
-						searchMode);
-				}
-			} else if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_PerformSearching_DES_ForwardOrBackwardMatching_Simple<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			} else {
-				CUDA_PerformSearching_DES_ForwardOrBackwardMatching<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-					CUDA_key,
-					CUDA_expansionFunction,
-					CUDA_key0Array,
-					CUDA_key7Array,
-					CUDA_keyFrom49To55Array,
-					searchMode);
-			}
+			CUDA_PerformSearching_DES_ForwardOrBackwardMatching<<<dimGrid, dimBlock, CUDADeviceProperties.sharedMemPerBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+				CUDA_key,
+				CUDA_expansionFunction,
+				CUDA_key0Array,
+				CUDA_key7Array,
+				CUDA_keyFrom49To55Array,
+				searchMode);
 		}
 		CUDA_ERROR(cudaGetLastError());
 		// CUDA_ERROR(cudaDeviceSynchronize()); // Check errors at kernel launch.

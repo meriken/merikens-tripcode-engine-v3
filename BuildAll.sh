@@ -6,7 +6,7 @@ cd CLRadeonExtender/
 echo Extracting CLRadeonExtender-*.zip...
 7z x -y CLRadeonExtender-*.zip > /dev/null
 cd CLRX-mirror-master/
-mkdir build/
+mkdir -p build/
 cd build/
 cmake ../
 make
@@ -16,13 +16,15 @@ cd ../../../
 cd BoostPackages/
 echo Extracting boost_1_61_0.7z...
 7z x -y boost_1_61_0.7z > /dev/null
+cp sp_counted_base_gcc_x86.hpp boost_1_61_0/boost/smart_ptr/detail
 cd boost_1_61_0
+find boost -type f -exec sed -i '/pragma.*deprecated/d' {} \;
 ./bootstrap.sh 
 # ./b2 link=static runtime-link=static -j 8 # FreeBSD is not happy.
 ./b2 link=static -j 8
 cd ../../
 
-mkdir CMakeBuild/
+mkdir -p CMakeBuild/
 cd CMakeBuild/
 cmake ../SourceFiles/
 make

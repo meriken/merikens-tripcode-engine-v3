@@ -248,7 +248,6 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	GetParametersForOpenCLDevice(info->openCLDeviceID, NULL, &numWorkItemsPerComputeUnit, &localWorkSize, NULL);
 
 	char childProcessPath[MAX_LEN_COMMAND_LINE + 1];
-	int32_t applicationPathLen = strlen(applicationPath);
 	strcpy(childProcessPath, applicationPath);
 #ifdef _WIN32
 	if (strcmp(childProcessPath + applicationPathLen - 6, "64.exe") == 0) {
@@ -398,8 +397,8 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 				sprintf(status,
 						"[process] %.1lfM TPS, %d WI/CU, %d WI/WG, Restarts: %u",
 						averageSpeed / 1000000,
-						numWorkItemsPerComputeUnit,
-						localWorkSize,
+						(int)numWorkItemsPerComputeUnit,
+						(int)localWorkSize,
 						info->numRestarts);
 				UpdateOpenCLDeviceStatus_ChildProcess(info, 
 													  status, 
@@ -410,7 +409,7 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 			}
 		} else if (strncmp(line_buffer, "[error],", strlen("[error],")) == 0) {
 			int32_t   errorCode;
-			char *delimiter = ",";
+			const char *delimiter = ",";
 			char *currentToken = strtok(line_buffer, delimiter); // "[error]"
 			BOOL isGood = (currentToken != NULL);
 			currentToken = strtok(NULL, delimiter); isGood = isGood && (currentToken != NULL) && 1 == sscanf(currentToken, "%d", &errorCode);
@@ -443,9 +442,9 @@ static void CreateProgramFromGCNAssemblySource(cl_context *context, cl_program *
 	char    binaryFilePath[MAX_LEN_FILE_PATH + 1];
 	FILE   *binaryFile;
 #if defined(_WIN32)
-	sprintf(binaryFilePath, "%s\\OpenCL\\bin\\OpenCL12GCN_%02x%02x%02x%02x.bin", applicationDirectory, RandomByte(), RandomByte(), RandomByte(), RandomByte());
+	sprintf(binaryFilePath, "%s\\OpenCL\\bin\\OpenCL12GCN_%02x%02x%02x%02x.bin", applicationDirectory, (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte());
 #else
-	sprintf(binaryFilePath, "/tmp/OpenCL12GCN_%02x%02x%02x%02x.bin", applicationDirectory, RandomByte(), RandomByte(), RandomByte(), RandomByte());
+	sprintf(binaryFilePath, "/tmp/OpenCL12GCN_%02x%02x%02x%02x.bin", (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte());
 #endif
 	
 	char    sourceFilePath[MAX_LEN_FILE_PATH + 1];
@@ -576,7 +575,6 @@ void Thread_SearchForSHA1TripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *i
 						          || strcmp(deviceName, "Carrizo") == 0 */)
 						   && (   strncmp(deviceVersion, "OpenCL 1.2", 10) == 0
 						       || strncmp(deviceVersion, "OpenCL 2.0", 10) == 0);
-	BOOL isIntelHDGraphics = FALSE;
 	if (   strcmp(deviceVendor, OPENCL_VENDOR_INTEL) == 0
 		&& strncmp(deviceName, "Intel(R) HD Graphics", strlen("Intel(R) HD Graphics")) == 0) {
 		// There is a bug in the Intel OpenCL driver.
@@ -679,7 +677,7 @@ void Thread_SearchForSHA1TripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *i
 	OPENCL_ERROR(openCLError);
 	char    binaryFilePath[MAX_LEN_FILE_PATH + 1];
 	FILE   *binaryFile;
-	sprintf(binaryFilePath, "%s/OpenCL/bin/OpenCL12GCN_%02x%02x%02x%02x.bin", applicationDirectory, RandomByte(), RandomByte(), RandomByte(), RandomByte());
+	sprintf(binaryFilePath, "%s/OpenCL/bin/OpenCL12GCN_%02x%02x%02x%02x.bin", applicationDirectory, (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte());
 	if (binaryFile = fopen(binaryFilePath, "wb")) {
 		fwrite(binaryArray[0], sizeof(unsigned char), binarySizeArray[0], binaryFile);
 		fclose(binaryFile);
@@ -688,7 +686,7 @@ void Thread_SearchForSHA1TripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *i
 	for(int32_t i = 0; i < numDevices; ++i)
 		free(binaryArray[i]);
 	free(binaryArray);
-	sprintf(sourceFilePath, "%s/OpenCL/bin/OpenCL12GCN_%02x%02x%02x%02x.asm", applicationDirectory, RandomByte(), RandomByte(), RandomByte(), RandomByte());
+	sprintf(sourceFilePath, "%s/OpenCL/bin/OpenCL12GCN_%02x%02x%02x%02x.asm", applicationDirectory, (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte(), (unsigned int)RandomByte());
 	char    assemblerCommand[MAX_LEN_COMMAND_LINE + 1];
 	sprintf(assemblerCommand, "\"%s/CLRadeonExtender/clrxdisasm\" -m -d -c -f \"%s\" > \"%s\"", applicationDirectory, binaryFilePath, sourceFilePath);
 	execute_system_command(assemblerCommand);

@@ -390,33 +390,11 @@ __global__ void (functionName)(\
 	}\
 }
 
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardMatching_1Chunk)
-	uint32_t      tripcodeChunk0 = tripcodeChunkArray[0];
-CUDA_SHA1_BEFORE_SEARCHING
-	if (tripcodeChunk == tripcodeChunk0) {
-		found = 1;
-		break;
-	}
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardMatching_Simple)
-CUDA_SHA1_BEFORE_SEARCHING
-	CUDA_SHA1_USE_SMALL_CHUNK_BITMAP
-	CUDA_SHA1_LINEAR_SEARCH
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
 CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardMatching)
 CUDA_SHA1_BEFORE_SEARCHING
 	CUDA_SHA1_USE_SMALL_CHUNK_BITMAP
 	CUDA_SHA1_USE_CHUNK_BITMAP
 	CUDA_SHA1_BINARY_SEARCH
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_BackwardMatching_Simple)
-CUDA_SHA1_BEFORE_SEARCHING
-	tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff);
-	CUDA_SHA1_USE_SMALL_CHUNK_BITMAP
-	CUDA_SHA1_LINEAR_SEARCH
 CUDA_SHA1_END_OF_SEAERCH_FUNCTION
 
 CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_BackwardMatching)
@@ -427,33 +405,20 @@ CUDA_SHA1_BEFORE_SEARCHING
 	CUDA_SHA1_BINARY_SEARCH
 CUDA_SHA1_END_OF_SEAERCH_FUNCTION
 
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_Flexible_Simple)
-CUDA_SHA1_BEFORE_SEARCHING
-
-#define PERFORM_LINEAR_SEARCH_IF_NECESSARY                                           \
-	if (!smallChunkBitmap[tripcodeChunk >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)]) { \
-		CUDA_SHA1_LINEAR_SEARCH                                                      \
-	}                                                                                \
-
-	/* tripcodeChunk =  (A >>  2) */                                        PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((A <<  4) & 0x3fffffff) | ((B >> 28) & 0x0000000f); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((A << 10) & 0x3fffffff) | ((B >> 22) & 0x000003ff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((A << 16) & 0x3fffffff) | ((B >> 16) & 0x0000ffff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((A << 22) & 0x3fffffff) | ((B >> 10) & 0x003fffff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((A << 28) & 0x3fffffff) | ((B >>  4) & 0x0fffffff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((B <<  2) & 0x3fffffff) | ((C >> 30) & 0x00000003); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_Flexible)
-CUDA_SHA1_BEFORE_SEARCHING
-
 #define PERFORM_BINARY_SEARCH_IF_NECESSARY                                              \
 	if (   !smallChunkBitmap[tripcodeChunk >> ((5 - SMALL_CHUNK_BITMAP_LEN_STRING) * 6)]    \
 	    && !chunkBitmap     [tripcodeChunk >> ((5 - CHUNK_BITMAP_LEN_STRING      ) * 6)]) { \
 		CUDA_SHA1_BINARY_SEARCH                                                         \
 	}                                                                                   \
 
+CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching)
+CUDA_SHA1_BEFORE_SEARCHING
+	/* tripcodeChunk =  (A >>  2) */                                        PERFORM_BINARY_SEARCH_IF_NECESSARY
+	   tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff); PERFORM_BINARY_SEARCH_IF_NECESSARY
+CUDA_SHA1_END_OF_SEAERCH_FUNCTION
+
+CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_Flexible)
+CUDA_SHA1_BEFORE_SEARCHING
 	/* tripcodeChunk =  (A >>  2) */                                        PERFORM_BINARY_SEARCH_IF_NECESSARY
 	   tripcodeChunk = ((A <<  4) & 0x3fffffff) | ((B >> 28) & 0x0000000f); PERFORM_BINARY_SEARCH_IF_NECESSARY
 	   tripcodeChunk = ((A << 10) & 0x3fffffff) | ((B >> 22) & 0x000003ff); PERFORM_BINARY_SEARCH_IF_NECESSARY
@@ -461,18 +426,6 @@ CUDA_SHA1_BEFORE_SEARCHING
 	   tripcodeChunk = ((A << 22) & 0x3fffffff) | ((B >> 10) & 0x003fffff); PERFORM_BINARY_SEARCH_IF_NECESSARY
 	   tripcodeChunk = ((A << 28) & 0x3fffffff) | ((B >>  4) & 0x0fffffff); PERFORM_BINARY_SEARCH_IF_NECESSARY
 	   tripcodeChunk = ((B <<  2) & 0x3fffffff) | ((C >> 30) & 0x00000003); PERFORM_BINARY_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff); PERFORM_BINARY_SEARCH_IF_NECESSARY
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching_Simple)
-CUDA_SHA1_BEFORE_SEARCHING
-	/* tripcodeChunk =  (A >>  2) */                                        PERFORM_LINEAR_SEARCH_IF_NECESSARY
-	   tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff); PERFORM_LINEAR_SEARCH_IF_NECESSARY
-CUDA_SHA1_END_OF_SEAERCH_FUNCTION
-
-CUDA_SHA1_DEFINE_SEARCH_FUNCTION(CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching)
-CUDA_SHA1_BEFORE_SEARCHING
-	/* tripcodeChunk =  (A >>  2) */                                        PERFORM_BINARY_SEARCH_IF_NECESSARY
 	   tripcodeChunk = ((B <<  8) & 0x3fffffff) | ((C >> 24) & 0x000000ff); PERFORM_BINARY_SEARCH_IF_NECESSARY
 CUDA_SHA1_END_OF_SEAERCH_FUNCTION
 
@@ -510,7 +463,7 @@ void Thread_SearchForSHA1TripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info)
 		sprintf(status, "[disabled]");
 		UpdateCUDADeviceStatus(info, status);
 		return;
-	}
+	} 
 
 	numBlocksPerSM = options.CUDANumBlocksPerSM;
 	numBlocksPerGrid = numBlocksPerSM * CUDADeviceProperties.multiProcessorCount;
@@ -549,79 +502,34 @@ void Thread_SearchForSHA1TripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info)
 		dim3 dimBlock(CUDA_SHA1_NUM_THREADS_PER_BLOCK);
 		dim3 dimGrid(numBlocksPerGrid);
 		if (searchMode == SEARCH_MODE_FORWARD_MATCHING) {
-			if (numTripcodeChunk == 1) {
-				CUDA_SHA1_PerformSearching_ForwardMatching_1Chunk<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			} else if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_SHA1_PerformSearching_ForwardMatching_Simple<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			} else {
-				CUDA_SHA1_PerformSearching_ForwardMatching<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			}
-		
+			CUDA_SHA1_PerformSearching_ForwardMatching<<<dimGrid, dimBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+			    cudaKeyAndRandomBytes);
 		} else if (searchMode == SEARCH_MODE_BACKWARD_MATCHING) {
-			if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_SHA1_PerformSearching_BackwardMatching_Simple<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			} else {
-				CUDA_SHA1_PerformSearching_BackwardMatching<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			}
-
+			CUDA_SHA1_PerformSearching_BackwardMatching<<<dimGrid, dimBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+			    cudaKeyAndRandomBytes);
 		} else if (searchMode == SEARCH_MODE_FORWARD_AND_BACKWARD_MATCHING) {
-			if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching_Simple<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			} else {
-				CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			}
+			CUDA_SHA1_PerformSearching_ForwardAndBackwardMatching<<<dimGrid, dimBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+			    cudaKeyAndRandomBytes);
 		} else {
 			// Flexible search
-			if (numTripcodeChunk <= CUDA_SIMPLE_SEARCH_THRESHOLD) {
-				CUDA_SHA1_PerformSearching_Flexible_Simple<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			} else {
-				CUDA_SHA1_PerformSearching_Flexible<<<dimGrid, dimBlock>>>(
-					CUDA_outputArray,
-					CUDA_chunkBitmap,
-					CUDA_tripcodeChunkArray,
-					numTripcodeChunk,
-				    cudaKeyAndRandomBytes);
-			}
+			CUDA_SHA1_PerformSearching_Flexible<<<dimGrid, dimBlock>>>(
+				CUDA_outputArray,
+				CUDA_chunkBitmap,
+				CUDA_tripcodeChunkArray,
+				numTripcodeChunk,
+			    cudaKeyAndRandomBytes);
 		}
 		CUDA_ERROR(cudaGetLastError());
 

@@ -97,6 +97,9 @@ typedef int BOOL;
 #endif
 
 // Boost
+// #pragma GCC diagnostic push
+// #pragma GCC diagnostic ignored "-Wunused"
+
 #include <boost/predef.h>
 #define BOOST_USE_WINDOWS_H
 #include <boost/iostreams/stream.hpp>
@@ -104,6 +107,8 @@ typedef int BOOL;
 extern char** environ;
 #endif
 #include <boost/process.hpp> // Boost.Process 0.5
+
+// #pragma GCC diagnostic pop
 
 // For MMX/SSE/SSE2/SSSE3 Intrinsics
 #ifdef ARCH_X86

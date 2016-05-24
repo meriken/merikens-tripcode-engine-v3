@@ -280,9 +280,9 @@ void PopRegexPattern(RegexPattern *pattern)
 
 #define DISCARD_FIRST_N_CHARACTERS(s, n) \
 {                                        \
-	int32_t i, len = strlen((char *)(s));    \
-	for (i = 0; i < len - (n); ++i)      \
-		(s)[i] = (s)[i + (n)];           \
+	uint32_t i, len = strlen((char *)(s));    \
+	for (i = 0; i < len - (uint32_t)(n); ++i)      \
+		(s)[i] = (s)[i + (uint32_t)(n)];           \
 	(s)[i] = '\0';                       \
 }
 
@@ -337,7 +337,7 @@ void ProcessNextRegexPattern()
 			PushRegexPattern(&pattern);
 		}
 
-	} else if (strlen((char *)pattern.expanded) > lenTripcode) {
+	} else if ((int32_t)strlen((char *)pattern.expanded) > lenTripcode) {
 		// Discard the expanded pattern because it's too long.
 		
 	} else if (pattern.remaining[0] == '^') {
@@ -428,18 +428,18 @@ void ProcessNextRegexPattern()
 		lenNextToken = strlen((char *)nextToken);
 		// printf("nextToken[] = `%s'\n", nextToken);
 
-		if (   strlen((char *)pattern.remaining) > lenNextToken
+		if (   (int32_t)strlen((char *)pattern.remaining) > lenNextToken
 			&& pattern.remaining[lenNextToken] == '*'          ) {
 			//
-			ERROR1(   strlen((char *)pattern.remaining) >= lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "**", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "*+", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "*?", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
@@ -455,17 +455,17 @@ void ProcessNextRegexPattern()
 			DISCARD_FIRST_N_CHARACTERS(newPattern1.remaining, lenNextToken + 1); // Discard the next token AND '*'.
 			PushRegexPattern(&newPattern1);
 			
-		} else if (   strlen((char *)pattern.remaining) > lenNextToken
+		} else if (   (int32_t)strlen((char *)pattern.remaining) > lenNextToken
 				   && pattern.remaining[lenNextToken] == '+'          ) {
-			ERROR1(   strlen((char *)pattern.remaining) >= lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "+*", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "++", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "+?", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
@@ -484,18 +484,18 @@ void ProcessNextRegexPattern()
 			strcpy((char *)newPattern1.remaining, (char *)tmp); // push back
 			PushRegexPattern(&newPattern1);
 
-		} else if (   strlen((char *)pattern.remaining) > lenNextToken
+		} else if (   (int32_t)strlen((char *)pattern.remaining) > lenNextToken
 			&& pattern.remaining[lenNextToken] == '?'          ) {
 			//
-			ERROR1(   strlen((char *)pattern.remaining) >= lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "?*", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "?+", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
-			ERROR1(   strlen((char *)pattern.remaining) >=  lenNextToken + 2
+			ERROR1(   (int32_t)strlen((char *)pattern.remaining) >=  lenNextToken + 2
 				   && strncmp((char *)pattern.remaining + lenNextToken, "??", 2) == 0,
 				   ERROR_INVALID_REGEX,
 				   "Invalid regular expression: `%s'", pattern.original);
@@ -511,23 +511,23 @@ void ProcessNextRegexPattern()
 			DISCARD_FIRST_N_CHARACTERS(newPattern1.remaining,	lenNextToken + 1); // Discard the next token AND '?'.
 			PushRegexPattern(&newPattern1);
 			
-		} else if (   strlen((char *)pattern.remaining) > lenNextToken
+		} else if (   (int32_t)strlen((char *)pattern.remaining) > lenNextToken
 				   && pattern.remaining[lenNextToken] == '{'          ) {
-			int32_t n = 0, m = 0, lenCurrentToken;
-			if (strlen((char *)pattern.remaining) >= lenNextToken + 3
+			int32_t n = 0, m = 0, lenCurrentToken = 0;
+			if ((int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 3
 				&& isdigit(pattern.remaining[lenNextToken + 1])
 				&& pattern.remaining[lenNextToken + 1] >= '1'        
 				&& pattern.remaining[lenNextToken + 2] == '}'  ) {
 				lenCurrentToken = 3;
 				n = m = pattern.remaining[lenNextToken + 1] - '0';
-			} else if (strlen((char *)pattern.remaining) >= lenNextToken + 4
+			} else if ((int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 4
 				&& isdigit(pattern.remaining[lenNextToken + 1])
 				&& isdigit(pattern.remaining[lenNextToken + 2])
 				&& pattern.remaining[lenNextToken + 3] == '}'  ) {
 				lenCurrentToken = 4;
 				n = m = (pattern.remaining[lenNextToken + 1] - '0') * 10 + (pattern.remaining[lenNextToken + 2] - '0');
 				ERROR1(n < 1 || n > lenTripcode, ERROR_INVALID_REGEX, "Invalid regular expression: `%s'", pattern.original);
-			} else if (strlen((char *)pattern.remaining) >= lenNextToken + 5
+			} else if ((int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 5
 				&& isdigit(pattern.remaining[lenNextToken + 1])
 				&& pattern.remaining[lenNextToken + 2] == ','        
 				&& isdigit(pattern.remaining[lenNextToken + 3])
@@ -536,7 +536,7 @@ void ProcessNextRegexPattern()
 				n = pattern.remaining[lenNextToken + 1] - '0';
 				m = pattern.remaining[lenNextToken + 3] - '0';
 				ERROR1(n < 1 || n > m, ERROR_INVALID_REGEX, "Invalid regular expression: `%s'", pattern.original);
-			} else if (strlen((char *)pattern.remaining) >= lenNextToken + 6
+			} else if ((int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 6
 				&& isdigit(pattern.remaining[lenNextToken + 1])
 				&& pattern.remaining[lenNextToken + 2] == ','        
 				&& isdigit(pattern.remaining[lenNextToken + 3])
@@ -546,7 +546,7 @@ void ProcessNextRegexPattern()
 				n = pattern.remaining[lenNextToken + 1] - '0';
 				m = (pattern.remaining[lenNextToken + 3] - '0') * 10 + (pattern.remaining[lenNextToken + 4] - '0');
 				ERROR1(n > m || m > lenTripcode, ERROR_INVALID_REGEX, "Invalid regular expression: `%s'", pattern.original);
-			} else if (strlen((char *)pattern.remaining) >= lenNextToken + 7
+			} else if ((int32_t)strlen((char *)pattern.remaining) >= lenNextToken + 7
 				&& isdigit(pattern.remaining[lenNextToken + 1])
 				&& isdigit(pattern.remaining[lenNextToken + 2])
 				&& pattern.remaining[lenNextToken + 3] == ','        
@@ -820,7 +820,6 @@ void ProcessNextRegexPattern()
 			}
 
 		} else if (IS_BASE64_CHAR(pattern.remaining[0])) {
-			RegexPattern newPattern = pattern;
 			int32_t lenExpanded = strlen((char *)pattern.expanded);
 			pattern.expanded[lenExpanded    ] = pattern.remaining[0];
 			pattern.expanded[lenExpanded + 1] = '\0';
@@ -961,9 +960,9 @@ void RemoveInvalidExpandedPatterns()
 	// are not allowed as the last ones.
 	do {
 		dirty = FALSE;
-		for (int32_t i = 0; i < numExpandedPatterns; ++i) {
-			int32_t len = strlen((char *)expandedPatternArray[i].c);
-			if (   expandedPatternArray[i].pos + len == lenTripcode
+		for (uint32_t i = 0; i < numExpandedPatterns; ++i) {
+			uint32_t len = strlen((char *)expandedPatternArray[i].c);
+			if (   expandedPatternArray[i].pos + len == (uint32_t)lenTripcode
 			    && !IS_SPECIAL_CHARACTER    (expandedPatternArray[i].c[len - 1])
 			    && !IS_LAST_CHAR_OF_TRIPCODE(expandedPatternArray[i].c[len - 1])) {
 				expandedPatternArray[i] = expandedPatternArray[numExpandedPatterns - 1];
@@ -1012,7 +1011,10 @@ void LoadTargetPatterns(BOOL displayProgress)
 		BOOL  isRegexUsed = FALSE;
 		
 		while (!feof(patternFile)) {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-result"
 			fgets(line, sizeof(line), patternFile);
+#pragma GCC diagnostic pop
 			if (feof(patternFile) /* && strlen(line) == 0 */)
 				break;
 			if (ferror(patternFile)){
@@ -1100,13 +1102,13 @@ void LoadTargetPatterns(BOOL displayProgress)
 	// resolve collisions involving special characters.
 	int32_t numCollisions = 0;
 	BOOL dirty = TRUE;
-	for (int32_t j = 0; j < lenTripcode; (!dirty) ? (++j) : (TRUE)) {
+	for (uint32_t j = 0; j < (uint32_t)lenTripcode; (!dirty) ? (++j) : (TRUE)) {
 		if (dirty) {
 			qsort(expandedPatternArray, numExpandedPatterns, sizeof(expandedPatternArray[0]), CompareExpandedPatternExactly);
 			numExpandedPatterns = uniq(expandedPatternArray, numExpandedPatterns, sizeof(expandedPatternArray[0]), CompareExpandedPatternExactly);
 			dirty = FALSE;
 		}
-		for (int32_t i = 0; i < numExpandedPatterns && !dirty; ++i) {
+		for (uint32_t i = 0; i < numExpandedPatterns && !dirty; ++i) {
 			if (   j < strlen((char *)expandedPatternArray[i].c)
 			    && IS_SPECIAL_CHARACTER(expandedPatternArray[i].c[j])
 				&& (   (   i > 0
@@ -1145,7 +1147,7 @@ void LoadTargetPatterns(BOOL displayProgress)
 
 	// Set an appropriate search mode.	
 	searchMode = SEARCH_MODE_NIL;
-	for (int32_t i = 0; i < numExpandedPatterns; ++i) {
+	for (uint32_t i = 0; i < numExpandedPatterns; ++i) {
 		if (expandedPatternArray[i].pos == 0) {
 			// forward-matching pattern
 			if (searchMode == SEARCH_MODE_NIL) {
@@ -1153,7 +1155,7 @@ void LoadTargetPatterns(BOOL displayProgress)
 			} else if (searchMode == SEARCH_MODE_BACKWARD_MATCHING) {
 				searchMode = SEARCH_MODE_FORWARD_AND_BACKWARD_MATCHING;
 			}
-		} else if (expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) == lenTripcode) {
+		} else if (expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) == (uint32_t)lenTripcode) {
 			// backward-matching pattern
 			if (searchMode == SEARCH_MODE_NIL) {
 				searchMode = SEARCH_MODE_BACKWARD_MATCHING;
@@ -1171,16 +1173,16 @@ void LoadTargetPatterns(BOOL displayProgress)
 		printf("  Expanding special characters in the array of expanded patterns...            ");
 		reset_cursor_pos(0);
 	}
-	for (int32_t i = 0; i < numExpandedPatterns; ++i) {
+	for (uint32_t i = 0; i < numExpandedPatterns; ++i) {
 		if (   searchMode == SEARCH_MODE_FORWARD_MATCHING
 		    || searchMode == SEARCH_MODE_FLEXIBLE
-			|| expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) != lenTripcode) {
+			|| expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) != (uint32_t)lenTripcode) {
 			// Expand the first five characters.
-			for (int32_t j = 0; j < MIN_LEN_EXPANDED_PATTERN; ++j)
+			for (uint32_t j = 0; j < MIN_LEN_EXPANDED_PATTERN; ++j)
 				ExpandSpecialCharInExpandedPatternArray(i, j);
 		} else {
 			// Expand the last five characters.
-			for (int32_t j = strlen((char *)expandedPatternArray[i].c) - MIN_LEN_EXPANDED_PATTERN;
+			for (uint32_t j = strlen((char *)expandedPatternArray[i].c) - MIN_LEN_EXPANDED_PATTERN;
 			     j < strlen((char *)expandedPatternArray[i].c); ++j)
 				ExpandSpecialCharInExpandedPatternArray(i, j);
 		}
@@ -1202,12 +1204,12 @@ void LoadTargetPatterns(BOOL displayProgress)
 			numExpandedPatterns = uniq(expandedPatternArray, numExpandedPatterns, sizeof(expandedPatternArray[0]), CompareExpandedPatternExactly);
 			dirty = FALSE;
 		}
-		for (int32_t i = 0; i + 1 < numExpandedPatterns; ++i) {
+		for (uint32_t i = 0; i + 1 < numExpandedPatterns; ++i) {
 			if (   expandedPatternArray[i].pos == expandedPatternArray[i + 1].pos
 			    && strlen((char *)expandedPatternArray[i].c) <= strlen((char *)expandedPatternArray[i + 1].c)
 			    && strncmp((char *)expandedPatternArray[i].c, (char *)expandedPatternArray[i + 1].c, strlen((char *)expandedPatternArray[i].c)) == 0) {
 				// printf("Duplicate expanded patterns were found: '%s', '%s'.\n", expandedPatternArray[i].c, expandedPatternArray[i + 1].c);
-				for (int32_t j = i + 1; j + 1 < numExpandedPatterns; ++j)
+				for (uint32_t j = i + 1; j + 1 < numExpandedPatterns; ++j)
 					expandedPatternArray[j] = expandedPatternArray[j + 1];
 				--numExpandedPatterns;
 				--i;
@@ -1232,9 +1234,9 @@ void LoadTargetPatterns(BOOL displayProgress)
 	memset(chunkBitmap,       0x01, CHUNK_BITMAP_SIZE);
 	memset(mediumChunkBitmap, 0x01, MEDIUM_CHUNK_BITMAP_SIZE);
 	memset(smallChunkBitmap,  0x01, SMALL_CHUNK_BITMAP_SIZE);
-	for (int32_t i = 0; i < numExpandedPatterns; ++i) {
+	for (uint32_t i = 0; i < numExpandedPatterns; ++i) {
 		BOOL lastFiveCharacters =    (searchMode == SEARCH_MODE_BACKWARD_MATCHING || searchMode == SEARCH_MODE_FORWARD_AND_BACKWARD_MATCHING)
-					              && (expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) == lenTripcode);
+					              && (expandedPatternArray[i].pos + strlen((char *)(expandedPatternArray[i].c)) == (uint32_t)lenTripcode);
 		ERROR0(!CreateTripcodeChunk(expandedPatternArray[i].c, &tripcodeChunk, lastFiveCharacters),
 		       ERROR_INVALID_TARGET_PATTERN,
 		       "There is an invalid character in a target pattern.");
@@ -1255,11 +1257,11 @@ void LoadTargetPatterns(BOOL displayProgress)
 		compactSmallChunkBitmap[i >> 3] |= (smallChunkBitmap[i] ? (1 << (i & 7)) : 0);
 
 #ifdef DEBUG_DISPLAY_EXPANDED_PATTERNS
-	for (int32_t i = 0; i < numExpandedPatterns; ++i)
+	for (uint32_t i = 0; i < numExpandedPatterns; ++i)
 		printf("expandedPatternArray[%6d] = {`%s', %d}\n", i, expandedPatternArray[i].c, expandedPatternArray[i].pos);
 #endif
 #ifdef DEBUG_DISPLAY_TRIPCODE_CHUNKS
-	for (int32_t i = 0; i < numTripcodeChunk; ++i)
+	for (uint32_t i = 0; i < numTripcodeChunk; ++i)
 		printf("tripcodeChunkArray[%d] = 0x%08x\n", i, tripcodeChunkArray[i]);
 	printf("numExpandedPatterns = %d\n", numExpandedPatterns);
 	printf("numTripcodeChunk = %d\n", numTripcodeChunk);
@@ -1276,7 +1278,7 @@ void LoadTargetPatterns(BOOL displayProgress)
 	matchingProb_mpf = 0;
 	minLenExpandedPattern = lenTripcode;
 	maxLenExpandedPattern = 0; 
-	for (int32_t i = 0; i < numExpandedPatterns; ++i) {
+	for (uint32_t i = 0; i < numExpandedPatterns; ++i) {
 		int32_t len = strlen ((char *)expandedPatternArray[i].c);
 		if (len < minLenExpandedPattern)
 			minLenExpandedPattern = len;
@@ -1360,7 +1362,7 @@ void ProcessMatch(unsigned char *tripcode, unsigned char *key)
 BOOL IsTripcodeChunkValid(unsigned char *tripcode)
 {
 	for (int32_t i = 0; i <= lenTripcode - 5; ++i) {
-		uint32_t tripcodeChunk;
+		uint32_t tripcodeChunk = 0x00000000;
 		CreateTripcodeChunk(tripcode + i, &tripcodeChunk, FALSE);
 		if (0 < i && searchMode == SEARCH_MODE_FORWARD_MATCHING)
 			continue;

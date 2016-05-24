@@ -184,6 +184,7 @@ if(USE_YASM)
 endif()
 
 
+
 #######
 # C++ #
 #######
@@ -217,7 +218,7 @@ endif()
 if(ARCH_X86)
     SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -mmmx -msse -msse2")
 endif()
-SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -std=c++11 -Wall -Wno-deprecated-declarations -O3")
+SET(GCC_COVERAGE_COMPILE_FLAGS "${GCC_COVERAGE_COMPILE_FLAGS} -std=c++11 -Wno-deprecated-declarations -O3 -isystem ../BoostPackages/boost_1_61_0 -isystem ../BoostPackages/include")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS} ${MTE_COMPILE_FLAGS}")
 
 
