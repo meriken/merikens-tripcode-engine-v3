@@ -98,7 +98,7 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 You should be able to build and run this application on any POSIX-compliant operating systems. (**Note:** AVX2 is not supported on them.) You need the following tools to build Meriken's Tripcode Engine.
 
 * CMake 3.1 or later
-* C++11-compliant compiler (g++-4.8 or later/clang++-3.4 or later)
+* C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later; g++ is recommended.)
 * AMD APP SDK 3.0 (if you are using an AMD video card.)
 * CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
 
