@@ -83,7 +83,13 @@ case $OS in
     ;;
 esac
 ./bootstrap.sh $BOOTSTRAP_OPTIONS
-./b2 $B2_OPTIONS runtime-link=static link=static variant=release --with-iostreams --with-system
+case $OS in
+  'FreeBSD')
+    ;;
+  *) 
+    ./b2 $B2_OPTIONS runtime-link=static link=static variant=release --with-iostreams --with-system
+    ;;
+esac
 
 cd ../../
 
