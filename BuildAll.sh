@@ -5,7 +5,9 @@ set -e
 BOOTSTRAP_OPTIONS=""
 B2_OPTIONS=""
 CMAKE_OPTIONS=""
+MAKE_OPTIONS=""
 RUN_TESTS=false
+NUM_THREADS="8"
 while [ "$#" -gt 0 ]; do
 key="$1"
 case $key in
@@ -16,8 +18,8 @@ case $key in
     ;;
     --with-toolset=clang)
 	BOOTSTRAP_OPTIONS="$BOOTSTRAP_OPTIONS --with-toolset=clang"
-	B2_OPTIONS="$B2_OPTIONS toolset=clang"
-	CMAKE_OPTIONS="$CMAKE_OPTIONS -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++"
+	B2_OPTIONS="$B2_OPTIONS toolset=clang cxxflags=-stdlib=libc++"
+	CMAKE_OPTIONS=$'$CMAKE_OPTIONS -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++'
     ;;
     --enable-cuda)
 	CMAKE_OPTIONS="$CMAKE_OPTIONS -DENABLE_CUDA=ON"
@@ -36,10 +38,14 @@ case $key in
     ;;
     --run-tests)
 	RUN_TESTS=true
-	;;
+    ;;
     --rebuild)
 	rm -rf CLRadeonExtender/CLRX-mirror-master/build BoostPackages/boost_1_61_0 CMakeBuild/
-	;;
+    ;;
+    -j)
+	NUM_THREADS="$2"
+	shift
+    ;;
    	*)
 	echo "Unknown option: $key"
 	exit 1
@@ -47,6 +53,8 @@ case $key in
 esac
 shift
 done
+MAKE_OPTIONS="$MAKE_OPTIONS -j $NUM_THREADS"
+B2_OPTIONS="$B2_OPTIONS -j $NUM_THREADS"
 
 # CLRadeonExtender
 cd CLRadeonExtender/
@@ -56,7 +64,7 @@ cd CLRX-mirror-master/
 mkdir -p build/
 cd build/
 cmake $CMAKE_OPTIONS ../
-make
+make $MAKE_OPTIONS
 cd ../../../
 
 # Boost
@@ -75,13 +83,14 @@ case $OS in
     ;;
 esac
 ./bootstrap.sh $BOOTSTRAP_OPTIONS
-./b2 $B2_OPTIONS link=static
+./b2 $B2_OPTIONS runtime-link=static link=static variant=release --with-iostreams --with-system
+
 cd ../../
 
 mkdir -p CMakeBuild/
 cd CMakeBuild/
 cmake $CMAKE_OPTIONS ../SourceFiles/
-make
+make $MAKE_OPTIONS
 
 if [ "$RUN_TESTS" = true ]
 then
