@@ -104,6 +104,7 @@ fi
 
 # CLRadeonExtender
 if [ ! -f "./CLRadeonExtender/CLRX-mirror-master/build/programs/clrxasm"]
+then
     cd CLRadeonExtender/
     echo Extracting CLRadeonExtender...
     7z x -y CLRadeonExtender-*.zip > /dev/null
