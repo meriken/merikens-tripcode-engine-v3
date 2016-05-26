@@ -145,6 +145,16 @@ If you would like to use an AMD graphics card, you also need to run `sudo apt in
 
 For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
+#### Build Instructions for Arch Linux 201604
+
+You can download the application from the AUR.
+
+```
+$ git clone https://aur.archlinux.org/merikens-tripcode-engine-v3-git.git
+$ cd merikens-tripcode-engine-v3-git
+$ makepkg -sri
+```
+
 #### Build Instructions for FreeBSD 10.3
 
 You need to build the application with GCC.
