@@ -36,6 +36,12 @@ case $key in
     --enable-cuda-des-multiple-kernels-mode)
 	CMAKE_OPTIONS="$CMAKE_OPTIONS -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON"
     ;;
+    --english-version)
+	CMAKE_OPTIONS="$CMAKE_OPTIONS -DENGLISH_VERSION=ON"
+    ;;
+    --japanese-version)
+	CMAKE_OPTIONS="$CMAKE_OPTIONS -DENGLISH_VERSION=OFF"
+    ;;
     --run-tests)
 	RUN_TESTS=true
     ;;
