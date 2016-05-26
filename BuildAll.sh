@@ -61,6 +61,9 @@ shift
 done
 MAKE_OPTIONS="$MAKE_OPTIONS -j $NUM_THREADS"
 B2_OPTIONS="$B2_OPTIONS -j $NUM_THREADS"
+if [ -f "/etc/arch-release" ]; then
+    CMAKE_OPTIONS="$CMAKE_OPTIONS -DLIB_INSTALL_DIR=lib"
+fi
 
 # CLRadeonExtender
 cd CLRadeonExtender/
