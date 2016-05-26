@@ -88,26 +88,32 @@ then
 fi
 if [ "$BUILD_CMAKE" = true ]
 then
-    cd CMake
-    tar xzf cmake-$CMAKE_VERSION.tar.gz
-    cd cmake-$CMAKE_VERSION
-    ./configure
-    make $MAKE_OPTIONS
     BUILD_CMAKE=true
-    CMAKE="`pwd`/bin/cmake"
-    cd ../..
+    CMAKE="`pwd`/CMake/cmake-$CMAKE_VERSION/bin/cmake"
+    if [ ! -f $CMAKE ]
+    then
+        cd CMake
+        rm -rf cmake-$CMAKE_VERSION
+        tar xzf cmake-$CMAKE_VERSION.tar.gz
+        cd cmake-$CMAKE_VERSION
+        ./configure
+        make $MAKE_OPTIONS
+        cd ../..
+    fi
 fi
 
 # CLRadeonExtender
-cd CLRadeonExtender/
-echo Extracting CLRadeonExtender...
-7z x -y CLRadeonExtender-*.zip > /dev/null
-cd CLRX-mirror-master/
-mkdir -p build/
-cd build/
-$CMAKE $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../
-make $MAKE_OPTIONS
-cd ../../../
+if [ ! -f "./CLRadeonExtender/CLRX-mirror-master/build/programs/clrxasm"]
+    cd CLRadeonExtender/
+    echo Extracting CLRadeonExtender...
+    7z x -y CLRadeonExtender-*.zip > /dev/null
+    cd CLRX-mirror-master/
+    mkdir -p build/
+    cd build/
+    $CMAKE $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../
+    make $MAKE_OPTIONS
+    cd ../../../
+fi
 
 # Boost
 string="$CPLUS_INCLUDE_PATH"
