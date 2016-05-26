@@ -165,6 +165,8 @@ then
 	echo Tests were successful.
 fi
 
+cd ../
+
 if [ "$INSTALL" = true ]
 then
     ech Installing CLRadeonExtender...
