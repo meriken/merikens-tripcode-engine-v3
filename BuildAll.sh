@@ -110,9 +110,11 @@ make $MAKE_OPTIONS
 cd ../../../
 
 # Boost
-if [ -d "/usr/include/python2.7/" ]
+string="$CPLUS_INCLUDE_PATH"
+substring="/usr/include/python2.7"
+if [ -d substring ] && test "${string#*$substring}" == "$string"
 then
-	export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python2.7/"
+    export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:$substring"
 fi
 cd BoostPackages/
 echo Extracting boost_1_61_0.7z...
