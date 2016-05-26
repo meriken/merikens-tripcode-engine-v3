@@ -2,6 +2,7 @@
 set -e
 
 # Options
+CMAKE_VERSION="3.5.2"
 BOOTSTRAP_OPTIONS=""
 B2_OPTIONS=""
 CMAKE_OPTIONS=""
@@ -46,7 +47,7 @@ case $key in
 	RUN_TESTS=true
     ;;
     --rebuild)
-	rm -rf CLRadeonExtender/CLRX-mirror-master/build BoostPackages/boost_1_61_0 CMakeBuild/
+	rm -rf CMake/cmake-$CMAKE_VERSION CLRadeonExtender/CLRX-mirror-master/build BoostPackages/boost_1_61_0 CMakeBuild/
     ;;
     -j)
 	NUM_THREADS="$2"
@@ -65,6 +66,34 @@ if [ -f "/etc/arch-release" ]; then
     CMAKE_OPTIONS="$CMAKE_OPTIONS -DLIB_INSTALL_DIR=lib"
 fi
 
+# CMake
+BUILD_CMAKE=false
+CMAKE="cmake"
+if ! cmake --version > /dev/null
+then
+    BUILD_CMAKE=true
+fi
+if [ "$BUILD_CMAKE" = false ]
+then
+    INSTALLED_CMAKE_VERSION=`cmake --version | sed 's/^[^0-9][^0-9]*//g' | awk '1 { print $1; }'`
+    RESULT=$(echo $CMAKE_VERSION $INSTALLED_CMAKE_VERSION | awk '{ split($1, a, "."); split($2, b, ".");for (i = 1; i <= 4; i++) if (a[i] < b[i]) { x =-1; break; } else if (a[i] > b[i]) { x = 1; break; } print x; }')
+    if  [ "$RESULT" = "1" ]
+    then
+	BUILD_CMAKE=true
+    fi
+fi
+if [ "$BUILD_CMAKE" = true ]
+then
+    cd CMake
+    tar xzf cmake-$CMAKE_VERSION.tar.gz
+    cd cmake-$CMAKE_VERSION
+    ./configure
+    make $MAKE_OPTIONS
+    BUILD_CMAKE=true
+    CMAKE="`pwd`/bin/cmake"
+    cd ../..
+fi
+
 # CLRadeonExtender
 cd CLRadeonExtender/
 echo Extracting CLRadeonExtender...
@@ -72,7 +101,7 @@ echo Extracting CLRadeonExtender...
 cd CLRX-mirror-master/
 mkdir -p build/
 cd build/
-cmake $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../
+$CMAKE $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../
 make $MAKE_OPTIONS
 cd ../../../
 
@@ -105,7 +134,7 @@ cd ../../
 
 mkdir -p CMakeBuild/
 cd CMakeBuild/
-cmake $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../SourceFiles/
+$CMAKE $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../SourceFiles/
 make $MAKE_OPTIONS
 
 if [ "$RUN_TESTS" = true ]
