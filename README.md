@@ -101,18 +101,22 @@ You should be able to build and run this application on any POSIX-compliant oper
 * AMD APP SDK 3.0 (if you are using an AMD video card.)
 * CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
 
-You should be able to build everything with `BuildAll.sh`. If you are building the application manually, make sure to extract `BoostPackages/boost_1_61_0.7z` and build it before building `MerikensTripcodeEngine`. You also need to build and install CLRadeonExtender in the package.
+You should be able to build everything by running `./BuildAll.sh`. You can specify the following options for `BuildAll.sh`:
 
-You can reconfigure the application after you run `BuildAll.sh`:
+*    --with-toolset=gcc
+*    --with-toolset=clang
+*    --enable-cuda
+*    --disable-cuda
+*    --enable-opencl
+*    --disable-opencl
+*    --enable-cuda-des-multiple-kernels-mode
+*    --english-version
+*    --japanese-version
+*    --run-tests
+*    --install
+*    --rebuild
 
-```
-$ cd CMakeBuild
-$ cmake -DENABLE_OPENCL=ON -DENABLE_CUDA=ON -DENGLISH_VERSION=ON -DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=OFF ../SourceFiles
-$ make clean && make -j 8
-$ sudo make install
-```
-
-Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE=ON) take **extremely** long time to build.
+Please note that NVIDIA-optimized versions (`-enable-cuda-des-multiple-kernels-mode`) take **extremely** long time to build.
 
 #### Build Instructions for Ubuntu 16.04 LTS
 
