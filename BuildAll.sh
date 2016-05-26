@@ -167,7 +167,9 @@ fi
 
 if [ "$INSTALL" = true ]
 then
+    ech Installing CLRadeonExtender...
     sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
+    echo Installing MerikensTripcodeEngine...
     sudo make -C CMakeBuild install
 fi
 
