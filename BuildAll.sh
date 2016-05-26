@@ -9,6 +9,7 @@ CMAKE_OPTIONS=""
 MAKE_OPTIONS=""
 RUN_TESTS=false
 NUM_THREADS="8"
+INSTALL=false
 while [ "$#" -gt 0 ]; do
 key="$1"
 case $key in
@@ -45,6 +46,9 @@ case $key in
     ;;
     --run-tests)
 	RUN_TESTS=true
+    ;;
+    --install)
+	INSTALL=true
     ;;
     --rebuild)
 	rm -rf CMake/cmake-$CMAKE_VERSION CLRadeonExtender/CLRX-mirror-master/build BoostPackages/boost_1_61_0 CMakeBuild/
@@ -106,6 +110,10 @@ make $MAKE_OPTIONS
 cd ../../../
 
 # Boost
+if [ -d "/usr/include/python2.7/" ]
+then
+	export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python2.7/"
+fi
 cd BoostPackages/
 echo Extracting boost_1_61_0.7z...
 7z x -y boost_1_61_0.7z > /dev/null
@@ -153,5 +161,11 @@ then
 		exit 1
 	fi
 	echo Tests were successful.
+fi
+
+if [ "$INSTALL" = true ]
+then
+    sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
+    sudo make -C CMakeBuild install
 fi
 
