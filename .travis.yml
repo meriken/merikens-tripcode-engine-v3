@@ -8,5 +8,5 @@ os:
 - linux
 - osx
 before_install:
-- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update ; sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev ; curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt ; export PATH=/opt/cmake-3.5.2-Linux-x86_64/bin:$PATH ; fi
-- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install -y p7zip ; curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Darwin-x86_64.tar.gz | sudo tar -xzC /opt ; export PATH=/opt/cmake-3.5.2-Darwin-x86_64/CMake.app/Contents/bin:$PATH ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get -qq update ; sudo apt-get install -y p7zip-full libbz2-dev python2.7-dev ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install -y p7zip ; fi
