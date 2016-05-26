@@ -97,7 +97,6 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 
 You should be able to build and run this application on any POSIX-compliant operating systems. (**Note:** AVX2 is not supported on them.) You need the following tools to build Meriken's Tripcode Engine.
 
-* CMake 3.1 or later
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later; g++ is recommended.)
 * AMD APP SDK 3.0 (if you are using an AMD video card.)
 * CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
@@ -119,10 +118,7 @@ Please note that NVIDIA-optimized versions (-DENABLE_CUDA_DES_MULTIPLE_KERNELS_M
 
 ```
 $ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev 
-$ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python2.7/"
-$ ./BuildAll.sh
-$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
-$ sudo make -C CMakeBuild install
+$ ./BuildAll.sh --install
 ```
 
 Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you cannot use AMD video cards with this application. If you would like to use an AMD graphics card, please stick to Ubuntu 14.04 LTS.
@@ -131,10 +127,7 @@ Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you ca
 
 ```
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
-$ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python2.7/"
-$ ./BuildAll.sh
-$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
-$ sudo make -C CMakeBuild install
+$ ./BuildAll.sh --install
 ```
 
 If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
@@ -158,9 +151,7 @@ You need to build the application with GCC.
 ```
 $ sudo pkg install gcc
 $ sudo pkg install p7zip
-$ ./BuildAll.sh --with-toolset=gcc
-$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
-$ sudo make -C CMakeBuild install
+$ ./BuildAll.sh --with-toolset=gcc --install
 ```
 
 #### Build Instructions for Mac OS X 10.10
@@ -169,9 +160,7 @@ Please install [Homebrew]( http://brew.sh/ ) first if you want to follow these i
 
 ```
 $ brew install p7zip
-$ ./BuildAll.sh
-$ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
-$ sudo make -C CMakeBuild install
+$ ./BuildAll.sh --install
 ```
 
 
