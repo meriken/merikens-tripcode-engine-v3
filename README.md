@@ -129,11 +129,7 @@ Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you ca
 
 #### Build Instructions for Ubuntu 14.04 LTS
 
-If you are using Ubuntu 14.04 LTS, CMake must be upgraded first.
-
 ```
-$ curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Linux-x86_64.tar.gz | sudo tar -xzC /opt
-$ export PATH=/opt/cmake-3.5.2-Linux-x86_64/bin:$PATH
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
 $ export CPLUS_INCLUDE_PATH="$CPLUS_INCLUDE_PATH:/usr/include/python2.7/"
 $ ./BuildAll.sh
@@ -161,7 +157,6 @@ You need to build the application with GCC.
 
 ```
 $ sudo pkg install gcc
-$ sudo pkg install cmake
 $ sudo pkg install p7zip
 $ ./BuildAll.sh --with-toolset=gcc
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
@@ -173,8 +168,6 @@ $ sudo make -C CMakeBuild install
 Please install [Homebrew]( http://brew.sh/ ) first if you want to follow these instructions.
 
 ```
-$ curl -sSL https://cmake.org/files/v3.5/cmake-3.5.2-Darwin-x86_64.tar.gz | sudo tar -xzC /opt
-$ export PATH=/opt/cmake-3.5.2-Darwin-x86_64/CMake.app/Contents/bin:$PATH
 $ brew install p7zip
 $ ./BuildAll.sh
 $ sudo make -C CLRadeonExtender/CLRX-mirror-master/build install
