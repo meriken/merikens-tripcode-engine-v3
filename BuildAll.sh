@@ -96,7 +96,7 @@ cd ../../
 
 mkdir -p CMakeBuild/
 cd CMakeBuild/
-cmake $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../SourceFiles/
+cmake $CMAKE_OPTIONS ../SourceFiles/
 make $MAKE_OPTIONS
 
 if [ "$RUN_TESTS" = true ]
