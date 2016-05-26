@@ -101,7 +101,7 @@ You should be able to build and run this application on any POSIX-compliant oper
 * AMD APP SDK 3.0 (if you are using an AMD video card.)
 * CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
 
-You should be able to build everything by running `./BuildAll.sh`. You can specify the following options for `BuildAll.sh`:
+You should be able to build everything by running `./BuildAll.sh --install`. You can specify the following options for `BuildAll.sh`:
 
 *    --with-toolset=gcc
 *    --with-toolset=clang
