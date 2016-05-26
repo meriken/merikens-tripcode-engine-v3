@@ -69,7 +69,7 @@ echo Extracting CLRadeonExtender...
 cd CLRX-mirror-master/
 mkdir -p build/
 cd build/
-cmake $CMAKE_OPTIONS ../
+cmake $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../
 make $MAKE_OPTIONS
 cd ../../../
 
@@ -102,7 +102,7 @@ cd ../../
 
 mkdir -p CMakeBuild/
 cd CMakeBuild/
-cmake $CMAKE_OPTIONS ../SourceFiles/
+cmake $CMAKE_OPTIONS -DCMAKE_INSTALL_PREFIX=/usr ../SourceFiles/
 make $MAKE_OPTIONS
 
 if [ "$RUN_TESTS" = true ]
