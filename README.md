@@ -121,7 +121,7 @@ Please note that NVIDIA-optimized versions (`-enable-cuda-des-multiple-kernels-m
 #### Build Instructions for Ubuntu 16.04 LTS
 
 ```
-$ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev 
+$ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev mesa-common-dev
 $ ./BuildAll.sh --install
 ```
 
@@ -130,7 +130,7 @@ Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you ca
 #### Build Instructions for Ubuntu 14.04 LTS
 
 ```
-$ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev 
+$ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev mesa-common-dev
 $ ./BuildAll.sh --install
 ```
 
