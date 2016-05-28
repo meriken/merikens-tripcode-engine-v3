@@ -743,13 +743,51 @@ void DisplayCopyrights()
 {
 #ifdef ENGLISH_VERSION
 	printf("%s English\n", PRODUCT_NAME);
-	printf("[compiled at %s on %s (PST)]\n", __TIME__, __DATE__);
 	printf("Copyright (C) 2014-2016 !/Meriken/. <meriken.ygch.net@gmail.com>\n");
 #else
 	printf("%s\n", PRODUCT_NAME);
-	printf("[compiled at %s on %s (PST)]\n", __TIME__, __DATE__);
 	printf("Copyright (C) 2011-2016 %c%c/Meriken/. <meriken.ygch.net@gmail.com>\n", 0x81, 0x9f);
 #endif
+	printf("Compiled at %s on %s\n", __TIME__, __DATE__);
+	printf("Enabled Features:");
+
+#ifdef ENABLE_OPENCL
+	printf(" OpenCL/GCN");
+#endif
+#ifdef ENABLE_CUDA
+	printf(" CUDA");
+#endif
+
+#ifdef ARCH_64BIT
+#ifdef USE_YASM
+	if (IsAVX2Supported()) {
+		printf(" AVX2(64-bit)");
+	} else if (IsAVXSupported()) {
+		printf(" AVX(64-bit)");
+	} else {
+		printf(" SSE2(64-bit)");
+	}
+#elif defined(ARCH_X86)
+	printf(" SSE2(64-bit)");
+#else
+	printf(" Generic(64-bit)");
+#endif
+#else
+#ifdef USE_YASM
+	if (IsAVX2Supported()) {
+		printf(" AVX2(32-bit)");
+	} else if (IsAVXSupported()) {
+		printf(" AVX(32-bit)");
+	} else {
+		printf(" SSE2(32-bit)");
+	}
+#elif defined(ARCH_X86)
+	printf(" SSE2(32-bit)");
+#else
+	printf(" Generic(32-bit)");
+#endif
+#endif
+	printf("\n");
 	printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
     printf("This is free software, and you are welcome to redistribute it\n");
     printf("under certain conditions.\n");
