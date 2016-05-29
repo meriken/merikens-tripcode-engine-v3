@@ -354,8 +354,18 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	while (!GetTerminationState())
 	{
 		std::string line;
+#ifdef _WIN32
 		if (!std::getline(*(info->input_stream), line))
 			break;
+#else
+		boost_process_spinlock.lock();
+		if (!info->input_stream->rdbuf()->in_avail()
+			|| !std::getline(*(info->input_stream), line)) {
+			boost_process_spinlock.unlock();
+			break;
+		}
+		boost_process_spinlock.unlock();
+#endif
 		char line_buffer[65536];
 		strncpy(line_buffer, line.data(), sizeof(line_buffer) - 1);
 		line_buffer[sizeof(line_buffer) - 1] = '\0';
