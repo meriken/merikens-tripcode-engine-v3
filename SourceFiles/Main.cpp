@@ -162,7 +162,7 @@ static spinlock cuda_device_search_thread_info_array_spinlock;
 static spinlock opencl_device_search_thread_info_array_spinlock;
 static spinlock system_command_spinlock;
 spinlock gcn_assembler_spinlock;
-spinlock boost_process_spinlock;
+std::mutex boost_process_spinlock;
 uint32_t     numGeneratedTripcodes_GPU;
 uint32_t     numGeneratedTripcodesByGPUInMillions;
 uint32_t     numGeneratedTripcodes_CPU;
@@ -872,6 +872,19 @@ void CheckSearchThreads()
 	opencl_device_search_thread_info_array_spinlock.lock();
 	for (int32_t index = 0; index < numOpenCLDeviceSearchThreads; ++index) {
 		struct OpenCLDeviceSearchThreadInfo *info = &openCLDeviceSearchThreadInfoArray[index];
+		if (info->runChildProcess) {
+			boost_process_spinlock.lock();
+			char ch = info->input_stream->get();
+			if (!info->input_stream->eof() && !info->input_stream->fail())  {
+				info->input_stream->putback(ch);
+				std::string line;
+				if (std::getline(*(info->input_stream), line))
+					info->child_process_output.push(line);
+			}
+			boost_process_spinlock.unlock();
+		}
+
+		// Alive?
 		uint64_t  currentTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
 		uint64_t  deltaTime = currentTime - info->timeLastUpdated;
 		//ERROR0(deltaTime > 1 * 60 * 1000, ERROR_SEARCH_THREAD_UNRESPONSIVE, "Search thread became unresponsive.");
@@ -898,12 +911,14 @@ void CheckSearchThreads()
 				delete info->input_stream;
 			info->input_stream = NULL;
 			if (info->child_process) {
+				boost_process_spinlock.lock();
 				try {
 					boost::process::terminate(*(info->child_process));
 				} catch (const std::exception& e) {
 				}
 				delete info->child_process;
 				info->child_process = NULL;
+				boost_process_spinlock.unlock();
 			}
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
@@ -2460,21 +2475,17 @@ int main(int argc, char **argv)
 #endif
 
 		// Wait for the duration of STATUS_UPDATE_INTERVAL.
-		for (int32_t i = 0; i < NUM_CHECKS_PER_INTERVAL; ++i) {
-			// Break the loop if the search is paused.
-			if (UpdatePauseState())
-				break;
-
-			// Break the loop if the search was terminated.
-			if (UpdateTerminationState())
-				break;
-
+		auto waitStartingTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
+		while (TIME_SINCE_EPOCH_IN_MILLISECONDS - waitStartingTime < STATUS_UPDATE_INTERVAL * 1000 && !UpdatePauseState() && !UpdateTerminationState()) {
 #if defined(_WIN32)
 			// Break the loop if the parent process has already quit.
 			if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
 				break;
+#else
+			if (parent_process_id != getppid())
+				break;
 #endif
-
+			CheckSearchThreads();
 			sleep_for_milliseconds((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL));
 		}
 		if (UpdateTerminationState())
