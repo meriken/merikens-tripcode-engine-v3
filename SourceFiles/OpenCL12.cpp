@@ -359,8 +359,12 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 			break;
 #else
 		boost_process_spinlock.lock();
-		if (!info->input_stream->rdbuf()->in_avail()
-			|| !std::getline(*(info->input_stream), line)) {
+		if (!info->input_stream->rdbuf()->in_avail()) {
+			boost_process_spinlock.unlock();
+			sleep_for_milliseconds(100);
+			continue;
+		}
+		if (!std::getline(*(info->input_stream), line)) {
 			boost_process_spinlock.unlock();
 			break;
 		}
