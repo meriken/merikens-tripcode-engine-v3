@@ -200,7 +200,7 @@ extern int32_t searchDevice;
 // For multi-threading
 #ifndef __CUDACC__
 extern spinlock gcn_assembler_spinlock;
-extern std::mutex boost_process_spinlock;
+extern std::mutex boost_process_mutex;
 extern mte::named_event termination_event;
 extern mte::named_event pause_event;
 #endif

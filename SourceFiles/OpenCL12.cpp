@@ -259,7 +259,7 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	}
 #endif
 
-	boost_process_spinlock.lock();
+	boost_process_mutex.lock();
 
 #ifdef _WIN32
 	typedef std::codecvt_byname<wchar_t, char, std::mbstate_t> converter_type;
@@ -337,7 +337,7 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	boost::iostreams::file_descriptor_source source(stdout_pipe.source, boost::iostreams::close_handle);
 	info->input_stream = new boost::iostreams::stream<boost::iostreams::file_descriptor_source>(source);
 
-	boost_process_spinlock.unlock();
+	boost_process_mutex.unlock();
 }
 
 void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
@@ -354,23 +354,24 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	while (!GetTerminationState())
 	{
 		std::string line;
+		// Things get very tricky here.
 #ifdef _WIN32
 		if (!std::getline(*(info->input_stream), line))
 			break;
 #else
-		boost_process_spinlock.lock();
+		boost_process_mutex.lock();
 		//char ch;
 		//if (!info->input_stream->readsome(&ch, 1)) {
-		//	boost_process_spinlock.unlock();
+		//	boost_process_mutex.unlock();
 		//	sleep_for_milliseconds(100);
 		//	continue;
 		//}
 		//info->input_stream->putback(ch);
 		if (!std::getline(*(info->input_stream), line)) {
-			boost_process_spinlock.unlock();
+			boost_process_mutex.unlock();
 			break;
 		}
-		boost_process_spinlock.unlock();
+		boost_process_mutex.unlock();
 #endif
 		char line_buffer[65536];
 		strncpy(line_buffer, line.data(), sizeof(line_buffer) - 1);

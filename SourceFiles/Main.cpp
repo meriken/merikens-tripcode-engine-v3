@@ -162,7 +162,7 @@ static spinlock cuda_device_search_thread_info_array_spinlock;
 static spinlock opencl_device_search_thread_info_array_spinlock;
 static spinlock system_command_spinlock;
 spinlock gcn_assembler_spinlock;
-std::mutex boost_process_spinlock;
+std::mutex boost_process_mutex;
 uint32_t     numGeneratedTripcodes_GPU;
 uint32_t     numGeneratedTripcodesByGPUInMillions;
 uint32_t     numGeneratedTripcodes_CPU;
