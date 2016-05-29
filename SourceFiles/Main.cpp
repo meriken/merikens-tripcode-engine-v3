@@ -2473,6 +2473,10 @@ int main(int argc, char **argv)
 			// Break the loop if the parent process has already quit.
 			if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
 				break;
+#else
+			if (parent_process_id != getppid())
+				break;
+
 #endif
 
 			sleep_for_milliseconds((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL));
@@ -2492,6 +2496,9 @@ int main(int argc, char **argv)
 			// Break the loop if the parent process has already quit.
 #if defined(_WIN32)
 			if (options.redirection && WaitForSingleObject(parentProcess, 0) != WAIT_TIMEOUT)
+				break;
+#else
+			if (parent_process_id != getppid())
 				break;
 #endif
 
