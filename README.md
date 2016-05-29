@@ -278,7 +278,7 @@ I occasionaly create support threads for this program on 4chan to receive direct
 * [Meriken's Tripcode Engine No. 7 (5/20/2016)]( http://boards.4chan.org/g/thread/54662329 )
 * [Meriken's Tripcode Engine No. 8 (5/21/2016)]( http://boards.4chan.org/g/thread/54679797 )
 * [Meriken's Tripcode Engine No. 9 (5/29/2016)]( http://boards.4chan.org/g/thread/54807160 )
-* 
+
 ## Source Code
 
 The source code is hosted on GitHub:
