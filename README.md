@@ -1,5 +1,3 @@
-
-
 Meriken's Tripcode Engine [![Build Status](https://travis-ci.org/meriken/merikens-tripcode-engine-v3.svg?branch=master)](https://travis-ci.org/meriken/merikens-tripcode-engine-v3) [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/meriken/merikens-tripcode-engine-v3/master/LICENSE)
 =========================
 
@@ -95,8 +93,8 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 You should be able to build and run this application on any POSIX-compliant operating systems. (**Note:** AVX2 is not supported on them.) You need the following tools to build Meriken's Tripcode Engine.
 
 * C++11-compliant compiler (g++-4.8 or later/clang++-3.5 or later; g++ is recommended.)
-* AMD APP SDK 3.0 (if you are using an AMD video card.)
-* CUDA Toolkit 7.5 (if you are using an NVIDIA video card.)
+* OpenCL 1.2 SDK such as AMD APP SDK and NVIDIA CUDA Toolkit (if you are using an AMD/NVIDIA video card.)
+* CUDA Toolkit 7.5+ (optional for optimal performance if you are using an NVIDIA video card.)
 
 You should be able to build everything by running `./BuildAll.sh --install`. You can specify the following options for `BuildAll.sh`:
 
@@ -115,25 +113,38 @@ You should be able to build everything by running `./BuildAll.sh --install`. You
 
 Please note that NVIDIA-optimized versions (`-enable-cuda-des-multiple-kernels-mode`) take **extremely** long time to build.
 
-#### Build Instructions for Ubuntu 16.04 LTS
+#### Installation Instructions for Ubuntu 16.04 LTS
+
+The easiest way is to download the application from my PPA:
 
 ```
+$ sudo add-apt-repository ppa:meriken/ppa
+$ sudo apt update && sudo apt install merikens-tripcode-engine
+```
+
+For optimal performance with NVIDIA video cards, however, you need to build the application yourself.
+
+
+```
+$ git clone https://github.com/meriken/merikens-tripcode-engine-v3
+$ cd merikens-tripcode-engine-v3
 $ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev mesa-common-dev
 $ ./BuildAll.sh --install
 ```
 
 Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you cannot use AMD video cards with this application. If you would like to use an AMD graphics card, please stick to Ubuntu 14.04 LTS.
 
-#### Build Instructions for Ubuntu 14.04 LTS
+#### Installation Instructions for Ubuntu 14.04 LTS
+
+The only difference from Ubuntu 16.04 LTS is that you have to install CUDA Toolkit 7.5+ manually before you build the application.
 
 ```
+$ git clone https://github.com/meriken/merikens-tripcode-engine-v3
+$ cd merikens-tripcode-engine-v3
+(Install CUDA Toolkit...)
 $ sudo apt-get update && sudo apt-get install p7zip-full libbz2-dev python2.7-dev mesa-common-dev
 $ ./BuildAll.sh --install
 ```
-
-If you would like to use an AMD graphics card, you also need to run `sudo apt install fglrx-updates fglrx-updates-dev` and install [AMD APP SDK 3.0]( http://developer.amd.com/tools-and-sdks/opencl-zone/amd-accelerated-parallel-processing-app-sdk/ ) before building `MerikensTripcodeEngine`.
-
-For an NVIDIA graphics card, you also need to install [CUDA Toolkit 7.5]( https://developer.nvidia.com/cuda-toolkit ) before building `MerikensTripcodeEngine`.
 
 #### Build Instructions for Arch Linux 201604
 
@@ -150,6 +161,8 @@ $ makepkg -sri
 You need to build the application with GCC.
 
 ```
+$ git clone https://github.com/meriken/merikens-tripcode-engine-v3
+$ cd merikens-tripcode-engine-v3
 $ sudo pkg install gcc
 $ sudo pkg install p7zip
 $ ./BuildAll.sh --with-toolset=gcc --install
@@ -160,10 +173,18 @@ $ ./BuildAll.sh --with-toolset=gcc --install
 Please install [Homebrew]( http://brew.sh/ ) first if you want to follow these instructions.
 
 ```
+$ git clone https://github.com/meriken/merikens-tripcode-engine-v3
+$ cd merikens-tripcode-engine-v3
 $ brew install p7zip
 $ ./BuildAll.sh --install
 ```
 
+### Dependencies
+
+You need the following software installed in order to run the application:
+
+* AMD Proprietary Linux Graphics Driver (if you are using an AMD graphics card)
+* NVIDIA Display Driver Version 352.78 or later (if you are using an NVIDIA graphics card)
 
 ### Usage
 
