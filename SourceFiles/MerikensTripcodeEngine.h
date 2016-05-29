@@ -79,13 +79,14 @@ typedef int BOOL;
 #if !defined(__CUDACC__)
 #include <thread>
 #endif
+#ifdef ENABLE_CUDA
 #include <mutex>
+#endif
 #ifdef _WIN32
 // g++-4 does not have codecvt.
 #include <codecvt>
 #endif
 #include <locale>
-#include <queue>
 
 // Standard C libraries
 #if !defined(_WIN32)
@@ -201,7 +202,7 @@ extern int32_t searchDevice;
 // For multi-threading
 #ifndef __CUDACC__
 extern spinlock gcn_assembler_spinlock;
-extern std::mutex boost_process_spinlock;
+extern spinlock boost_process_spinlock;
 extern mte::named_event termination_event;
 extern mte::named_event pause_event;
 #endif

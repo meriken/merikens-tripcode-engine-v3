@@ -138,7 +138,6 @@ struct OpenCLDeviceSearchThreadInfo {
 	BOOL         runChildProcess;
 	boost::process::child *child_process;
 	boost::iostreams::stream<boost::iostreams::file_descriptor_source> *input_stream;
-	std::queue<std::string> child_process_output;
 	uint64_t     timeLastUpdated;
 };
 
