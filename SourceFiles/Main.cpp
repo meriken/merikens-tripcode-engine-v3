@@ -2478,7 +2478,8 @@ int main(int argc, char **argv)
 				break;
 
 #endif
-
+            if (options.redirection)
+                printf("[dummy]\n");
 			sleep_for_milliseconds((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL));
 		}
 		if (UpdateTerminationState())

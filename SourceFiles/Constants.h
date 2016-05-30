@@ -168,7 +168,7 @@
 #define PRODUCT_NAME                 "Meriken's Tripcode Engine 3.2.7"
 #define COMMAND                      "MerikensTripcodeEngine"
 #define STATUS_UPDATE_INTERVAL       10.000       // in seconds
-#define NUM_CHECKS_PER_INTERVAL      10
+#define NUM_CHECKS_PER_INTERVAL      100
 #define PAUSE_INTERVAL               100          // in milliseconds
 #define SPEED_DROP_WARNING_THRESHOLD 0.50         // Issue a warning if the speed drops below 50% of the maximum speed.
 #define SCREEN_WIDTH                 80

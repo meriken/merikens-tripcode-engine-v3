@@ -436,6 +436,7 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 				ERROR0(TRUE, errorCode, GetErrorMessage(errorCode));
 			}
 		}
+		std::this_thread::yield();
 	}
 
 	if (info->input_stream)
