@@ -354,21 +354,23 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	while (!GetTerminationState())
 	{
 		std::string line;
+		char line_buffer[65536];
 		// Things get very tricky here.
 #ifdef _WIN32
 		if (!std::getline(*(info->input_stream), line))
 			break;
+		strncpy(line_buffer, line.c_str(), min(line.size(), sizeof(line_buffer) - 1));
+		line_buffer[min(line.size(), sizeof(line_buffer) - 1)] = '\0';
 #else
 		boost_process_mutex.lock();
 		if (!std::getline(*(info->input_stream), line)) {
 			boost_process_mutex.unlock();
 			break;
 		}
-		boost_process_mutex.unlock();
+		strncpy(line_buffer, line.c_str(), min(line.size(), sizeof(line_buffer) - 1));
+		line_buffer[min(line.size(), sizeof(line_buffer) - 1)] = '\0';
+		boost_process_mutex.unlock(); 
 #endif
-		char line_buffer[65536];
-		strncpy(line_buffer, line.data(), sizeof(line_buffer) - 1);
-		line_buffer[sizeof(line_buffer) - 1] = '\0';
 
 		if (strncmp(line_buffer, "[tripcode],", strlen("[tripcode],")) == 0) {
 			unsigned char tripcode[MAX_LEN_TRIPCODE + 1];

@@ -2460,7 +2460,8 @@ int main(int argc, char **argv)
 #endif
 
 		// Wait for the duration of STATUS_UPDATE_INTERVAL.
-		for (int32_t i = 0; i < NUM_CHECKS_PER_INTERVAL; ++i) {
+		auto waitStartTime = TIME_SINCE_EPOCH_IN_MILLISECONDS;
+		while (TIME_SINCE_EPOCH_IN_MILLISECONDS - waitStartTime < STATUS_UPDATE_INTERVAL * 1000) {
 			// Break the loop if the search is paused.
 			if (UpdatePauseState())
 				break;
@@ -2476,10 +2477,13 @@ int main(int argc, char **argv)
 #else
 			if (parent_process_id != getppid())
 				break;
+#endif
             if (options.redirection)
                 printf("[dummy]\n");
-#endif
-			sleep_for_milliseconds((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL));
+			if (waitStartTime + STATUS_UPDATE_INTERVAL * 1000 <= TIME_SINCE_EPOCH_IN_MILLISECONDS)
+				break;
+			sleep_for_milliseconds(min((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL), 
+				                       (uint32_t)(waitStartTime + STATUS_UPDATE_INTERVAL * 1000 - TIME_SINCE_EPOCH_IN_MILLISECONDS)));
 		}
 		if (UpdateTerminationState())
 			break;
