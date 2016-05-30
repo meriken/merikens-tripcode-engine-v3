@@ -122,6 +122,13 @@ $ sudo add-apt-repository ppa:meriken/ppa
 $ sudo apt update && sudo apt install merikens-tripcode-engine
 ```
 
+If you are using the 64-bit version of the OS, you can use the CUDA-compatible package instead:
+
+```
+$ sudo add-apt-repository ppa:meriken/ppa
+$ sudo apt update && sudo apt install merikens-tripcode-engine-cuda
+```
+
 For optimal performance with NVIDIA video cards, however, you need to build the application yourself.
 
 
