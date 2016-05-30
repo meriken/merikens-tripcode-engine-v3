@@ -2482,8 +2482,8 @@ int main(int argc, char **argv)
                 printf("[dummy]\n");
 			if (waitStartTime + STATUS_UPDATE_INTERVAL * 1000 <= TIME_SINCE_EPOCH_IN_MILLISECONDS)
 				break;
-			sleep_for_milliseconds(min((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL), 
-				                       (uint32_t)(waitStartTime + STATUS_UPDATE_INTERVAL * 1000 - TIME_SINCE_EPOCH_IN_MILLISECONDS)));
+			sleep_for_milliseconds(std::min((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL), 
+				                            (uint32_t)(waitStartTime + STATUS_UPDATE_INTERVAL * 1000 - TIME_SINCE_EPOCH_IN_MILLISECONDS)));
 		}
 		if (UpdateTerminationState())
 			break;
