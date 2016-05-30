@@ -360,13 +360,6 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 			break;
 #else
 		boost_process_mutex.lock();
-		//char ch;
-		//if (!info->input_stream->readsome(&ch, 1)) {
-		//	boost_process_mutex.unlock();
-		//	sleep_for_milliseconds(100);
-		//	continue;
-		//}
-		//info->input_stream->putback(ch);
 		if (!std::getline(*(info->input_stream), line)) {
 			boost_process_mutex.unlock();
 			break;
@@ -447,9 +440,9 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	}
 	catch (const std::exception& e) {
 	}
-	if (info->child_process)
-		delete info->child_process;
-	info->child_process = NULL;
+	//if (info->child_process)
+	//	delete info->child_process;
+	//info->child_process = NULL;
 }
 
 static void CreateProgramFromGCNAssemblySource(cl_context *context, cl_program *program, cl_device_id *deviceID, char *deviceName, char *deviceVersion, char *driverVersion)

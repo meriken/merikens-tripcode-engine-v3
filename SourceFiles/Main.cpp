@@ -834,6 +834,8 @@ void UpdateOpenCLDeviceStatus_ChildProcess(struct OpenCLDeviceSearchThreadInfo *
 
 void CheckSearchThreads()
 {
+	if (UpdateTerminationState())
+		return;
 #ifdef ENABLE_CUDA
 	cuda_device_search_thread_info_array_spinlock.lock();
 	for (int32_t index = 0; index < numCUDADeviceSearchThreads; ++index) {
@@ -1188,8 +1190,6 @@ BOOL WINAPI ControlHandler(_In_  DWORD dwCtrlType)
 	case CTRL_SHUTDOWN_EVENT:
 	case CTRL_LOGOFF_EVENT:
 		SetTerminationState();
-		while (TRUE)
-			sleep_for_milliseconds(1000);
 		return TRUE;
 	default:
 		return FALSE;
@@ -2476,10 +2476,9 @@ int main(int argc, char **argv)
 #else
 			if (parent_process_id != getppid())
 				break;
-
-#endif
             if (options.redirection)
                 printf("[dummy]\n");
+#endif
 			sleep_for_milliseconds((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL));
 		}
 		if (UpdateTerminationState())
