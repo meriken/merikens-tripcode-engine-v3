@@ -883,16 +883,18 @@ void CheckSearchThreads()
 			if (info->child_process) {
 	   			delete info->input_stream;
 	            delete info->input_stream_source;
-	            delete info->stdout_sink;
-	            delete info->stdout_pipe;
-	            delete info->stderr_sink;
-	            delete info->stderr_pipe;
+
 				try {
 					boost::process::terminate(*(info->child_process));
 				} catch (const std::exception& e) {
 				}
 				delete info->child_process;
 				info->child_process = NULL;
+
+				delete info->stdout_sink;
+				delete info->stdout_pipe;
+				delete info->stderr_sink;
+				delete info->stderr_pipe;
 			}
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
