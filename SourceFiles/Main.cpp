@@ -759,30 +759,14 @@ void DisplayCopyrights()
 #endif
 
 #ifdef ARCH_64BIT
-#ifdef USE_YASM
-	if (IsAVX2Supported()) {
-		printf(" AVX2(64-bit)");
-	} else if (IsAVXSupported()) {
-		printf(" AVX(64-bit)");
-	} else {
-		printf(" SSE2(64-bit)");
-	}
-#elif defined(ARCH_X86)
-	printf(" SSE2(64-bit)");
+#ifdef ARCH_X86
+	printf(" SSE2/AVX/AVX2(x86_64)");
 #else
 	printf(" Generic(64-bit)");
 #endif
 #else
-#ifdef USE_YASM
-	if (IsAVX2Supported()) {
-		printf(" AVX2(32-bit)");
-	} else if (IsAVXSupported()) {
-		printf(" AVX(32-bit)");
-	} else {
-		printf(" SSE2(32-bit)");
-	}
-#elif defined(ARCH_X86)
-	printf(" SSE2(32-bit)");
+#ifdef ARCH_X86
+	printf(" SSE2/AVX/AVX2(x86)");
 #else
 	printf(" Generic(32-bit)");
 #endif
@@ -1556,6 +1540,49 @@ void InitSearchDevices(BOOL displayDeviceInformation)
 			printf("  Processor Info:           0x%06x\n", results[0]);
 #endif
 #endif
+            printf("  Instruction Set:         ");
+#ifdef ARCH_64BIT
+#ifdef USE_YASM
+	        if (IsAVX2Supported()) {
+		        printf(" AVX2(x86_64)");
+	        } else if (IsAVXSupported()) {
+		        printf(" AVX(x86_64)");
+	        } else {
+		        printf(" SSE2(x86_64)");
+	        }
+#elif defined(ARCH_X86)
+            if (__builtin_cpu_supports("avx2")) {
+		        printf(" AVX2(x86_64)");
+	        } else if (__builtin_cpu_supports("avx")) {
+		        printf(" AVX(x86_64)");
+	        } else {
+		        printf(" SSE2(x86_64)");
+	        }
+#else
+	        printf(" Generic(64-bit)");
+#endif
+#else
+#ifdef USE_YASM
+	        if (IsAVX2Supported()) {
+		        printf(" AVX2(x86)");
+	        } else if (IsAVXSupported()) {
+		        printf(" AVX(x86)");
+	        } else {
+		        printf(" SSE2(x86)");
+	        }
+#elif defined(ARCH_X86)
+            if (__builtin_cpu_supports("avx2")) {
+		        printf(" AVX2(x86)");
+	        } else if (__builtin_cpu_supports("avx")) {
+		        printf(" AVX(x86)");
+	        } else {
+		        printf(" SSE2(x86)");
+	        }
+#else
+	        printf(" Generic(32-bit)");
+#endif
+#endif
+			printf("\n");
 			printf("  Number of Logical Cores:  %d\n", std::thread::hardware_concurrency());
 			printf("  Number of Search Threads: %d\n", numCPUSearchThreads);
 			printf("\n");

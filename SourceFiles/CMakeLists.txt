@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1)
-project(MerikensTripcodeEngine C CXX)
+project(MerikensTripcodeEngine CXX C)
 
 set(MTE_BOOST_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../BoostPackages)
 set(MTE_BOOST_PACKAGE "boost_1_61_0")
@@ -57,7 +57,7 @@ try_run(
     "${CMAKE_BINARY_DIR}"
     "${CMAKE_SOURCE_DIR}/DetectX86.cpp"
     COMPILE_OUTPUT_VARIABLE COMPILE_OUTPUT)
-if (COMPILE_OUTPUT MATCHES "ARCH_X86")
+if (COMPILE_OUTPUT MATCHES "ARCH_X86" AND CMAKE_COMPILER_IS_GNUCXX)
     set(ARCH_X86 TRUE)
 else()
     set(ARCH_X86 FALSE)
@@ -198,6 +198,14 @@ if (USE_YASM)
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_yasm.cpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2.cpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_yasm.cpp")
+elseif(ARCH_X86)
+	file(GLOB CPU_SOURCES
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVXIntrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2Intrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_SSE2Intrinsics.cpp")
+	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVXIntrinsics.cpp" PROPERTIES COMPILE_FLAGS -mavx)
+	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2Intrinsics.cpp" PROPERTIES COMPILE_FLAGS "-mavx -mavx2")
 else()
 	file(GLOB CPU_SOURCES
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"

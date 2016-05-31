@@ -111,8 +111,6 @@ extern char** environ;
 
 // For MMX/SSE/SSE2/SSSE3 Intrinsics
 #ifdef ARCH_X86
-//#include <nmmintrin.h>
-//#include <smmintrin.h>
 #if defined(_MSC_VER)
 #include <intrin.h>
 #else
@@ -281,13 +279,6 @@ extern void TestNewCode();
 // BITSLICED DES                                                             //
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef ARCH_X86
-
-extern     void CPU_DES_SBoxes1_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *expandedKeySchedule, __m128i *dataBlocks, int32_t keyScheduleIndexBase);
-extern     void CPU_DES_SBoxes2_SSE2Intrinsics(unsigned char *expansionFunction, __m128i *expandedKeySchedule, __m128i *dataBlocks, int32_t keyScheduleIndexBase);
-
-#endif
-
 #ifdef USE_YASM
 
 extern "C" void CPU_DES_SBoxes1_asm_x64(void *context, int64_t keyScheduleIndexBase);
@@ -306,6 +297,7 @@ extern "C" void DES_Crypt25_x86_AVX2        (void *context);
 #endif
 
 #endif
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
