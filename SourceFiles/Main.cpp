@@ -881,20 +881,19 @@ void CheckSearchThreads()
             }
 			delete opencl_device_search_threads[index];
 			if (info->child_process) {
-	   			delete info->input_stream;
-	            delete info->input_stream_source;
-
+				// There seems to be no safe ways to delete these member functions.
+	   			// delete info->input_stream;
+				// delete info->input_stream_source;
 				try {
 					boost::process::terminate(*(info->child_process));
 				} catch (const std::exception& e) {
 				}
 				delete info->child_process;
 				info->child_process = NULL;
-
-				delete info->stdout_sink;
-				delete info->stdout_pipe;
-				delete info->stderr_sink;
-				delete info->stderr_pipe;
+				// delete info->stdout_sink;
+				// delete info->stdout_pipe;
+				// delete info->stderr_sink;
+				// delete info->stderr_pipe;
 			}
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
