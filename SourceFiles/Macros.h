@@ -279,3 +279,9 @@ extern unsigned char charTableForSeed[256];
 		releaseFunc(p);                         \
 		(p) = NULL;                             \
 	}                                           
+
+#ifdef _MSC_VER
+#define MIN min
+#else
+#define MIN std::min
+#endif
