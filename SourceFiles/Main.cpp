@@ -883,7 +883,6 @@ void CheckSearchThreads()
 			if (info->child_process) {
 	   			delete info->input_stream;
 	            delete info->input_stream_source;
-	            delete info->child_process;
 	            delete info->stdout_sink;
 	            delete info->stdout_pipe;
 	            delete info->stderr_sink;
