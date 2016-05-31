@@ -320,10 +320,10 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	command_line += (CONVERT_FROM_BYTES(std::string("\"")));
 #endif
 
-	boost::process::pipe stdout_pipe = boost::process::create_pipe();
-	boost::iostreams::file_descriptor_sink stdout_sink(stdout_pipe.sink, boost::iostreams::close_handle);
-	boost::process::pipe stderr_pipe = boost::process::create_pipe();
-	boost::iostreams::file_descriptor_sink stderr_sink(stderr_pipe.sink, boost::iostreams::close_handle);
+	info->stdout_pipe = new boost::process::pipe(boost::process::create_pipe());
+	info->stdout_sink = new boost::iostreams::file_descriptor_sink(info->stdout_pipe->sink, boost::iostreams::close_handle);
+	info->stderr_pipe = new boost::process::pipe(boost::process::create_pipe());
+	info->stderr_sink = new boost::iostreams::file_descriptor_sink(info->stderr_pipe->sink, boost::iostreams::close_handle);
 	info->child_process = new boost::process::child(boost::process::execute(
 #ifdef _WIN32
 		boost::process::initializers::run_exe(boost::process::shell_path().string()),
@@ -331,11 +331,11 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 		boost::process::initializers::run_exe(childProcessPath),
 #endif
 		boost::process::initializers::set_cmd_line(command_line),
-		boost::process::initializers::bind_stdout(stdout_sink),
-		boost::process::initializers::bind_stderr(stderr_sink),
+		boost::process::initializers::bind_stdout(*(info->stdout_sink)),
+		boost::process::initializers::bind_stderr(*(info->stderr_sink)),
 		boost::process::initializers::inherit_env()));
-	boost::iostreams::file_descriptor_source source(stdout_pipe.source, boost::iostreams::close_handle);
-	info->input_stream = new boost::iostreams::stream<boost::iostreams::file_descriptor_source>(source);
+	info->input_stream_source = new boost::iostreams::file_descriptor_source(info->stdout_pipe->source, boost::iostreams::close_handle);
+	info->input_stream = new boost::iostreams::stream<boost::iostreams::file_descriptor_source>(*(info->input_stream_source));
 
 	boost_process_mutex.unlock();
 }
@@ -356,7 +356,7 @@ void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 		std::string line;
 		char line_buffer[65536];
 		// Things get very tricky here.
-#ifdef _WIN32
+#if 1
 		if (!std::getline(*(info->input_stream), line))
 			break;
 		strncpy(line_buffer, line.c_str(), std::min(line.size(), sizeof(line_buffer) - 1));

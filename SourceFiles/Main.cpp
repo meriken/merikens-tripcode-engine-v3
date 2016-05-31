@@ -896,10 +896,14 @@ void CheckSearchThreads()
             } catch (const std::exception& e) {
             }
 			delete opencl_device_search_threads[index];
-			if (info->input_stream)
-				delete info->input_stream;
-			info->input_stream = NULL;
 			if (info->child_process) {
+	   			delete info->input_stream;
+	            delete info->input_stream_source;
+	            delete info->child_process;
+	            delete info->stdout_sink;
+	            delete info->stdout_pipe;
+	            delete info->stderr_sink;
+	            delete info->stderr_pipe;
 				try {
 					boost::process::terminate(*(info->child_process));
 				} catch (const std::exception& e) {
@@ -2478,8 +2482,6 @@ int main(int argc, char **argv)
 			if (parent_process_id != getppid())
 				break;
 #endif
-            if (options.redirection)
-                printf("[dummy]\n");
 			if (waitStartTime + STATUS_UPDATE_INTERVAL * 1000 <= TIME_SINCE_EPOCH_IN_MILLISECONDS)
 				break;
 			sleep_for_milliseconds(std::min((uint32_t)(STATUS_UPDATE_INTERVAL * 1000 / NUM_CHECKS_PER_INTERVAL), 

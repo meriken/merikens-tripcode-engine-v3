@@ -136,7 +136,12 @@ struct OpenCLDeviceSearchThreadInfo {
 	uint32_t     numDiscardedTripcodes;
 	uint32_t     numRestarts;
 	BOOL         runChildProcess;
+	boost::process::pipe *stdout_pipe;
+	boost::iostreams::file_descriptor_sink *stdout_sink;
+	boost::process::pipe *stderr_pipe;
+	boost::iostreams::file_descriptor_sink *stderr_sink;
 	boost::process::child *child_process;
+	boost::iostreams::file_descriptor_source *input_stream_source;
 	boost::iostreams::stream<boost::iostreams::file_descriptor_source> *input_stream;
 	uint64_t     timeLastUpdated;
 };
