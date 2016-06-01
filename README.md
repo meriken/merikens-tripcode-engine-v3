@@ -63,7 +63,7 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
-This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
+I recommend the source archive be extracted at the root of a drive. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
 There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
@@ -96,7 +96,7 @@ You should be able to build and run this application on any POSIX-compliant oper
 * OpenCL 1.2 SDK such as AMD APP SDK and NVIDIA CUDA Toolkit (if you are using an AMD/NVIDIA video card.)
 * CUDA Toolkit 7.5+ (optional for optimal performance if you are using an NVIDIA video card.)
 
-You should be able to build everything by running `./BuildAll.sh --install`. You can specify the following options for `BuildAll.sh`:
+You should be able to build and install everything by running `./BuildAll.sh --install`. You can specify the following options for `BuildAll.sh`:
 
 *    --with-toolset=gcc
 *    --with-toolset=clang
