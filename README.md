@@ -135,7 +135,7 @@ For optimal performance with NVIDIA video cards, however, you need to build the 
 ```
 $ git clone https://github.com/meriken/merikens-tripcode-engine-v3
 $ cd merikens-tripcode-engine-v3
-$ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.8 g++-4.8 p7zip-full libbz2-dev python2.7-dev mesa-common-dev
+$ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.9 g++-4.9 p7zip-full libbz2-dev python2.7-dev mesa-common-dev
 $ ./BuildAll.sh --install
 ```
 
