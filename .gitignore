@@ -22,4 +22,6 @@ CMakeBuild
 *~
 CLRadeonExtender/CLRX-mirror-master
 CMake/cmake-3.5.2
-
+*.VC.opendb
+*.VC.db
+*.cxlovr

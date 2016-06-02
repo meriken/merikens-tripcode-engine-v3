@@ -58,8 +58,8 @@ I am also working on the English version of my tripcode search service and would
 
 You need the following tools to build Meriken's Tripcode Engine.
 
-* Visual Studio 2013 Community
-* CUDA Toolkit 7.5
+* Visual Studio 2015 Community
+* CUDA Toolkit 8.0
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
