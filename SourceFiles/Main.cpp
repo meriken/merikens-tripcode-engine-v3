@@ -445,6 +445,7 @@ void ReleaseResources()
 		RELEASE_AND_SET_TO_NULL(tripcodeFile,     fclose);
 	}
 
+#ifdef CLEAN_UP_CHILD_PROCESS_INFO
 	while (deleted_opencl_device_search_thread_info_queue.size()) {
 		OpenCLDeviceSearchThreadInfo info = deleted_opencl_device_search_thread_info_queue.front();
 		deleted_opencl_device_search_thread_info_queue.pop();
@@ -458,6 +459,7 @@ void ReleaseResources()
 		delete info.stderr_sink;
 		delete info.stderr_pipe;
 	}
+#endif
 }
 
 void PrintUsage()
@@ -830,8 +832,18 @@ void UpdateOpenCLDeviceStatus_ChildProcess(struct OpenCLDeviceSearchThreadInfo *
 
 #endif
 
+#ifdef __GNUC__
+#if __GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 9)
+#define CLEAN_UP_CHILD_PROCESS_INFO
+#endif
+#else
+#define CLEAN_UP_CHILD_PROCESS_INFO
+#endif
+
+#ifdef CLEAN_UP_CHILD_PROCESS_INFO
 #include <queue>
 static std::queue<struct OpenCLDeviceSearchThreadInfo> deleted_opencl_device_search_thread_info_queue;
+#endif
 
 void CheckSearchThreads()
 {
@@ -914,7 +926,9 @@ void CheckSearchThreads()
 				// delete info->stderr_sink;
 				// delete info->stderr_pipe;
 
+#ifdef CLEAN_UP_CHILD_PROCESS_INFO
 				deleted_opencl_device_search_thread_info_queue.push(*info);
+#endif
 				info->child_process = NULL;
 			}
 			info->currentSpeed = 0;
