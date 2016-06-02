@@ -171,6 +171,8 @@ uint32_t     numGeneratedTripcodesByCPUInMillions;
 //
 static std::independent_bits_engine<std::default_random_engine, CHAR_BIT, unsigned int> random_bytes_engine(std::random_device{}());
 static spinlock random_byte_spinlock;
+#include <queue>
+static std::queue<struct OpenCLDeviceSearchThreadInfo> deleted_opencl_device_search_thread_info_queue;
 
 
 
@@ -443,6 +445,20 @@ void ReleaseResources()
 	RELEASE_AND_SET_TO_NULL(regexPatternArray,    free);
     if (tripcodeFile) {
 		RELEASE_AND_SET_TO_NULL(tripcodeFile,     fclose);
+	}
+
+	while (deleted_opencl_device_search_thread_info_queue.size()) {
+		OpenCLDeviceSearchThreadInfo info = deleted_opencl_device_search_thread_info_queue.front();
+		deleted_opencl_device_search_thread_info_queue.pop();
+		if (!info.runChildProcess || !info.child_process)
+			continue;
+		delete info.input_stream;
+		delete info.input_stream_source;
+		delete info.child_process;
+		delete info.stdout_sink;
+		delete info.stdout_pipe;
+		delete info.stderr_sink;
+		delete info.stderr_pipe;
 	}
 }
 
@@ -887,16 +903,18 @@ void CheckSearchThreads()
 				}
 				
 				// There seems to be no safe ways to delete all of these class members on Windows
-				// without completely screwing up Boost.Process.
+				// right away without completely screwing up Boost.Process.
 
 	   			// delete info->input_stream;
 				// delete info->input_stream_source;
-				delete info->child_process;
-				info->child_process = NULL;
+				// delete info->child_process;
 				// delete info->stdout_sink;
 				// delete info->stdout_pipe;
 				// delete info->stderr_sink;
 				// delete info->stderr_pipe;
+
+				deleted_opencl_device_search_thread_info_queue.push(*info);
+				info->child_process = NULL;
 			}
 			info->currentSpeed = 0;
 			info->averageSpeed = 0;
