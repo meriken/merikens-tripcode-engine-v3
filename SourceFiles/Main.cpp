@@ -171,8 +171,6 @@ uint32_t     numGeneratedTripcodesByCPUInMillions;
 //
 static std::independent_bits_engine<std::default_random_engine, CHAR_BIT, unsigned int> random_bytes_engine(std::random_device{}());
 static spinlock random_byte_spinlock;
-#include <queue>
-static std::queue<struct OpenCLDeviceSearchThreadInfo> deleted_opencl_device_search_thread_info_queue;
 
 
 
@@ -831,6 +829,9 @@ void UpdateOpenCLDeviceStatus_ChildProcess(struct OpenCLDeviceSearchThreadInfo *
 }
 
 #endif
+
+#include <queue>
+static std::queue<struct OpenCLDeviceSearchThreadInfo> deleted_opencl_device_search_thread_info_queue;
 
 void CheckSearchThreads()
 {
