@@ -203,9 +203,13 @@ elseif(ARCH_X86)
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVXIntrinsics.cpp"
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2Intrinsics.cpp"
-		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_SSE2Intrinsics.cpp")
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_SSE2Intrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_AVXIntrinsics.cpp"
+		"${CMAKE_CURRENT_SOURCE_DIR}/CPU12_AVX2Intrinsics.cpp")
 	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVXIntrinsics.cpp" PROPERTIES COMPILE_FLAGS -mavx)
+	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU12_AVXIntrinsics.cpp" PROPERTIES COMPILE_FLAGS -mavx)
 	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU10_AVX2Intrinsics.cpp" PROPERTIES COMPILE_FLAGS "-mavx -mavx2")
+	set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/CPU12_AVX2Intrinsics.cpp" PROPERTIES COMPILE_FLAGS "-mavx -mavx2")
 else()
 	file(GLOB CPU_SOURCES
 		"${CMAKE_CURRENT_SOURCE_DIR}/CPU10_SSE2Intrinsics.cpp"

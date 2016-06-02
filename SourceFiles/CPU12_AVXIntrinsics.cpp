@@ -74,8 +74,6 @@ typedef union VECTOR_ALIGNMENT sha1_vector {
 } sha1_vector;
 #define VECTOR_ELEMENTS m128i_u32
 
-#ifdef ARCH_X86
-
 inline sha1_vector vnot_func(const sha1_vector &a) 
 {
     sha1_vector ret;
@@ -129,81 +127,6 @@ inline sha1_vector ROTL(unsigned int bits, const sha1_vector &val)
 	return ret;
 }
 
-#else
-
-inline sha1_vector vnot_func(const sha1_vector &a) 
-{
-    sha1_vector dst;
-
-    dst.m128i_u32[0] = ~(a).m128i_u32[0];
-    dst.m128i_u32[1] = ~(a).m128i_u32[1];
-    dst.m128i_u32[2] = ~(a).m128i_u32[2];
-    dst.m128i_u32[3] = ~(a).m128i_u32[3];
-    return dst;
-}
-
-inline sha1_vector vand_func(const sha1_vector &a, const sha1_vector &b) 
-{
-    sha1_vector dst;
-
-    dst.m128i_u32[0] = (a).m128i_u32[0] & (b).m128i_u32[0];
-    dst.m128i_u32[1] = (a).m128i_u32[1] & (b).m128i_u32[1];
-    dst.m128i_u32[2] = (a).m128i_u32[2] & (b).m128i_u32[2];
-    dst.m128i_u32[3] = (a).m128i_u32[3] & (b).m128i_u32[3];
-    return dst;
-}
-
-inline sha1_vector vor_func(const sha1_vector &a, const sha1_vector &b) 
-{
-    sha1_vector dst;
-
-    dst.m128i_u32[0] = (a).m128i_u32[0] | (b).m128i_u32[0];
-    dst.m128i_u32[1] = (a).m128i_u32[1] | (b).m128i_u32[1];
-    dst.m128i_u32[2] = (a).m128i_u32[2] | (b).m128i_u32[2];
-    dst.m128i_u32[3] = (a).m128i_u32[3] | (b).m128i_u32[3];
-    return dst;
-}
-
-inline sha1_vector vxor_func(const sha1_vector &a, const sha1_vector &b) 
-{
-    sha1_vector dst;
-
-    dst.m128i_u32[0] = (a).m128i_u32[0] ^ (b).m128i_u32[0];
-    dst.m128i_u32[1] = (a).m128i_u32[1] ^ (b).m128i_u32[1];
-    dst.m128i_u32[2] = (a).m128i_u32[2] ^ (b).m128i_u32[2];
-    dst.m128i_u32[3] = (a).m128i_u32[3] ^ (b).m128i_u32[3];
-    return dst;
-}
-
-inline sha1_vector vadd_func(const sha1_vector &a, const sha1_vector &b) 
-{
-    sha1_vector dst;
-
-    dst.m128i_u32[0] = (a).m128i_u32[0] + (b).m128i_u32[0];
-    dst.m128i_u32[1] = (a).m128i_u32[1] + (b).m128i_u32[1];
-    dst.m128i_u32[2] = (a).m128i_u32[2] + (b).m128i_u32[2];
-    dst.m128i_u32[3] = (a).m128i_u32[3] + (b).m128i_u32[3];
-    return dst;
-}
-
-// Circular left rotation of 32-bit value 'val' left by 'bits' bits
-// (assumes that 'bits' is always within range from 0 to 32)
-// #define ROTL( bits, val ) \
-//        ( ( ( val ) << ( bits ) ) | ( ( val ) >> ( 32 - ( bits ) ) ) )
-// #define ROTL(bits, val) _mm_or_si128(_mm_slli_epi32((val), (bits)), _mm_srli_epi32((val), 32 - (bits)))
-inline sha1_vector ROTL(unsigned int bits, const sha1_vector &val) 
-{
-	sha1_vector dst;
-
-    dst.m128i_u32[0] = (val.m128i_u32[0] << bits) + (val.m128i_u32[0] >> (32 - bits));
-    dst.m128i_u32[1] = (val.m128i_u32[1] << bits) + (val.m128i_u32[1] >> (32 - bits));
-    dst.m128i_u32[2] = (val.m128i_u32[2] << bits) + (val.m128i_u32[2] >> (32 - bits));
-    dst.m128i_u32[3] = (val.m128i_u32[3] << bits) + (val.m128i_u32[3] >> (32 - bits));
-	return dst;
-}
-
-#endif
-
 // Initial hash values (see p. 14 of FIPS 180-3)
 static VECTOR_ALIGNMENT sha1_vector H0 = {0x67452301, 0x67452301, 0x67452301, 0x67452301};
 static VECTOR_ALIGNMENT sha1_vector H1 = {0xefcdab89, 0xefcdab89, 0xefcdab89, 0xefcdab89};
@@ -217,41 +140,6 @@ static VECTOR_ALIGNMENT sha1_vector K1 = {0x6ed9eba1, 0x6ed9eba1, 0x6ed9eba1, 0x
 static VECTOR_ALIGNMENT sha1_vector K2 = {0x8f1bbcdc, 0x8f1bbcdc, 0x8f1bbcdc, 0x8f1bbcdc};
 static VECTOR_ALIGNMENT sha1_vector K3 = {0xca62c1d6, 0xca62c1d6, 0xca62c1d6, 0xca62c1d6};
 
-#define CPU12_SHA1_MAIN_LOOP SearchForSHA1Tripcodes
+#define CPU12_SHA1_MAIN_LOOP SearchForSHA1Tripcodes_AVX
 #include "CPU12_Intrinsics.h"
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-// CPU SEARCH THREAD FOR 12 CHARACTER TRIPCODES                              //
-///////////////////////////////////////////////////////////////////////////////
-
-
-#ifdef ARCH_X86
-extern uint32_t SearchForSHA1Tripcodes_AVX();
-extern uint32_t SearchForSHA1Tripcodes_AVX2();
-#endif
-
-void Thread_SearchForSHA1TripcodesOnCPU()
-{
-	while (!GetTerminationState()) {
-		while (GetPauseState() && !GetTerminationState())
-			sleep_for_milliseconds(PAUSE_INTERVAL);
-
-		uint32_t numGeneratedTripcodes;
-#ifdef ARCH_X86
-		if (__builtin_cpu_supports("avx2")) {
-			numGeneratedTripcodes = SearchForSHA1Tripcodes_AVX2();
-		} else if (__builtin_cpu_supports("avx")) {
-			numGeneratedTripcodes = SearchForSHA1Tripcodes_AVX();
-		} else {
-			numGeneratedTripcodes = SearchForSHA1Tripcodes();
-		}
-#else
-		numGeneratedTripcodes = SearchForSHA1Tripcodes();
-#endif
-
-		AddToNumGeneratedTripcodesByCPU(numGeneratedTripcodes);
-	}
-}
 
