@@ -15,6 +15,14 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 * [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi ; NVIDIA Display Driver Version 352.78 or later)
 * [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 ; NVIDIA Display Driver Version 352.78 or later)
 
+### Ubuntu Personal Package Archives
+
+* [Meriken's PPA}( https://launchpad.net/~meriken/+archive/ubuntu/ppa )
+
+### Arch Linux User Repository
+
+* [merikens-tripcode-engine-v3-git]( https://aur.archlinux.org/packages/merikens-tripcode-engine-v3-git/ )
+
 ### Source Codes
 * [v3.2.10.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_10_tar_gz )
 
