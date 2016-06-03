@@ -12,8 +12,8 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 ### Precompiled Binaries for Windows
 
-* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )
-* [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )
+* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi ; NVIDIA Display Driver Version 352.78 or later)
+* [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 ; NVIDIA Display Driver Version 352.78 or later)
 
 ### Source Codes
 * [v3.2.10.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_10_tar_gz )
@@ -73,7 +73,7 @@ You need the following software installed in order to run the application:
 
 * [AMD Radeon Desktop Video Card Driver][4]
   (if you are using an AMD graphics card)
-* [NVIDIA Display Driver Version 352.78 or later][5]
+* [NVIDIA Display Driver Version 362.61 or later][5]
   (if you are using an NVIDIA graphics card)
 
 [4]: http://support.amd.com/en-us/download

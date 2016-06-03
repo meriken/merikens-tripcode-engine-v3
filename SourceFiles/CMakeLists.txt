@@ -76,12 +76,19 @@ endif()
 # CUDA DETECTION #
 ##################
 
-# Workaround for CUDA Toolki 7.5 and Ubuntu 16.04 LTS
+# Workaround for CUDA Toolkit 7.5 and Ubuntu 16.04 LTS
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES") 
 
 find_package(CUDA 7.5)
 if(NOT CUDA_FOUND)
-    set(ENABLE_CUDA FALSE)
+    set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda-8.0")
+    find_package(CUDA 8.0)
+    if(CUDA_FOUND)
+        set(CUDA_INCLUDE_DIR "/usr/local/cuda-8.0/include")
+        set(CUDA_LIBRARY "/usr/local/cuda-8.0/lib64")
+    else()
+        set(ENABLE_CUDA FALSE)
+    endif()
 endif()
 if (ENABLE_CUDA AND CMAKE_COMPILER_IS_GNUCC)
     execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion
@@ -242,47 +249,44 @@ if(ENABLE_CUDA)
         "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/")
     set(CUDA_HOST_COMPILER ${CMAKE_CXX_COMPILER})
     if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
-        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE)
- 	cuda_compile(
-	    CUDA10_REGISTERS_CU_OUTPUT
-	    ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher0.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher1.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher2.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher3.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher4.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher5.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher6.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher7.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher8.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher9.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher10.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher11.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher12.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher13.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher14.cu 
-            ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher15.cu
-            STATIC
-            OPTIONS
-                -gencode=arch=compute_50,code=sm_50 
-                -gencode=arch=compute_52,code=sm_52 
-                -gencode=arch=compute_53,code=sm_53 
-                -gencode=arch=compute_53,code=compute_53 
-                -maxrregcount=168)
+        if(CUDA_VERSION_STRING VERSION_EQUAL "8.0" OR CUDA_VERSION_STRING VERSION_GREATER "8.0")
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_60,code=sm_60;-gencode=arch=compute_61,code=sm_61;-maxrregcount=168)
+		else()
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-maxrregcount=168)
+		endif()
+ 		cuda_compile(
+			CUDA10_REGISTERS_CU_OUTPUT
+			${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher0.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher1.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher2.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher3.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher4.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher5.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher6.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher7.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher8.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher9.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher10.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher11.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher12.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher13.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher14.cu 
+				${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers_MultipleKernels/CUDA10_Registers_KernelLauncher15.cu
+				STATIC)
     else()
-        set(CUDA_NVCC_FLAGS -DENABLE_CUDA)
- 	cuda_compile(
-	    CUDA10_REGISTERS_CU_OUTPUT
-	    ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
-            STATIC
-            OPTIONS
-                -gencode=arch=compute_50,code=sm_50 
-                -gencode=arch=compute_52,code=sm_52 
-                -gencode=arch=compute_53,code=sm_53 
-                -gencode=arch=compute_53,code=compute_53 
-                -maxrregcount=168)
+        if(CUDA_VERSION_STRING VERSION_EQUAL "8.0" OR CUDA_VERSION_STRING VERSION_GREATER "8.0")
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_60,code=sm_60;-gencode=arch=compute_61,code=sm_61;-gencode=arch=compute_61,code=compute_61;-maxrregcount=168)
+		else()
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_53,code=compute_53;-maxrregcount=168)
+		endif()
+ 		cuda_compile(
+			CUDA10_REGISTERS_CU_OUTPUT
+			${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_Registers.cu
+				STATIC)
     endif()
 
+    set(CUDA_NVCC_FLAGS -DENABLE_CUDA)
     cuda_compile(
         CUDA10_SHAREDMEMORY_CU_OUTPUT
         ${CMAKE_CURRENT_SOURCE_DIR}/CUDA10_SharedMemory.cu
@@ -294,20 +298,15 @@ if(ENABLE_CUDA)
             -gencode=arch=compute_35,code=sm_35 
             -gencode=arch=compute_37,code=sm_37 
             -maxrregcount=42)
+
+    if(CUDA_VERSION_STRING VERSION_EQUAL "8.0" OR CUDA_VERSION_STRING VERSION_GREATER "8.0")
+	    set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-gencode=arch=compute_20,code=sm_20;-gencode=arch=compute_20,code=sm_21;-gencode=arch=compute_30,code=sm_30;-gencode=arch=compute_32,code=sm_32;-gencode=arch=compute_35,code=sm_35;-gencode=arch=compute_37,code=sm_37;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_60,code=sm_60;-gencode=arch=compute_61,code=sm_61;-gencode=arch=compute_61,code=compute_61)
+	else()
+	    set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-gencode=arch=compute_20,code=sm_20;-gencode=arch=compute_20,code=sm_21;-gencode=arch=compute_30,code=sm_30;-gencode=arch=compute_32,code=sm_32;-gencode=arch=compute_35,code=sm_35;-gencode=arch=compute_37,code=sm_37;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_53,code=compute_53)
+	endif()
     cuda_compile(
         CUDA12_CU_OUTPUT
-        ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu
-	OPTIONS 
-            -gencode=arch=compute_20,code=sm_20 
-            -gencode=arch=compute_20,code=sm_21 
-            -gencode=arch=compute_30,code=sm_30 
-            -gencode=arch=compute_32,code=sm_32 
-            -gencode=arch=compute_35,code=sm_35 
-            -gencode=arch=compute_37,code=sm_37
-            -gencode=arch=compute_50,code=sm_50 
-            -gencode=arch=compute_52,code=sm_52 
-            -gencode=arch=compute_53,code=sm_53 
-            -gencode=arch=compute_53,code=compute_53)
+        ${CMAKE_CURRENT_SOURCE_DIR}/CUDA12.cu)
 
     set(CUDA_FILES
         ${CUDA10_REGISTERS_CU_OUTPUT} 
