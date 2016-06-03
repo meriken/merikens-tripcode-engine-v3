@@ -57,8 +57,9 @@ Target Pattern: ^TEST//
 I would really appreciate donations as it is quite expensive to keep buying hardware for testing.
 I am also working on the English version of my tripcode search service and would like to add more servers.
 
-* PayPal: `meriken.ygch.net@gmail.com`
-* Bitcoin: `1BZrWADRhLr9DyQYYRJhRcmudE3vntT5em`
+[![]( https://pledgie.com/campaigns/31841.png )]( https://pledgie.com/campaigns/31841 )
+
+Bitcoin: `1BZrWADRhLr9DyQYYRJhRcmudE3vntT5em`
 
 ## Windows
 
