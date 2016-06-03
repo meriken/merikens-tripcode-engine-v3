@@ -17,7 +17,7 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 ### Ubuntu Personal Package Archives
 
-* [Meriken's PPA}( https://launchpad.net/~meriken/+archive/ubuntu/ppa )
+* [Meriken's PPA]( https://launchpad.net/~meriken/+archive/ubuntu/ppa )
 
 ### Arch Linux User Repository
 
