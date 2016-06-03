@@ -1,14 +1,12 @@
 Meriken's Tripcode Engine [![Build Status](https://travis-ci.org/meriken/merikens-tripcode-engine-v3.svg?branch=master)](https://travis-ci.org/meriken/merikens-tripcode-engine-v3) [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/meriken/merikens-tripcode-engine-v3/master/LICENSE)
 =========================
 
-[![]( https://pledgie.com/campaigns/31841.png )]( https://pledgie.com/campaigns/31841 )
+This repository was moved from https://github.com/meriken/merikens-tripcode-engine
 
 "Meriken's Tripcode Engine" is a cross-platform application designed to generate custom/vanity tripcodes at maximum speed. 
 It is arguably the fastest and most powerful program of its kind. It makes effecitive use of available computing power of CPUs and GPUs, 
 and the user can specify flexible regex patterns for desired tripcodes. It features highly optimized, extensively parallelized 
 implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and Intel SSE2/AVX/AVX2.
-
-(This repository was moved from https://github.com/meriken/merikens-tripcode-engine )
 
 ## Downloads
 
@@ -59,8 +57,9 @@ Target Pattern: ^TEST//
 I would really appreciate donations as it is quite expensive to keep buying hardware for testing.
 I am also working on the English version of my tripcode search service and would like to add more servers.
 
-* [PayPal through Pledgie]( https://pledgie.com/campaigns/31841 )
-* Bitcoin: `1BZrWADRhLr9DyQYYRJhRcmudE3vntT5em`
+[![]( https://pledgie.com/campaigns/31841.png )]( https://pledgie.com/campaigns/31841 )
+
+Bitcoin: `1BZrWADRhLr9DyQYYRJhRcmudE3vntT5em`
 
 ## Windows
 
