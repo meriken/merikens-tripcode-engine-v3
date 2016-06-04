@@ -848,7 +848,7 @@ void ExpandRegexPattern(unsigned char *regexPattern, BOOL displayProgress)
 	pattern.endsAtLastChar    = FALSE;
 	pattern.wereVerticalBarsProcessed = FALSE;
 	pattern.depth = 0;
-	for (int32_t depth = 0; depth < MAX_NUM_DEPTHS_IN_REGEX_PATTERN; ++depth) {
+	for (int32_t depth = 0; depth < MAX_NUM_DEPTHS_IN_REGEX_PATTERN - 1; ++depth) {
 		pattern.expandedAtLowerDepth[depth][0] = '\0';
 		pattern.remainingAtLowerDepth[depth][0] = '\0';
 	}
