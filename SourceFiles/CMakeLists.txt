@@ -79,16 +79,19 @@ endif()
 # Workaround for CUDA Toolkit 7.5 and Ubuntu 16.04 LTS
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_FORCE_INLINES") 
 
-find_package(CUDA 7.5)
-if(NOT CUDA_FOUND)
+if(EXISTS "/usr/local/cuda-8.0")
     set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda-8.0")
-    find_package(CUDA 8.0)
-    if(CUDA_FOUND)
-        set(CUDA_INCLUDE_DIR "/usr/local/cuda-8.0/include")
-        set(CUDA_LIBRARY "/usr/local/cuda-8.0/lib64")
-    else()
-        set(ENABLE_CUDA FALSE)
-    endif()
+	find_package(CUDA 8.0)
+endif()
+if(NOT CUDA_FOUND AND EXISTS "/usr/local/cuda-7.5")
+    set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda-7.5")
+	find_package(CUDA 7.5)
+endif()
+if(NOT CUDA_FOUND)
+    find_package(CUDA 7.5)
+endif()
+if(NOT CUDA_FOUND)
+    set(ENABLE_CUDA FALSE)
 endif()
 if (ENABLE_CUDA AND CMAKE_COMPILER_IS_GNUCC)
     execute_process(COMMAND ${CMAKE_C_COMPILER} -dumpversion
@@ -331,11 +334,22 @@ if (ENABLE_OPENCL AND ENABLE_CUDA)
         "${MTE_BOOST_DIR}/include"
         "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
         ${OpenCL_INCLUDE_DIR}
-        ${CUDA_INCLUDE_DIR})
-    link_directories(
-        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-        ${OpenCL_LIBRARY}
-        ${CUDA_LIBRARY})
+        "${CUDA_SDK_ROOT_DIR}include")
+	if(ARCH_64BIT)
+		link_directories(
+		    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+		    ${OpenCL_LIBRARY}
+		    "${CUDA_SDK_ROOT_DIR}lib/x64"
+			"${CUDA_SDK_ROOT_DIR}lib64"
+			"${CUDA_SDK_ROOT_DIR}libx64")
+    else()
+		link_directories(
+		    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+		    ${OpenCL_LIBRARY}
+		    "${CUDA_SDK_ROOT_DIR}lib/Win32"
+			"${CUDA_SDK_ROOT_DIR}lib"
+			"${CUDA_SDK_ROOT_DIR}libWin32")
+	endif()
 elseif(ENABLE_OPENCL)
     LINK_LIBRARIES(
         ${OpenCL_LIBRARIES}
@@ -358,10 +372,22 @@ elseif(ENABLE_CUDA)
         ${CMAKE_CURRENT_SOURCE_DIR}
         "${MTE_BOOST_DIR}/include"
         "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/"
-        ${CUDA_INCLUDE_DIR})
-    link_directories(
-        "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
-        ${CUDA_LIBRARY})
+        "${CUDA_SDK_ROOT_DIR}include")
+	if(ARCH_64BIT)
+		link_directories(
+		    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+		    ${OpenCL_LIBRARY}
+		    "${CUDA_SDK_ROOT_DIR}lib/x64"
+			"${CUDA_SDK_ROOT_DIR}lib64"
+			"${CUDA_SDK_ROOT_DIR}libx64")
+    else()
+		link_directories(
+		    "${MTE_BOOST_DIR}/${MTE_BOOST_PACKAGE}/stage/lib/"
+		    ${OpenCL_LIBRARY}
+		    "${CUDA_SDK_ROOT_DIR}lib/Win32"
+			"${CUDA_SDK_ROOT_DIR}lib"
+			"${CUDA_SDK_ROOT_DIR}libWin32")
+	endif()
 else()
     LINK_LIBRARIES(
         boost_system
