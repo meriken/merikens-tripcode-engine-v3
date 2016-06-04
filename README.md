@@ -4,7 +4,7 @@ Meriken's Tripcode Engine [![Build Status](https://travis-ci.org/meriken/meriken
 This repository was moved from https://github.com/meriken/merikens-tripcode-engine
 
 "Meriken's Tripcode Engine" is a cross-platform application designed to generate custom/vanity tripcodes at maximum speed. 
-It is arguably the fastest and most powerful program of its kind. It makes effecitive use of available computing power of CPUs and GPUs, 
+It is arguably the fastest and most powerful program of its kind. It makes effective use of available computing power of CPUs and GPUs, 
 and the user can specify flexible regex patterns for desired tripcodes. It features highly optimized, extensively parallelized 
 implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and Intel SSE2/AVX/AVX2.
 
