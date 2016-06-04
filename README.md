@@ -12,9 +12,12 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 
 ### Precompiled Binaries for Windows
 
-* [MerikensTripcodeEngine_3.2.11_English_Windows.zip]( http://bit.ly/20YC2D0 ) (NVIDIA Display Driver Version 362.61 or later)
-* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi ) (NVIDIA Display Driver Version 352.78 or later)
-* [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 ) (NVIDIA Display Driver Version 352.78 or later)
+* [MerikensTripcodeEngine_3.2.11_English_Windows.zip]( http://bit.ly/20YC2D0 )<sup>[1](#myfootnote1)</sup>
+* [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )<sup>[2](#myfootnote2)</sup>
+* [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )<sup>[2](#myfootnote2)</sup>
+
+<a name="myfootnote1">1</a>: NVIDIA Display Driver Version 362.61 or later is required if you are using an NVIDIA video card.<br>
+<a name="myfootnote1">2</a>: NVIDIA Display Driver Version 352.78 or later is required if you are using an NVIDIA video card.<br>
 
 ### Ubuntu Personal Package Archives
 
@@ -72,7 +75,7 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
-I recommend the source archive be extracted at the root of a drive. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
+I recommend that the source archive be extracted at the root of a drive and that the environment variable `PreferredToolArchitecture` be set to `x64`. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
 There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
