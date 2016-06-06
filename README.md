@@ -123,7 +123,7 @@ You should be able to build and install everything by running `./BuildAll.sh --i
 *    --install
 *    --rebuild
 
-Please note that NVIDIA-optimized versions (`-enable-cuda-des-multiple-kernels-mode`) take **extremely** long time to build.
+Please note that NVIDIA-optimized versions (`--enable-cuda-des-multiple-kernels-mode`) take **extremely** long time to build.
 
 #### Installation Instructions for Ubuntu 16.04 LTS
 
