@@ -414,7 +414,19 @@ file(GLOB GCN_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/bin/*.asm")
 install(FILES ${GCN_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL/bin)
 file(GLOB OPENCL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/*.cl")
 install(FILES ${OPENCL_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL)
-
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/MerikensTripcodeEngine.1" DESTINATION share/man/man1)
+if(CMAKE_HOST_UNIX)
+    install(CODE "
+    EXECUTE_PROCESS(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink MerikensTripcodeEngine merikens-tripcode-engine
+       WORKING_DIRECTORY \"${CMAKE_INSTALL_PREFIX}/bin\"
+       )
+    ")
+    install(CODE "
+    EXECUTE_PROCESS(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink MerikensTripcodeEngine.1 merikens-tripcode-engine.1
+       WORKING_DIRECTORY \"${CMAKE_INSTALL_PREFIX}/share/man/man1\"
+       )
+    ")
+endif(CMAKE_HOST_UNIX)
 
 
 #############

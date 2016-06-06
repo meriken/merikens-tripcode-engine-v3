@@ -796,7 +796,7 @@ void DisplayCopyrights()
 	printf("\n");
 }
 
-void PrintUsage()
+void print_usage()
 {
 	printf("Usage:\n");
 	printf("    %s [-c] [-g] [-d device_no] [-x blocks_per_SM]\n", COMMAND);
@@ -815,7 +815,7 @@ void PrintUsage()
 	printf("        Use Shift-JIS characters for keys.\n");
 	printf("    --disable-gcn-assembler :\n");
 	printf("        Disable GCN assembler and use OpenCL kernels instead.\n");
-	printf("    -h : Show summary of options.\n");
+	printf("    -h : Show summary of options.\n\n");
 }
 
 #ifdef ENABLE_CUDA
@@ -1894,7 +1894,8 @@ void ObtainOptions(int32_t argCount, char **arguments)
 
 		} else if (   strcmp(arguments[indexArg], "-h") == 0
 			       || strcmp(arguments[indexArg], "--help") == 0) {
-			PrintUsage();
+			print_usage();
+			show_cursor();
 			exit(0);
 
 		} else {

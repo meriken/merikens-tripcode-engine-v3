@@ -1,0 +1,137 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2016 Meriken <meriken.ygch.net@gmail.com>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH MERIKENSTRIPCODEENGINE 1 "June 6 2016"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+MerikensTripcodeEngine \- a custom tripcode generator
+.SH SYNOPSIS
+.B MerikensTripcodeEngine
+.RI [ options ]
+.br
+.B merikens-tripcode-engine
+.RI [ options ]
+.SH DESCRIPTION
+.B MerikensTripcodeEngine
+is a cross-platform application designed to generate custom/vanity tripcodes 
+at maximum speed. It is arguably the fastest and most powerful program of 
+its kind. It makes effective use of available computing power of CPUs and 
+GPUs, and the user can specify flexible regex patterns for desired 
+tripcodes. It features highly optimized, extensively parallelized 
+implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA 
+CUDA, and Intel SSE2/AVX/AVX2.
+.PP
+You can generate custom/vanity tripcodes by specifying search patterns in 
+\fI./patterns.txt\fP and then running \fBMerikensTripcodeEngine\fP. 
+Matching tripcodes will be displayed and saved in \fI./tripcodes.txt\fP. 
+See \fBEXAMPLE OF PATTERNS.TXT\fP and \fBOPTIONS\fP below for details.
+.SH EXAMPLE OF PATTERNS.TXT
+# Meriken's Tripcode Engine English
+.br
+# Copyright (c) 2011-2016 !/Meriken/. <meriken.ygch.net@gmail.com>
+.br
+#
+.br
+# - Specify only one pattern in each line.
+.br
+# - Patterns must be at least 5 characters in length.
+.br
+# - Patterns that are too long will be ignored.
+.br
+# - Strings after '#' are treated as comments.
+.PP
+# Specify non-regex patterns after the "#noregex" directive.
+.br
+# You can only use [A-Za-z0-9./] for patterns.
+.PP
+#noregex
+.br
+TEST/                   # Matches "!TEST/UH3.F", "!TEST/ZXVew", etc.
+.PP
+# Specify regex patterns after the "#regex" directive.
+.br
+# The following operators and specifiers are available for use:
+.br
+# 
+.br
+#     ^ $ () | [] [^] . + * ? \\ {n} {m,n} \\n
+.br
+#     [:alpha:] [:upper:] [:lower:] [:digit:] [:alnum:] [:punct:]
+.br
+# 
+.br
+# It is encouraged to use '^' whenever possible to achieve maximum
+.br
+# search speed.
+.PP
+#regex
+.br
+#^TEST/                 # Matches "!TEST/UH3.F", "!TEST/ZXVew", etc.
+.br
+#/TEST$                 # Matches "!15ycs/TEST", "!wtra5/TEST", etc.
+.br
+#/TEST/                 # Matches "!y/TEST/5uj", "!anj/TEST/.", etc.
+.br
+#^[0-9]*$               # Matches "!8710915015", "!9104552720", etc.
+.br
+#^([:upper:]{5})\\1$     # Matches "!IOPAFIOPAF", "!UIABTUIABT", etc.
+.br
+#^[Mm]eriken[:punct:]   # Matches "!meriken/u6", "!Meriken.qe", etc.
+.PP
+#ignore
+.br
+Lines between "#ignore" are "#endignore" will be ignored.
+.br
+#endignore
+.PP
+# You cannot specify a pattern in the last line.
+.SH OPTIONS
+.TP
+.B \-g
+Use GPUs as search devices. (This option can be used in combination with "\-c".)
+.TP
+.B \-d \fIdevice_number\fI
+Specify a GPU to use.
+.TP
+.B \-c
+Use CPUs as search devices. (This option can be used in combination with "-g".)
+.TP
+.B \-l \fIlength_of_tripcodes\fI
+Specify either 10 or 12. (Please note that you can use 12 character tripcodes only at 2ch.net.)
+.TP
+.B \-x \fInumber_of_blocks/SM\fI
+Specify the number of blocks per SM (1 <= n <= 256) for CUDA devices.
+.TP
+.B \-t \fInumber_of_threads\fI
+Specify the number of CPU search threads.
+.TP
+.B \-o \fIoutput_file\fI
+Specify an output file.
+.TP
+.B \-f \fIinput_file\fI
+Specify an input file.
+.TP
+.B \-\-use\-one\-and\-two\-byte\-characters\-for\-keys
+Use Shift-JIS characters for keys.
+.TP
+.B \-\-disable\-gcn\-assembler
+Disable GCN assembler and use OpenCL kernels instead.
+.TP
+.B \-h
+Show summary of options.
+
+
