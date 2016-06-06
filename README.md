@@ -66,7 +66,7 @@ I am also working on the English version of my tripcode search service and would
 
 ## Windows
 
-### Building
+### Building on Windows
 
 You need the following tools to build Meriken's Tripcode Engine.
 
@@ -100,7 +100,7 @@ Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example 
 
 ## Linux, Mac OS X,  and Other POSIX Systems
 
-### Building
+### Building on POSIX Systems
 
 You should be able to build and run this application on any POSIX-compliant operating systems. You need the following tools to build Meriken's Tripcode Engine.
 
