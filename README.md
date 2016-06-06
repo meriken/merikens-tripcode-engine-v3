@@ -75,7 +75,7 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
-I recommend that the source archive be extracted at the root of a drive and that the environment variable `PreferredToolArchitecture` be set to `x64`. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
+I recommend that the source archive be extracted at the root of a drive and that the environment variable `PreferredToolArchitecture` be set to `x64` on 64-bit operating systems. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
 There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
