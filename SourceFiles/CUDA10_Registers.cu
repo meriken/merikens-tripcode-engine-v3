@@ -176,11 +176,12 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 	CUDA_ERROR(cudaMalloc((void **)&cudaKeyAndRandomBytes,    sizeof(unsigned char) * 8)); 
 	
 	info->mutex.lock();
+	bool multiple_kernels_mode = false;
 #ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
-	bool multiple_kernels_mode =    (   CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE == 0
-                                     && info->properties.major * 10 + info->properties.minor >= 50
-	                                 && info->properties.major * 10 + info->properties.minor <= 61)
-		                         || info->properties.major * 10 + info->properties.minor == CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;
+	multiple_kernels_mode =    (   CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE == 0
+                                && info->properties.major * 10 + info->properties.minor >= 50
+	                            && info->properties.major * 10 + info->properties.minor <= 61)
+		                    || info->properties.major * 10 + info->properties.minor == CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;
 
 	if (multiple_kernels_mode) {
 		CUDA_DES_InitializeKernelLauncher0();

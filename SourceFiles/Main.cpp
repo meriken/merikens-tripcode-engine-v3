@@ -462,13 +462,6 @@ void ReleaseResources()
 #endif
 }
 
-void PrintUsage()
-{
-	printf("Usage: %s [-c] [-g] [-d device_no] [-x blocks_per_SM] [-y global_work_size] [-z local_work_size] [-o tripcode_file] [-f pattern_file] [-i] [-w]\n", COMMAND);
-	getchar();
-	exit(-1);
-}
-
 void reset_cursor_pos(int n)
 {
 #if defined(_WIN32)
@@ -803,6 +796,26 @@ void DisplayCopyrights()
 	printf("\n");
 }
 
+void PrintUsage()
+{
+	printf("Usage:\n");
+	printf("    %s [-c] [-g] [-d device_no] [-x blocks_per_SM]\n", COMMAND);
+	printf("    [-o tripcode_file] [-f pattern_file]\n\n");
+	printf("Options:\n");
+	printf("    -g : Use GPUs as search devices.\n");
+	printf("    -d [device number] : Specify a GPU to use.\n");
+	printf("    -c : Use CPUs as search devices.\n");
+	printf("    -l [length of tripcodes] : Specify either 10 or 12. \n");
+	printf("    -x [number of blocks/SM] : \n");
+	printf("        Specify the number of blocks per SM (1 <= n <= 256) for CUDA devices.\n");
+	printf("    -t [number of threads] : Specify the number of CPU search threads.\n");
+	printf("    -o [output file] : Specify an output file.\n");
+	printf("    -f [input file] : Specify an input file.\n");
+	printf("    --use-one-and-two-byte-characters-for-keys :\n");
+	printf("        Use Shift-JIS characters for keys.\n");
+	printf("    --disable-gcn-assembler :\n");
+	printf("        Disable GCN assembler and use OpenCL kernels instead.\n");
+}
 #ifdef ENABLE_CUDA
 
 void UpdateCUDADeviceStatus(struct CUDADeviceSearchThreadInfo *info, const char *status)
@@ -1877,8 +1890,13 @@ void ObtainOptions(int32_t argCount, char **arguments)
 		} else if (strcmp(arguments[indexArg], "-u") == 0 && indexArg + 1 < argCount) {
 			options.search_duration = atoi(arguments[++indexArg]);
 
+		} else if (   strcmp(arguments[indexArg], "-h") == 0
+			       || strcmp(arguments[indexArg], "--help") == 0) {
+			PrintUsage();
+			exit(0);
+
 		} else {
-			ERROR0(TRUE, ERROR_INVALID_OPTION, "An invalid option was specified.");
+			ERROR0(TRUE, ERROR_INVALID_OPTION, "An invalid option was specified. Use -h option for help.");
 		}
 	}
 
