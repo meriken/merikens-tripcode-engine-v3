@@ -815,7 +815,9 @@ void PrintUsage()
 	printf("        Use Shift-JIS characters for keys.\n");
 	printf("    --disable-gcn-assembler :\n");
 	printf("        Disable GCN assembler and use OpenCL kernels instead.\n");
+	printf("    -h : Show summary of options.\n");
 }
+
 #ifdef ENABLE_CUDA
 
 void UpdateCUDADeviceStatus(struct CUDADeviceSearchThreadInfo *info, const char *status)
