@@ -764,6 +764,11 @@ void DisplayCopyrights()
 	printf("%s\n", PRODUCT_NAME);
 	printf("Copyright (C) 2011-2016 %c%c/Meriken/. <meriken.ygch.net@gmail.com>\n", 0x81, 0x9f);
 #endif
+	printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
+	printf("This is free software, and you are welcome to redistribute it\n");
+	printf("under certain conditions.\n");
+	printf("\n");
+
 	printf("Compiled at %s on %s\n", __TIME__, __DATE__);
 	printf("Enabled Features:");
 
@@ -788,10 +793,14 @@ void DisplayCopyrights()
 #endif
 #endif
 	printf("\n");
-	printf("This program comes with ABSOLUTELY NO WARRANTY.\n");
-    printf("This is free software, and you are welcome to redistribute it\n");
-    printf("under certain conditions.\n");
-    printf("\n");
+
+#if defined(CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE) && CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE == 0
+	printf("Target Compute Capabilities (CUDA): sm50 sm52 sm53 sm60 sm61\n");
+#elif defined(CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE)
+	printf("Target Compute Capability (CUDA): sm%02d\n", CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE);
+#endif
+
+	printf("\n");
 }
 
 #ifdef ENABLE_CUDA

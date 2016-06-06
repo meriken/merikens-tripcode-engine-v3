@@ -251,11 +251,21 @@ void StartChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info)
 	strcpy(childProcessPath, applicationPath);
 #ifdef _WIN32
 	auto applicationPathLen = strlen(applicationPath);
+	// For 32-bit OpenCL binaries
 	if (strcmp(childProcessPath + applicationPathLen - 6, "64.exe") == 0) {
-		strcpy(childProcessPath + applicationPathLen - 6, ".exe"); // For 32-bit OpenCL binaries
+		strcpy(childProcessPath + applicationPathLen - 6, ".exe");
 	}
 	else if (strcmp(childProcessPath + applicationPathLen - 13, "64_NVIDIA.exe") == 0) {
-		strcpy(childProcessPath + applicationPathLen - 13, ".exe"); // For 32-bit OpenCL binaries
+		strcpy(childProcessPath + applicationPathLen - 13, ".exe");
+	}
+	else if (strncmp(childProcessPath + applicationPathLen - 18, "64_NVIDIA_sm", 12) == 0) {
+		strcpy(childProcessPath + applicationPathLen - 18, ".exe");
+	}
+	else if (strcmp(childProcessPath + applicationPathLen - 11, "_NVIDIA.exe") == 0) {
+		strcpy(childProcessPath + applicationPathLen - 11, ".exe");
+	}
+	else if (strncmp(childProcessPath + applicationPathLen - 16, "_NVIDIA_sm", 10) == 0) {
+		strcpy(childProcessPath + applicationPathLen - 16, ".exe");
 	}
 #endif
 

@@ -39,18 +39,6 @@
 
 
 
-// #define SINGLE_SALT
-
-// 841.6M t/s (1 chunk, DEBUG_SALT_0, 10m)
-// 833.9M t/s (1 chunk 2 streams, DEBUG_SALT_0, 5h)
-// 835.2M t/s (1 chunks, 4096 kernels, 15m)
-// 831.4M t/s (1 chunks, JD, 3m)
-
-// 790.0M t/s (10000 chunks, DEBUG_SALT_0, 25m)
-// 795.0M t/s (10000 chunks, JD, 27m)
-// 787.1M t/s (10000 chunks, 4096 kernels, 11m)
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // INCLUDE FILE(S)                                                           //
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,6 +47,8 @@
 #include "CUDA10_Registers_Kernel_Common.h"
 #ifdef DEBUG_SALT_0
 #define SALT 0
+#elif defined(SALT)
+#undef SALT
 #endif
 #include "CUDA10_Registers_Kernel.h"
 
@@ -187,22 +177,29 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 	
 	info->mutex.lock();
 #ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
-	CUDA_DES_InitializeKernelLauncher0();
-	CUDA_DES_InitializeKernelLauncher1();
-	CUDA_DES_InitializeKernelLauncher2();
-	CUDA_DES_InitializeKernelLauncher3();
-	CUDA_DES_InitializeKernelLauncher4();
-	CUDA_DES_InitializeKernelLauncher5();
-	CUDA_DES_InitializeKernelLauncher6();
-	CUDA_DES_InitializeKernelLauncher7();
-	CUDA_DES_InitializeKernelLauncher8();
-	CUDA_DES_InitializeKernelLauncher9();
-	CUDA_DES_InitializeKernelLauncher10();
-	CUDA_DES_InitializeKernelLauncher11();
-	CUDA_DES_InitializeKernelLauncher12();
-	CUDA_DES_InitializeKernelLauncher13();
-	CUDA_DES_InitializeKernelLauncher14();
-	CUDA_DES_InitializeKernelLauncher15();
+	bool multiple_kernels_mode =    (   CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE == 0
+                                     && info->properties.major * 10 + info->properties.minor >= 50
+	                                 && info->properties.major * 10 + info->properties.minor <= 61)
+		                         || info->properties.major * 10 + info->properties.minor == CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;
+
+	if (multiple_kernels_mode) {
+		CUDA_DES_InitializeKernelLauncher0();
+		CUDA_DES_InitializeKernelLauncher1();
+		CUDA_DES_InitializeKernelLauncher2();
+		CUDA_DES_InitializeKernelLauncher3();
+		CUDA_DES_InitializeKernelLauncher4();
+		CUDA_DES_InitializeKernelLauncher5();
+		CUDA_DES_InitializeKernelLauncher6();
+		CUDA_DES_InitializeKernelLauncher7();
+		CUDA_DES_InitializeKernelLauncher8();
+		CUDA_DES_InitializeKernelLauncher9();
+		CUDA_DES_InitializeKernelLauncher10();
+		CUDA_DES_InitializeKernelLauncher11();
+		CUDA_DES_InitializeKernelLauncher12();
+		CUDA_DES_InitializeKernelLauncher13();
+		CUDA_DES_InitializeKernelLauncher14();
+		CUDA_DES_InitializeKernelLauncher15();
+	}
 #endif
 	CUDA_ERROR(cudaMemcpy(cudaTripcodeChunkArray, tripcodeChunkArray, sizeof(uint32_t) * numTripcodeChunk, cudaMemcpyHostToDevice));
 	CUDA_ERROR(cudaMemcpyToSymbol(cudaKeyCharTable_FirstByte,  keyCharTable_FirstByte,  SIZE_KEY_CHAR_TABLE));
@@ -224,7 +221,7 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 	CUDA_ERROR(cudaMalloc((void **)&cudaTripcodeIndexArray,       sizeof(unsigned char) * numThreadsPerGrid));
 	CUDA_ERROR(cudaMalloc((void **)&cudaPrevPassCountArray,       sizeof(unsigned char) * numThreadsPerGrid));
 	CUDA_ERROR(cudaMalloc((void **)&cudaPrevTripcodeIndexArray,   sizeof(unsigned char) * numThreadsPerGrid));
-	while (!GetTerminationState()) {
+	while (!GetTerminationState() && !GetErrorState()) {
 		// Choose the first 3 characters of the keyAndRandomBytes.
 		int32_t intSalt;
 		for (int32_t i = 3; i < lenTripcode; ++i)
@@ -281,43 +278,47 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 		CUDA_ERROR(cudaMemcpyAsync(cudaKeyVectorsFrom49To55, keyVectorsFrom49To55, sizeof(keyVectorsFrom49To55), cudaMemcpyHostToDevice, currentStream))
 		CUDA_ERROR(cudaMemcpyAsync(cudaKeyAndRandomBytes, keyAndRandomBytes, 8, cudaMemcpyHostToDevice, currentStream));
 #ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
-		switch (intSalt / 256) {
-		case 0: CUDA_DES_CALL_KERNEL_LAUNCHER(0); break;
-		case 1: CUDA_DES_CALL_KERNEL_LAUNCHER(1); break;
-		case 2: CUDA_DES_CALL_KERNEL_LAUNCHER(2); break;
-		case 3: CUDA_DES_CALL_KERNEL_LAUNCHER(3); break;
-		case 4: CUDA_DES_CALL_KERNEL_LAUNCHER(4); break;
-		case 5: CUDA_DES_CALL_KERNEL_LAUNCHER(5); break;
-		case 6: CUDA_DES_CALL_KERNEL_LAUNCHER(6); break;
-		case 7: CUDA_DES_CALL_KERNEL_LAUNCHER(7); break;
-		case 8: CUDA_DES_CALL_KERNEL_LAUNCHER(8); break;
-		case 9: CUDA_DES_CALL_KERNEL_LAUNCHER(9); break;
-		case 10: CUDA_DES_CALL_KERNEL_LAUNCHER(10); break;
-		case 11: CUDA_DES_CALL_KERNEL_LAUNCHER(11); break;
-		case 12: CUDA_DES_CALL_KERNEL_LAUNCHER(12); break;
-		case 13: CUDA_DES_CALL_KERNEL_LAUNCHER(13); break;
-		case 14: CUDA_DES_CALL_KERNEL_LAUNCHER(14); break;
-		case 15: CUDA_DES_CALL_KERNEL_LAUNCHER(15); break;
-		default: printf("intSalt: %d\n", intSalt); ASSERT(FALSE);
-		}
-#else
-		dim3 dimGrid(numBlocksPerGrid);
-		dim3 dimBlock(CUDA_DES_NUM_THREADS_PER_BLOCK);
+		if (multiple_kernels_mode) {
+			switch (intSalt / 256) {
+			case 0: CUDA_DES_CALL_KERNEL_LAUNCHER(0); break;
+			case 1: CUDA_DES_CALL_KERNEL_LAUNCHER(1); break;
+			case 2: CUDA_DES_CALL_KERNEL_LAUNCHER(2); break;
+			case 3: CUDA_DES_CALL_KERNEL_LAUNCHER(3); break;
+			case 4: CUDA_DES_CALL_KERNEL_LAUNCHER(4); break;
+			case 5: CUDA_DES_CALL_KERNEL_LAUNCHER(5); break;
+			case 6: CUDA_DES_CALL_KERNEL_LAUNCHER(6); break;
+			case 7: CUDA_DES_CALL_KERNEL_LAUNCHER(7); break;
+			case 8: CUDA_DES_CALL_KERNEL_LAUNCHER(8); break;
+			case 9: CUDA_DES_CALL_KERNEL_LAUNCHER(9); break;
+			case 10: CUDA_DES_CALL_KERNEL_LAUNCHER(10); break;
+			case 11: CUDA_DES_CALL_KERNEL_LAUNCHER(11); break;
+			case 12: CUDA_DES_CALL_KERNEL_LAUNCHER(12); break;
+			case 13: CUDA_DES_CALL_KERNEL_LAUNCHER(13); break;
+			case 14: CUDA_DES_CALL_KERNEL_LAUNCHER(14); break;
+			case 15: CUDA_DES_CALL_KERNEL_LAUNCHER(15); break;
+			default: printf("intSalt: %d\n", intSalt); ASSERT(FALSE);
+			}
+		} else {
+#endif
+			dim3 dimGrid(numBlocksPerGrid);
+			dim3 dimBlock(CUDA_DES_NUM_THREADS_PER_BLOCK);
 #ifdef DEBUG_SALT_0
-		CUDA_DES_PerformSearch_0<<<dimGrid, dimBlock, 0, currentStream>>>(
+			CUDA_DES_PerformSearch_0<<<dimGrid, dimBlock, 0, currentStream>>>(
 #else
-		CUDA_DES_PerformSearch<<<dimGrid, dimBlock, 0, currentStream>>>(
+			CUDA_DES_PerformSearch<<<dimGrid, dimBlock, 0, currentStream>>>(
 #endif	
-			cudaPassCountArray,
-			cudaTripcodeIndexArray,
-			cudaTripcodeChunkArray,
-			numTripcodeChunk,
-			intSalt,
-			cudaKey0Array,
-			cudaKey7Array,
-			cudaKeyVectorsFrom49To55,
-			cudaKeyAndRandomBytes,
-			searchMode);
+				cudaPassCountArray,
+				cudaTripcodeIndexArray,
+				cudaTripcodeChunkArray,
+				numTripcodeChunk,
+				intSalt,
+				cudaKey0Array,
+				cudaKey7Array,
+				cudaKeyVectorsFrom49To55,
+				cudaKeyAndRandomBytes,
+				searchMode);
+#ifdef CUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE
+		}
 #endif
 		CUDA_ERROR(cudaGetLastError());
 		CUDA_ERROR(cudaMemcpyAsync(passCountArray,     cudaPassCountArray,     sizeof(unsigned char) * numThreadsPerGrid, cudaMemcpyDeviceToHost, currentStream));
@@ -386,7 +387,8 @@ void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadIn
 		timeElapsed += deltaTime;
 		speed = numGeneratedTripcodes / timeElapsed;
 		sprintf(status,
-			    "%.1lfM TPS, %d blocks/SM",
+			    "%s %.1lfM TPS, %d blocks/SM",
+		        multiple_kernels_mode ? "[multiple kernels]" : "[single kernel]",
 				speed / 1000000,
 				numBlocksPerSM);
 		UpdateCUDADeviceStatus(info, status);

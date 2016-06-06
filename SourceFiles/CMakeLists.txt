@@ -20,7 +20,7 @@ if(ENGLISH_VERSION)
     set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENGLISH_VERSION")
 endif()
 if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
-    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE")
+    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE=0")
 endif()
 
 
@@ -253,9 +253,9 @@ if(ENABLE_CUDA)
     set(CUDA_HOST_COMPILER ${CMAKE_CXX_COMPILER})
     if(ENABLE_CUDA_DES_MULTIPLE_KERNELS_MODE)
         if(CUDA_VERSION_STRING VERSION_EQUAL "8.0" OR CUDA_VERSION_STRING VERSION_GREATER "8.0")
-	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_60,code=sm_60;-gencode=arch=compute_61,code=sm_61;-maxrregcount=168)
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE=0;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-gencode=arch=compute_60,code=sm_60;-gencode=arch=compute_61,code=sm_61;-maxrregcount=168)
 		else()
-	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-maxrregcount=168)
+	        set(CUDA_NVCC_FLAGS -DENABLE_CUDA;-DCUDA_DES_ENABLE_MULTIPLE_KERNELS_MODE=0;-gencode=arch=compute_50,code=sm_50;-gencode=arch=compute_52,code=sm_52;-gencode=arch=compute_53,code=sm_53;-maxrregcount=168)
 		endif()
  		cuda_compile(
 			CUDA10_REGISTERS_CU_OUTPUT
