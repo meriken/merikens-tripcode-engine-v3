@@ -185,7 +185,7 @@ You need to build the application with GCC.
 $ git clone https://github.com/meriken/merikens-tripcode-engine-v3
 $ cd merikens-tripcode-engine-v3
 $ sudo pkg install gcc
-$ export LD_LIBRARY_PATH="/usr/local/lib/gcc48
+$ export LD_LIBRARY_PATH="/usr/local/lib/gcc48"
 $ sudo pkg install p7zip
 $ ./BuildAll.sh --with-toolset=gcc --install
 ```
