@@ -99,6 +99,8 @@ Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" and "Options" below.
 
+Alternatively, you can extract one of the NVIDIA-optimized versions in `MerikensTripcodeEngine64_NVIDIA.7z` and use it instead if you are using an NVIDIA video card with the compute capability of 5.0 or greater on a 64-bit operating system. Please note that these binaries are exremely huge.
+
 ## Linux, Mac OS X,  and Other POSIX Systems
 
 ### Building on POSIX Systems
