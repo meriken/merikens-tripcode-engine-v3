@@ -11,7 +11,7 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 ## Downloads
 
 ### Precompiled Binaries for Windows
-
+* [MerikensTripcodeEngine_3.2.12_English_Windows.zip]( http://bit.ly/1tdRqRn )<sup>[1](#myfootnote1)</sup>
 * [MerikensTripcodeEngine_3.2.11_English_Windows.zip]( http://bit.ly/20YC2D0 )<sup>[1](#myfootnote1)</sup>
 * [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )<sup>[2](#myfootnote2)</sup>
 * [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )<sup>[2](#myfootnote2)</sup>
