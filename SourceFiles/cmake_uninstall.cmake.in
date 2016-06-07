@@ -19,3 +19,18 @@ foreach(file ${files})
     message(STATUS "File $ENV{DESTDIR}${file} does not exist.")
   endif(IS_SYMLINK "$ENV{DESTDIR}${file}" OR EXISTS "$ENV{DESTDIR}${file}")
 endforeach(file)
+
+message(STATUS "Uninstalling @CMAKE_INSTALL_PREFIX@/bin/merikens-tripcode-engine")
+exec_program(
+    "@CMAKE_COMMAND@" ARGS "-E remove \"$ENV{DESTDIR}@CMAKE_INSTALL_PREFIX@/bin/merikens-tripcode-engine\""
+    OUTPUT_VARIABLE rm_out
+    RETURN_VALUE rm_retval
+    )
+
+message(STATUS "Uninstalling @CMAKE_INSTALL_PREFIX@/share/man/man1/merikens-tripcode-engine.1")
+exec_program(
+    "@CMAKE_COMMAND@" ARGS "-E remove \"$ENV{DESTDIR}@CMAKE_INSTALL_PREFIX@/share/man/man1/merikens-tripcode-engine.1\""
+    OUTPUT_VARIABLE rm_out
+    RETURN_VALUE rm_retval
+    )
+
