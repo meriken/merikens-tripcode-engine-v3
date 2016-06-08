@@ -356,7 +356,9 @@ extern unsigned char charTableForKagami[256];
 // CPUID                                                                     //
 ///////////////////////////////////////////////////////////////////////////////
 
-extern "C" int32_t  IsAVXSupported();
-extern "C" int32_t  _myxgetbv(int32_t ecx);
-extern     int32_t  IsAVX2Supported();
+#ifdef ENABLE_AVX
+extern bool IsAVXSupported();
+extern bool IsAVX2Supported();
+#endif
+
 extern     BOOL IsCPUBasedOnNehalemMicroarchitecture();

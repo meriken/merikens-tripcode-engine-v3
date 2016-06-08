@@ -285,3 +285,7 @@ extern unsigned char charTableForSeed[256];
 #else
 #define MIN std::min
 #endif
+
+#if defined(ARCH_X86) && (defined(_MSC_VER) || defined(__INTEL_COMPILER) ||  defined(__GNUC__) || defined(__clang__))
+#define ENABLE_AVX
+#endif

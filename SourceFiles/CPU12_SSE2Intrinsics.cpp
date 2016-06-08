@@ -227,7 +227,7 @@ static VECTOR_ALIGNMENT sha1_vector K3 = {0xca62c1d6, 0xca62c1d6, 0xca62c1d6, 0x
 ///////////////////////////////////////////////////////////////////////////////
 
 
-#ifdef ARCH_X86
+#ifdef ENABLE_AVX
 extern uint32_t SearchForSHA1Tripcodes_AVX();
 extern uint32_t SearchForSHA1Tripcodes_AVX2();
 #endif
@@ -239,10 +239,10 @@ void Thread_SearchForSHA1TripcodesOnCPU()
 			sleep_for_milliseconds(PAUSE_INTERVAL);
 
 		uint32_t numGeneratedTripcodes;
-#ifdef ARCH_X86
-		if (__builtin_cpu_supports("avx2")) {
+#ifdef ENABLE_AVX
+		if (IsAVX2Supported()) {
 			numGeneratedTripcodes = SearchForSHA1Tripcodes_AVX2();
-		} else if (__builtin_cpu_supports("avx")) {
+		} else if (IsAVXSupported()) {
 			numGeneratedTripcodes = SearchForSHA1Tripcodes_AVX();
 		} else {
 			numGeneratedTripcodes = SearchForSHA1Tripcodes();

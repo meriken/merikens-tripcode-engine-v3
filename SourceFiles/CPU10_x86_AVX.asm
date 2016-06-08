@@ -31,8 +31,6 @@
 ; along with this program.  If not, see <http:;www.gnu.org/licenses/>.
 
 global _DES_Crypt25_x86_AVX
-global _IsAVXSupported
-global __myxgetbv
 
 
 
@@ -778,44 +776,3 @@ section .text
 		pop ebp
 		ret
 		db "THIS_IS_THE_END_OF_THE_FUNCTION",  0x00
-
-
-
-		; int IsAVXSupported();
-	_IsAVXSupported:
-		push ebx
-		xor eax, eax
-		cpuid
-		cmp eax, 1 ; does CPUID support eax = 1?
-		jb AVX_not_supported
-		mov eax, 1
-		cpuid
-		and ecx, 018000000h ;check 27 bit (OS uses XSAVE/XRSTOR)
-		cmp ecx, 018000000h ; and 28 (AVX supported by CPU)
-		jne AVX_not_supported
-		xor ecx, ecx ; XFEATURE_ENABLED_MASK/XCR0 register number = 0
-		xgetbv ; XFEATURE_ENABLED_MASK register is in edx:eax
-		and eax, 110b
-		cmp eax, 110b ; check the AVX registers restore at context switch
-		jne AVX_not_supported
-		mov eax, 1
-		pop ebx
-		ret
-	AVX_not_supported:
-		xor eax, eax
-		pop ebx
-		ret
-
-
-
-	__myxgetbv:
-		push ebp
-		mov ebp, esp
-
-		mov ecx, [ebp + 8]
-		xgetbv
-
-		mov esp, ebp
-		pop ebp
-		ret
-

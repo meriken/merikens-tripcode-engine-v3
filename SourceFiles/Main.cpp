@@ -773,14 +773,18 @@ void DisplayCopyrights()
 #endif
 
 #ifdef ARCH_64BIT
-#ifdef ARCH_X86
+#if defined(ENABLE_AVX)
 	printf(" SSE2/AVX/AVX2(x86_64)");
+#elif defined(ARCH_X86)
+	printf(" SSE2(x86_64)");
 #else
 	printf(" Generic(64-bit)");
 #endif
 #else
-#ifdef ARCH_X86
+#if defined(ENABLE_AVX)
 	printf(" SSE2/AVX/AVX2(x86)");
+#elif defined(ARCH_X86)
+	printf(" SSE2(x86)");
 #else
 	printf(" Generic(32-bit)");
 #endif
@@ -1602,7 +1606,7 @@ void InitSearchDevices(BOOL displayDeviceInformation)
 #endif
             printf("  Instruction Set:         ");
 #ifdef ARCH_64BIT
-#ifdef USE_YASM
+#ifdef ENABLE_AVX
 	        if (IsAVX2Supported()) {
 		        printf(" AVX2(x86_64)");
 	        } else if (IsAVXSupported()) {
@@ -1611,33 +1615,21 @@ void InitSearchDevices(BOOL displayDeviceInformation)
 		        printf(" SSE2(x86_64)");
 	        }
 #elif defined(ARCH_X86)
-            if (__builtin_cpu_supports("avx2")) {
-		        printf(" AVX2(x86_64)");
-	        } else if (__builtin_cpu_supports("avx")) {
-		        printf(" AVX(x86_64)");
-	        } else {
-		        printf(" SSE2(x86_64)");
-	        }
+		    printf(" SSE2(x86_64)");
 #else
 	        printf(" Generic(64-bit)");
 #endif
 #else
-#ifdef USE_YASM
-	        if (IsAVX2Supported()) {
-		        printf(" AVX2(x86)");
-	        } else if (IsAVXSupported()) {
-		        printf(" AVX(x86)");
-	        } else {
-		        printf(" SSE2(x86)");
-	        }
+#ifdef ENABLE_AVX
+			if (IsAVX2Supported()) {
+				printf(" AVX2(x86)");
+			} else if (IsAVXSupported()) {
+				printf(" AVX(x86)");
+			} else {
+				printf(" SSE2(x86)");
+			}
 #elif defined(ARCH_X86)
-            if (__builtin_cpu_supports("avx2")) {
-		        printf(" AVX2(x86)");
-	        } else if (__builtin_cpu_supports("avx")) {
-		        printf(" AVX(x86)");
-	        } else {
-		        printf(" SSE2(x86)");
-	        }
+			printf(" SSE2(x86)");
 #else
 	        printf(" Generic(32-bit)");
 #endif

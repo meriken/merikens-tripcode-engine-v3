@@ -211,16 +211,16 @@ inline void vandn(vtype &dst, vtype &a, vtype &b)
 // THREAD                                                                    //
 ///////////////////////////////////////////////////////////////////////////////
 
-#ifdef ARCH_X86
+#ifdef ENABLE_AVX
 
 extern void CPU_DES_MainLoop_AVX2();
 extern void CPU_DES_MainLoop_AVX();
 
 void Thread_SearchForDESTripcodesOnCPU()
 {
-    if(__builtin_cpu_supports("avx2")) {
+    if(IsAVX2Supported()) {
     	CPU_DES_MainLoop_AVX2();
-    } else if(__builtin_cpu_supports("avx")) {
+    } else if(IsAVXSupported()) {
     	CPU_DES_MainLoop_AVX();
     } else {
     	CPU_DES_MainLoop();
