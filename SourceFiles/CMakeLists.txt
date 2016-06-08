@@ -57,7 +57,7 @@ try_run(
     "${CMAKE_BINARY_DIR}"
     "${CMAKE_SOURCE_DIR}/DetectX86.cpp"
     COMPILE_OUTPUT_VARIABLE COMPILE_OUTPUT)
-if (COMPILE_OUTPUT MATCHES "ARCH_X86")
+if (COMPILE_OUTPUT MATCHES "ARCH_X86" AND CMAKE_COMPILER_IS_GNUCXX) # clang does not support __builtin_cpu_supports()
     set(ARCH_X86 TRUE)
 else()
     set(ARCH_X86 FALSE)
@@ -112,7 +112,7 @@ if (ENABLE_CUDA AND CMAKE_COMPILER_IS_GNUCC)
     endif()
 endif()
 if(ENABLE_CUDA)
-    set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENABLE_CUDA")
+	set(MTE_COMPILE_FLAGS "${MTE_COMPILE_FLAGS} -DENABLE_CUDA -DCUDA_VERSION=${CUDA_VERSION_MAJOR}${CUDA_VERSION_MINOR}")
 endif()
 
 
@@ -416,14 +416,16 @@ file(GLOB OPENCL_SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/OpenCL/*.cl")
 install(FILES ${OPENCL_SOURCE_FILES} DESTINATION etc/MerikensTripcodeEngine/OpenCL)
 install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/MerikensTripcodeEngine.1" DESTINATION share/man/man1)
 if(CMAKE_HOST_UNIX)
+    install(CODE "message(STATUS \"Installing: \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/merikens-tripcode-engine\")")
     install(CODE "
     EXECUTE_PROCESS(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink MerikensTripcodeEngine merikens-tripcode-engine
-       WORKING_DIRECTORY \"${CMAKE_INSTALL_PREFIX}/bin\"
+       WORKING_DIRECTORY \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin\"
        )
     ")
+    install(CODE "message(STATUS \"Installing: \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/man/man1/merikens-tripcode-engine.1\")")
     install(CODE "
     EXECUTE_PROCESS(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink MerikensTripcodeEngine.1 merikens-tripcode-engine.1
-       WORKING_DIRECTORY \"${CMAKE_INSTALL_PREFIX}/share/man/man1\"
+       WORKING_DIRECTORY \"\$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/share/man/man1\"
        )
     ")
 endif(CMAKE_HOST_UNIX)

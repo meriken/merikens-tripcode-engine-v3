@@ -11,7 +11,7 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 ## Downloads
 
 ### Precompiled Binaries for Windows
-
+* [MerikensTripcodeEngine_3.2.12_English_Windows.zip]( http://bit.ly/1tdRqRn )<sup>[1](#myfootnote1)</sup>
 * [MerikensTripcodeEngine_3.2.11_English_Windows.zip]( http://bit.ly/20YC2D0 )<sup>[1](#myfootnote1)</sup>
 * [MerikensTripcodeEngine_3.2.0_English_Windows.zip]( http://j.mp/27EmyJi )<sup>[2](#myfootnote2)</sup>
 * [MerikensTripcodeEngine_2.1.2_English.zip]( http://j.mp/26rh3x7 )<sup>[2](#myfootnote2)</sup>
@@ -28,7 +28,7 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 * [merikens-tripcode-engine-v3-git]( https://aur.archlinux.org/packages/merikens-tripcode-engine-v3-git/ )
 
 ### Source Codes
-* [merikens-tripcode-engine-v3-v3.2.11.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_11_tar_gz )
+* [merikens-tripcode-engine-v3-v3.2.13.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_13_tar_gz )
 
 ## Performance
 
@@ -66,7 +66,7 @@ I am also working on the English version of my tripcode search service and would
 
 ## Windows
 
-### Building
+### Building on Windows
 
 You need the following tools to build Meriken's Tripcode Engine.
 
@@ -75,7 +75,7 @@ You need the following tools to build Meriken's Tripcode Engine.
 * AMD APP SDK 3.0
 * YASM **1.2.0** (Do not use YASM 1.3.0!)
 
-I recommend that the source archive be extracted at the root of a drive and that the environment variable `PreferredToolArchitecture` be set to `x64`. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
+I recommend that the source archive be extracted at the root of a drive and that the environment variable `PreferredToolArchitecture` be set to `x64` on 64-bit operating systems. This program uses Boost 1.61.0 and Boost.Process 0.5. Make sure to extract `BoostPackages/boost_1_61_0.7z` and run `BoostPackages/BuildBoostForVisualStudio.bat` before building `VisualStudio/MerikensTripcodeEngine.sln`.
 
 There are several configurations. If you are using a 64-bit operating system, you need to build both 32-bit and 64-bit executables. Please note that NVIDIA-optimized versions take **extremely** long time to build.
 
@@ -98,9 +98,11 @@ Specify search patterns in `patterns.txt` and run either
 `MerikensTripcodeEngine64.exe`, if you are using a 64-bit operating system.
 Matching tripcodes will be displayed and saved in `tripcodes.txt`. See "Example of 'patterns.txt'" and "Options" below.
 
+Alternatively, you can extract one of the NVIDIA-optimized versions in `MerikensTripcodeEngine64_NVIDIA.7z` and use it instead if you are using an NVIDIA video card with the compute capability of 5.0 or greater on a 64-bit operating system. Please note that these binaries are exremely huge.
+
 ## Linux, Mac OS X,  and Other POSIX Systems
 
-### Building
+### Building on POSIX Systems
 
 You should be able to build and run this application on any POSIX-compliant operating systems. You need the following tools to build Meriken's Tripcode Engine.
 
@@ -183,6 +185,7 @@ You need to build the application with GCC.
 $ git clone https://github.com/meriken/merikens-tripcode-engine-v3
 $ cd merikens-tripcode-engine-v3
 $ sudo pkg install gcc
+$ export LD_LIBRARY_PATH="/usr/local/lib/gcc48"
 $ sudo pkg install p7zip
 $ ./BuildAll.sh --with-toolset=gcc --install
 ```
