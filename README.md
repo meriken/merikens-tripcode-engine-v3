@@ -28,6 +28,7 @@ implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and 
 * [merikens-tripcode-engine-v3-git]( https://aur.archlinux.org/packages/merikens-tripcode-engine-v3-git/ )
 
 ### Source Codes
+* [merikens-tripcode-engine-v3-v3.2.14.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_14_tar_gz )
 * [merikens-tripcode-engine-v3-v3.2.13.tar.gz]( http://bit.ly/merikens-tripcode-engine-v3-v3_2_13_tar_gz )
 
 ## Performance
