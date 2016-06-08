@@ -57,7 +57,7 @@ try_run(
     "${CMAKE_BINARY_DIR}"
     "${CMAKE_SOURCE_DIR}/DetectX86.cpp"
     COMPILE_OUTPUT_VARIABLE COMPILE_OUTPUT)
-if (COMPILE_OUTPUT MATCHES "ARCH_X86" AND CMAKE_COMPILER_IS_GNUCXX) # clang does not support __builtin_cpu_supports()
+if (COMPILE_OUTPUT MATCHES "ARCH_X86")
     set(ARCH_X86 TRUE)
 else()
     set(ARCH_X86 FALSE)
