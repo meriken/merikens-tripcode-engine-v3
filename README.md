@@ -130,7 +130,7 @@ Please note that NVIDIA-optimized versions (`--enable-cuda-des-multiple-kernels-
 
 #### Installation Instructions for Ubuntu 16.04 LTS
 
-The easiest way is to download the application from my PPA:
+The easiest way is to download the application from my PPA without CUDA support:
 
 ```
 $ sudo add-apt-repository ppa:meriken/ppa
@@ -151,14 +151,14 @@ For optimal performance with NVIDIA video cards, however, you need to build the 
 $ git clone https://github.com/meriken/merikens-tripcode-engine-v3
 $ cd merikens-tripcode-engine-v3
 $ sudo apt-get update && sudo apt-get install nvidia-cuda-toolkit gcc-4.9 g++-4.9 p7zip-full libbz2-dev python2.7-dev mesa-common-dev
-$ ./BuildAll.sh --install
+$ ./BuildAll.sh --enable-cuda-des-multiple-kernels-mode --install
 ```
 
-Unfortunately, AMD fglrx Driver is not available for Ubuntu 16.04 LTS, so you cannot use AMD video cards with this application. If you would like to use an AMD graphics card, please stick to Ubuntu 14.04 LTS.
+Unfortunately, AMD Proprietary (fglrx) Driver is not available for Ubuntu 16.04 LTS, so you cannot use AMD video cards with this application. If you would like to use an AMD graphics card, please stick to Ubuntu 14.04 LTS.
 
 #### Installation Instructions for Ubuntu 14.04 LTS
 
-The only difference from Ubuntu 16.04 LTS is that you have to install CUDA Toolkit 7.5+ manually before you build the application.
+The only differences from Ubuntu 16.04 LTS are that the `merikens-tripcode-engine-cuda` package is not available and that you have to install CUDA Toolkit 7.5+ manually if you want to build the application with CUDA support.
 
 ```
 $ git clone https://github.com/meriken/merikens-tripcode-engine-v3
