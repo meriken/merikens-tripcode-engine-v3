@@ -223,9 +223,13 @@ extern BOOL GetTerminationState();
 extern const char *GetErrorMessage(int32_t errorCode);
 
 //
+#ifdef ENABLE_CUDA
 extern void UpdateCUDADeviceStatus  (struct CUDADeviceSearchThreadInfo   *info, const char *status);
+#endif
+#ifdef ENABLE_OPENCL
 extern void UpdateOpenCLDeviceStatus(struct OpenCLDeviceSearchThreadInfo *info, const char *status);
 extern void UpdateOpenCLDeviceStatus_ChildProcess(struct OpenCLDeviceSearchThreadInfo *info, const char *status, double currentSpeed, double averageSpeed, double totalNumGeneratedTripcodes, uint32_t numDiscardedTripcodes);
+#endif
 
 //
 extern void show_cursor();
@@ -334,15 +338,19 @@ extern void Generate10CharTripcodes(TripcodeKeyPair *p, int32_t numTripcodes);
 ///////////////////////////////////////////////////////////////////////////////
 
 extern void Thread_SearchForSHA1TripcodesOnCPU();
-extern void Thread_SearchForSHA1TripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info);
-extern void Thread_SearchForSHA1TripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
-
 extern void Thread_SearchForDESTripcodesOnCPU();
+
+#ifdef ENABLE_CUDA
+extern void Thread_SearchForSHA1TripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info);
 extern void Thread_SearchForDESTripcodesOnCUDADevice(CUDADeviceSearchThreadInfo *info);
 extern void Thread_SearchForDESTripcodesOnCUDADevice_Registers(CUDADeviceSearchThreadInfo *info);
-extern void Thread_SearchForDESTripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
+#endif
 
+#ifdef ENABLE_OPENCL
+extern void Thread_SearchForSHA1TripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
+extern void Thread_SearchForDESTripcodesOnOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
 extern void Thread_RunChildProcessForOpenCLDevice(OpenCLDeviceSearchThreadInfo *info);
+#endif
 
 extern void DES_CreateExpansionFunction(char *saltString, unsigned char *expansionFunction);
 extern const char          charToIndexTableForDES[0x100];
