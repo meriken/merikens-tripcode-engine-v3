@@ -170,12 +170,12 @@ $ ./BuildAll.sh --install
 
 #### Build Instructions for Arch Linux 201604
 
-You can download the application from the AUR.
+You can download the application from the AUR. OpenCL support is enabled by default, but you need to install CUDA Toolkit 7.5 or later manually for CUDA support.
 
 ```
 $ git clone https://aur.archlinux.org/merikens-tripcode-engine-v3-git.git
 $ cd merikens-tripcode-engine-v3-git
-$ makepkg -sri
+$ makepkg -si
 ```
 
 #### Build Instructions for FreeBSD 10.3
