@@ -867,12 +867,13 @@ void UpdateOpenCLDeviceStatus_ChildProcess(struct OpenCLDeviceSearchThreadInfo *
 #endif
 
 #ifdef __GNUC__
-#if __GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 9)
+#if (__GNUC__ >= 5 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 9)) && defined(ENABLE_OPENCL)
 #define CLEAN_UP_CHILD_PROCESS_INFO
 #endif
-#else
+#elif defined(ENABLE_OPENCL)
 #define CLEAN_UP_CHILD_PROCESS_INFO
 #endif
+
 
 #ifdef CLEAN_UP_CHILD_PROCESS_INFO
 #include <queue>
