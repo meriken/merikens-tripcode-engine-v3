@@ -1,4 +1,4 @@
-Meriken's Tripcode Engine [![Build Status](https://travis-ci.org/meriken/merikens-tripcode-engine-v3.svg?branch=master)](https://travis-ci.org/meriken/merikens-tripcode-engine-v3) [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/meriken/merikens-tripcode-engine-v3/master/LICENSE)
+Meriken's Tripcode Engine [![Build Status](https://api.travis-ci.org/meriken/merikens-tripcode-engine-v3.svg?branch=master )](https://travis-ci.org/meriken/merikens-tripcode-engine-v3) [![GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://raw.githubusercontent.com/meriken/merikens-tripcode-engine-v3/master/LICENSE)
 =========================
 
 This repository was moved from https://github.com/meriken/merikens-tripcode-engine
