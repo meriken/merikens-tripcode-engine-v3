@@ -8,8 +8,20 @@ It is arguably the fastest and most powerful program of its kind. It makes effec
 and the user can specify flexible regex patterns for desired tripcodes. It features highly optimized, extensively parallelized 
 implementations of bitslice DES and SHA-1 for OpenCL, AMD GCN, NVIDIA CUDA, and Intel SSE2/AVX/AVX2.
 
-* auto-gen TOC:
-{:toc}
+## Table of Contents
+
+* [Downloads](#downloads)
+* [Performance](#performance)
+* [Donations](#donations)
+* [Supported Video Cards](#supported-video-cards)
+* [Windows](#windows)
+* [Linux, Mac OS X, and Other POSIX Systems]( #linux-mac-os-x--and-other-posix-systems )
+* [Example of "patterns.txt"](#example-of-patternstxt )
+* [Options](#options)
+* [Support Threads](#support-threads)
+* [Source Code](#source-code)
+* [Miscellaneous Notes](#miscellaneous-notes)
+* [License](#license)
 
 ## Downloads
 
