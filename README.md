@@ -65,6 +65,13 @@ I am also working on the English version of my tripcode search service and would
 * PayPal: `meriken.ygch.net@gmail.com`
 * Bitcoin: `1BZrWADRhLr9DyQYYRJhRcmudE3vntT5em`
 
+## Supported Video Cards
+
+* AMD Radeon HD 5xxx or later
+* CUDA-enabled NVIDIA video card with compute capability of 2.0 or higher<sup>[3](#myfootnote3)</sup>
+
+<a name="myfootnote3">3</a>: [CUDA GPUs]( https://developer.nvidia.com/cuda-gpus )<br>
+
 ## Windows
 
 ### Building on Windows
