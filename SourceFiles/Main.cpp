@@ -635,6 +635,28 @@ BOOL IsValidKey(unsigned char *key)
 	return TRUE;
 }
 
+static bool is_valid_one_byte_key_char(unsigned char key_char)
+{
+	if (lenTripcode == 10) {
+		return    IS_ONE_BYTE_KEY_CHAR(key_char)
+		       && (key_char < 128 || !IS_ONE_BYTE_KEY_CHAR(key_char - 128));
+	}
+	else {
+		return IS_ONE_BYTE_KEY_CHAR(key_char);
+	}
+}
+
+static bool is_valid_second_byte_sjis(unsigned char key_char)
+{
+	if (lenTripcode == 10) {
+		return    IS_SECOND_BYTE_SJIS(key_char)
+			   && (key_char < 128 || !IS_SECOND_BYTE_SJIS(key_char - 128));
+	}
+	else {
+		return IS_SECOND_BYTE_SJIS(key_char);
+	}
+}
+
 void CreateCharacterTables(void)
 {
 	unsigned char keyChar;
@@ -664,10 +686,10 @@ void CreateCharacterTables(void)
 	} else {
 		do {
 			keyChar = RandomByte();
-		} while (!IS_ONE_BYTE_KEY_CHAR(keyChar));
+		} while (!is_valid_one_byte_key_char(keyChar));
 		for (i = 0; i < SIZE_KEY_CHAR_TABLE; ++i) {
 			keyChar = ((int32_t)keyChar + 1) & 0xff;
-			while (!IS_ONE_BYTE_KEY_CHAR(keyChar))
+			while (!is_valid_one_byte_key_char(keyChar))
 				keyChar = ((int32_t)keyChar + 1) & 0xff;
 			keyCharTable_OneByte[i] = keyChar;
 		}
@@ -694,7 +716,7 @@ void CreateCharacterTables(void)
 			keyCharTable_SecondByteAndOneByte[i] = keyCharTable_OneByte[i];
 		}
 		for (int32_t i = 0; i < 256; ++i) {
-			if (IS_ONE_BYTE_KEY_CHAR(i)) {
+			if (is_valid_one_byte_key_char(i)) {
 				++numFirstByte;
 				++numSecondByte;
 				++numOneByte;
@@ -704,41 +726,41 @@ void CreateCharacterTables(void)
 		// Set keyCharTable_FirstByte[].
 		do {
 			keyChar = RandomByte();
-		} while (!(IS_ONE_BYTE_KEY_CHAR(keyChar) || IsFirstByteSJIS(keyChar)));
+		} while (!(is_valid_one_byte_key_char(keyChar) || IsFirstByteSJIS(keyChar)));
 		for (i = 0; i < SIZE_KEY_CHAR_TABLE; ++i) {
 			keyCharTable_FirstByte[i] = keyChar;
 			do {
 				keyChar = ((int32_t)keyChar + 1) & 0xff;
-			} while (!(IS_ONE_BYTE_KEY_CHAR(keyChar) || IsFirstByteSJIS(keyChar)));
+			} while (!(is_valid_one_byte_key_char(keyChar) || IsFirstByteSJIS(keyChar)));
 		}
 
 		// Set keyCharTable_SecondByte[].
 		do {
 			keyChar = RandomByte();
-		} while (!IS_SECOND_BYTE_SJIS(keyChar));
+		} while (!is_valid_second_byte_sjis(keyChar));
 		for (i = 0; i < SIZE_KEY_CHAR_TABLE; ++i) {
 			keyCharTable_SecondByte[i] = keyChar;
 			do {
 				keyChar = ((int32_t)keyChar + 1) & 0xff;
-			} while (!IS_SECOND_BYTE_SJIS(keyChar));
+			} while (!is_valid_second_byte_sjis(keyChar));
 		}
 
 		// Set keyCharTable_SecondByteAndOneByte[].
 		do {
 			keyChar = RandomByte();
-		} while (!(IS_SECOND_BYTE_SJIS(keyChar) && IS_ONE_BYTE_KEY_CHAR(keyChar)));
+		} while (!(is_valid_second_byte_sjis(keyChar) && is_valid_one_byte_key_char(keyChar)));
 		for (i = 0; i < SIZE_KEY_CHAR_TABLE; ++i) {
 			keyCharTable_SecondByteAndOneByte[i] = keyChar;
 			do {
 				keyChar = ((int32_t)keyChar + 1) & 0xff;
-			} while (!(IS_SECOND_BYTE_SJIS(keyChar) && IS_ONE_BYTE_KEY_CHAR(keyChar)));
+			} while (!(is_valid_second_byte_sjis(keyChar) && is_valid_one_byte_key_char(keyChar)));
 		}
 
 		// Count characters in each table.
 		for (int32_t i = 0; i < 256; ++i) {
-			if (IS_ONE_BYTE_KEY_CHAR(i) || IsFirstByteSJIS(i) ) ++numFirstByte;
-			if (                           IS_SECOND_BYTE_SJIS(i)) ++numSecondByte;
-			if (IS_ONE_BYTE_KEY_CHAR(i)                          ) ++numOneByte;
+			if (is_valid_one_byte_key_char(i) || IsFirstByteSJIS(i)          ) ++numFirstByte;
+			if (                                 is_valid_second_byte_sjis(i)) ++numSecondByte;
+			if (is_valid_one_byte_key_char(i)                                ) ++numOneByte;
 		}
 	}
 #if FALSE
