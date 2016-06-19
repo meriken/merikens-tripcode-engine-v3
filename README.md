@@ -83,7 +83,10 @@ I am also working on the English version of my tripcode search service and would
 ## Supported Video Cards
 
 * AMD Radeon HD 5xxx or later
+* Equivalent AMD APUs
 * CUDA-enabled NVIDIA video card with compute capability of 2.0 or higher<sup>[3](#myfootnote3)</sup>
+ 
+**Note:** Intel HD Graphics Series is not supported as it is too slow and older versions of Intel OpenCL drivers are too buggy.
 
 <a name="myfootnote3">3</a>: [CUDA GPUs]( https://developer.nvidia.com/cuda-gpus )<br>
 
