@@ -321,11 +321,11 @@ I occasionaly create support threads for this program on 4chan to receive direct
 * [Meriken's Tripcode Engine English No. 3 (10/13/2015)]( http://archive.rebeccablacktech.com/g/thread/50803429 ) 
 * [Meriken's Tripcode Engine English No. 4 (10/17/2015)]( https://archive.rebeccablacktech.com/g/thread/50871258 )
 * [Meriken's Tripcode Engine English No. 5 (4/24/2016)]( https://archive.rebeccablacktech.com/g/thread/54208823 )
-* [Meriken's Tripcode Engine English No. 6 (5/14/2016)]( http://boards.4chan.org/g/thread/54553624 )
-* [Meriken's Tripcode Engine No. 7 (5/20/2016)]( http://boards.4chan.org/g/thread/54662329 )
-* [Meriken's Tripcode Engine No. 8 (5/21/2016)]( http://boards.4chan.org/g/thread/54679797 )
-* [Meriken's Tripcode Engine No. 9 (5/29/2016)]( http://boards.4chan.org/g/thread/54807160 )
-* [Meriken's Tripcode Engine No. 10 (6/4/2016)]( http://boards.4chan.org/g/thread/54906403 )
+* [Meriken's Tripcode Engine English No. 6 (5/14/2016)]( https://archive.rebeccablacktech.com/g/thread/54553624 )
+* [Meriken's Tripcode Engine No. 7 (5/20/2016)]( https://archive.rebeccablacktech.com/g/thread/54662329 )
+* [Meriken's Tripcode Engine No. 8 (5/21/2016)]( https://archive.rebeccablacktech.com/g/thread/54679797 )
+* [Meriken's Tripcode Engine No. 9 (5/29/2016)]( https://archive.rebeccablacktech.com/g/thread/54807160 )
+* [Meriken's Tripcode Engine No. 10 (6/4/2016)]( https://archive.rebeccablacktech.com/g/thread/54906403 )
 
 ## Source Code
 
