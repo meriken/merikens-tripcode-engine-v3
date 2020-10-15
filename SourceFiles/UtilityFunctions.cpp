@@ -125,7 +125,7 @@ void run_cpuid(uint32_t eax, uint32_t ecx, int32_t *abcd)
 	abcd[3] = d;
 }
 
-static uint64_t _xgetbv(uint32_t xcr)
+static uint64_t __xgetbv(uint32_t xcr)
 {
 	uint32_t eax, edx;
 
@@ -138,7 +138,7 @@ static uint64_t _xgetbv(uint32_t xcr)
 int32_t check_xcr0_ymm()
 {
 	uint32_t xcr0;
-	xcr0 = (uint32_t)_xgetbv(0);
+	xcr0 = (uint32_t)__xgetbv(0);
 	return ((xcr0 & 6) == 6); /* checking if xmm and ymm state are enabled in XCR0 */
 }
 
