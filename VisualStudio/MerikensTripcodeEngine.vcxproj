@@ -295,24 +295,24 @@
     <ClCompile Include="..\SourceFiles\VerificationDuplicates.cpp" />
     <ClCompile Include="..\SourceFiles\Verification12.cpp" />
     <CudaCompile Include="..\SourceFiles\CUDA10_Registers.cu">
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">compute_86,sm_86;compute_86,compute_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">compute_86,sm_86;compute_86,compute_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">compute_86,sm_86;compute_86,compute_86</CodeGeneration>
@@ -344,15 +344,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -362,15 +362,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -388,15 +388,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -406,15 +406,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -432,15 +432,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -450,15 +450,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -476,15 +476,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -494,15 +494,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -520,15 +520,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -538,15 +538,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -564,15 +564,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -582,15 +582,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -608,15 +608,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -626,15 +626,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -652,15 +652,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -670,15 +670,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -696,15 +696,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -714,15 +714,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -740,15 +740,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -758,15 +758,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -784,15 +784,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -802,15 +802,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -828,15 +828,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -846,15 +846,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -872,15 +872,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -890,15 +890,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -916,15 +916,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -934,15 +934,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -960,15 +960,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -978,15 +978,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1004,15 +1004,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|Win32'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|Win32'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
@@ -1022,15 +1022,15 @@
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">compute_86,sm_86</CodeGeneration>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">168</MaxRegCount>
-      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">168</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm61|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm60|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm53|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm52|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_English_NVIDIA_sm50|x64'">$(MteMaxRegCount)</MaxRegCount>
+      <MaxRegCount Condition="'$(Configuration)|$(Platform)'=='Release_NVIDIA|x64'">$(MteMaxRegCount)</MaxRegCount>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">compute_86,sm_86</CodeGeneration>
       <CodeGeneration Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">compute_86,sm_86</CodeGeneration>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -1372,6 +1372,10 @@
     <RootNamespace>MERIKENsTripcodeFinderCUI</RootNamespace>
     <ProjectName>MerikensTripcodeEngine</ProjectName>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <!-- Register cap for the DES register kernel (CUDA10_Registers.cu + its kernel launchers).
+         Override from the command line, e.g. msbuild /p:MteMaxRegCount=160 or =192, to tune
+         occupancy vs. register spill on sm_86. Default 168 preserves the original behaviour. -->
+    <MteMaxRegCount Condition="'$(MteMaxRegCount)'==''">168</MteMaxRegCount>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

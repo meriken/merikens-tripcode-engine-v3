@@ -1,0 +1,425 @@
+name: Build Windows x64 NVIDIA multi-kernel maxrregcount=192 (CUDA sm_86)
+
+# Builds MerikensTripcodeEngine as a 64-bit Windows .exe with CUDA code
+# generation for NVIDIA Ampere (sm_86, e.g. RTX 3060 Ti / 3060 / 3070 / 3080 / 3090).
+#
+# Toolchain (matches the migrated Visual Studio project):
+#   * Visual Studio 2022 (PlatformToolset v143)
+#   * CUDA Toolkit 11.8  (supports sm_50 ... sm_90, including sm_86)
+#   * Windows 10 SDK
+#   * YASM / vsyasm 1.3.0 (VS build customization for the *.asm CPU kernels)
+#   * Boost 1.61.0 static libraries (built in-tree)
+#   * OpenCL headers + OpenCL.lib taken from the CUDA Toolkit
+#
+# Configuration built: Release_English_NVIDIA | x64 (NVIDIA multi-kernel).
+# This variant compiles the 16 CUDA10_Registers kernel launchers (the "optimized
+# for NVIDIA" build the README warns is slow). Because the project now targets
+# sm_86 ONLY (no sm_50..sm_61), nvcc generates a single cubin per launcher instead
+# of seven, so the multi-kernel build is feasible within CI time limits.
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+    # The multi-kernel build is far heavier than single-kernel; raise the ceiling
+    # well above the default 360 min so a cold cache run does not get cancelled.
+    timeout-minutes: 360
+
+    env:
+      SOLUTION: VisualStudio/MerikensTripcodeEngine.sln
+      CONFIGURATION: Release_English_NVIDIA
+      PLATFORM: x64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ------------------------------------------------------------------
+      # Build tools
+      # ------------------------------------------------------------------
+      - name: Set up MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      # ------------------------------------------------------------------
+      # CUDA Toolkit 11.8 (with actions/cache/restore and save)
+      # ------------------------------------------------------------------
+      - name: Restore CUDA Toolkit 11.8 Cache
+        id: cache-cuda
+        uses: actions/cache/restore@v4
+        with:
+          path: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8
+          key: cuda-toolkit-11.8.0-windows-2022-v1
+          restore-keys: |
+            cuda-toolkit-11.8.0-windows-2022-
+
+      - name: Install CUDA Toolkit 11.8
+        if: steps.cache-cuda.outputs.cache-hit != 'true'
+        uses: Jimver/cuda-toolkit@v0.2.19
+        id: cuda-toolkit
+        with:
+          cuda: '11.8.0'
+          method: 'network'
+          # Only the subpackages we actually need, to keep the install fast.
+          sub-packages: '["nvcc", "cudart", "visual_studio_integration", "cublas", "cublas_dev", "thrust"]'
+
+      - name: Configure CUDA environment
+        shell: pwsh
+        run: |
+          $cudaDir = 'C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8'
+          Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH=$cudaDir"
+          Add-Content -Path $env:GITHUB_ENV -Value "CUDA_PATH_V11_8=$cudaDir"
+          Add-Content -Path $env:GITHUB_PATH -Value "$cudaDir\bin"
+
+          $vsBcDirs = Get-ChildItem -Path 'C:\Program Files\Microsoft Visual Studio\2022' -Recurse -Directory -Filter 'BuildCustomizations' -ErrorAction SilentlyContinue
+
+          # Copy all CUDA MSBuild extensions (*.props, *.targets, *.xml, *.dll including Nvda.Build.CudaTasks)
+          # from CUDA's MSBuildExtensions directory into every VS 2022 BuildCustomizations folder
+          $msExtDir = Join-Path $cudaDir 'extras\visual_studio_integration\MSBuildExtensions'
+          if (Test-Path $msExtDir) {
+            Write-Host "Copying all CUDA MSBuild extensions from $msExtDir ..."
+            $extFiles = Get-ChildItem -Path $msExtDir -File
+            foreach ($d in $vsBcDirs) {
+              foreach ($f in $extFiles) {
+                Copy-Item $f.FullName $d.FullName -Force
+                Write-Host "Copied $($f.Name) to $($d.FullName)"
+              }
+            }
+          } else {
+            # Search anywhere in CUDA installation for Nvda.Build.CudaTasks*.dll
+            Write-Warning "extras\visual_studio_integration\MSBuildExtensions not found, searching CUDA dir..."
+            $cudaFiles = Get-ChildItem -Path $cudaDir -Recurse -Include 'CUDA 11.8.*','Nvda.Build.CudaTasks*' -ErrorAction SilentlyContinue
+            foreach ($d in $vsBcDirs) {
+              foreach ($f in $cudaFiles) {
+                Copy-Item $f.FullName $d.FullName -Force
+                Write-Host "Copied $($f.Name) to $($d.FullName)"
+              }
+            }
+          }
+
+          # Patch host_config.h to permit modern MSVC (Visual Studio 2022 v17.10+)
+          $hostConfig = Join-Path $cudaDir 'include\crt\host_config.h'
+          if (Test-Path $hostConfig) {
+            Write-Host "Patching host_config.h to allow current MSVC..."
+            $hcContent = Get-Content $hostConfig -Raw
+            $hcContent = $hcContent -replace '#error:?\s*-- unsupported Microsoft Visual Studio version!', '// #error: unsupported MSVC bypassed'
+            Set-Content -Path $hostConfig -Value $hcContent
+          }
+
+          # Bypass STL1002 in MSVC STL for CUDA 11.8
+          $yvals = Get-ChildItem -Path 'C:\Program Files\Microsoft Visual Studio\2022' -Recurse -Filter 'yvals_core.h' -ErrorAction SilentlyContinue
+          foreach ($y in $yvals) {
+            Write-Host "Patching $($y.FullName) to allow CUDA 11.8 with modern STL..."
+            $yContent = Get-Content $y.FullName -Raw
+            $yContent = $yContent -replace '_EMIT_STL_ERROR\s*\(\s*STL1002[^\)]*\);', '// STL1002 bypassed'
+            $yContent = $yContent -replace 'static_assert\s*\(\s*false\s*,\s*"error STL1002[^"]*"\);', '// STL1002 bypassed'
+            Set-Content -Path $y.FullName -Value $yContent
+          }
+
+      - name: Save CUDA Toolkit 11.8 Cache
+        if: steps.cache-cuda.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8
+          key: cuda-toolkit-11.8.0-windows-2022-v1
+
+      - name: Report CUDA version
+        shell: pwsh
+        run: |
+          Write-Host "CUDA_PATH = $env:CUDA_PATH"
+          & "$env:CUDA_PATH\bin\nvcc.exe" --version
+
+      # ------------------------------------------------------------------
+      # YASM / vsyasm (VS build customization used by the *.asm files)
+      # ------------------------------------------------------------------
+      - name: Install vsyasm 1.3.0
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $tmp = Join-Path $env:RUNNER_TEMP 'vsyasm'
+          New-Item -ItemType Directory -Force -Path $tmp | Out-Null
+
+          $zip = Join-Path $tmp 'vsyasm.zip'
+          Invoke-WebRequest -Uri 'https://github.com/yasm/yasm/releases/download/v1.3.0/vsyasm-1.3.0-win64.zip' -OutFile $zip
+          Expand-Archive -Path $zip -DestinationPath $tmp -Force
+
+          # Install Visual C++ 2010 Redistributable (provides MSVCR100.dll required by vsyasm.exe)
+          Write-Host "Installing Visual C++ 2010 runtime (MSVCR100.dll)..."
+          choco install vcredist2010 --no-progress -y
+
+          $vsyasmExe = Get-ChildItem -Path $tmp -Recurse -Filter 'vsyasm.exe' | Select-Object -First 1
+          if (-not $vsyasmExe) { Write-Error "vsyasm.exe not found in archive"; exit 1 }
+
+          # Copy vsyasm.exe to System32 and GITHUB_PATH
+          Copy-Item $vsyasmExe.FullName 'C:\Windows\System32\vsyasm.exe' -Force -ErrorAction SilentlyContinue
+          Add-Content -Path $env:GITHUB_PATH -Value $tmp
+
+          # In VS2022, default $(VCInstallDir) is 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\'.
+          # vsyasm.props defaults $(YasmPath) to $(VCInstallDir)bin\.
+          # Ensure VC\bin exists and contains vsyasm.exe and msvcr100.dll:
+          $vcBin = 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\bin'
+          New-Item -ItemType Directory -Force -Path $vcBin | Out-Null
+          Copy-Item $vsyasmExe.FullName (Join-Path $vcBin 'vsyasm.exe') -Force
+          Copy-Item $vsyasmExe.FullName (Join-Path $vcBin 'yasm.exe') -Force
+          if (Test-Path 'C:\Windows\System32\msvcr100.dll') {
+            Copy-Item 'C:\Windows\System32\msvcr100.dll' (Join-Path $vcBin 'msvcr100.dll') -Force
+            Copy-Item 'C:\Windows\System32\msvcr100.dll' (Join-Path $tmp 'msvcr100.dll') -Force
+          }
+
+          # Verify vsyasm runs successfully
+          Write-Host "Verifying vsyasm.exe..."
+          & "$vcBin\vsyasm.exe" --version
+
+          # Fix quotation escaping bug in vsyasm.props:
+          # Original vsyasm.props has: <CommandLineTemplate>"$(YasmPath)"vsyasm.exe ...
+          # When $(YasmPath) has a trailing slash (VC\bin\), \" in Windows escapes the quote!
+          # Changing to: <CommandLineTemplate>"$(YasmPath)vsyasm.exe" ...
+          $propsFile = Get-ChildItem -Path $tmp -Recurse -Filter 'vsyasm.props' | Select-Object -First 1
+          if ($propsFile) {
+            $propsContent = Get-Content $propsFile.FullName -Raw
+            $propsContent = $propsContent -replace '"\$\(YasmPath\)"vsyasm\.exe', '"$(YasmPath)vsyasm.exe"'
+            Set-Content -Path $propsFile.FullName -Value $propsContent
+          }
+
+          # Install the MSBuild build-customization files (vsyasm.props/targets/xml)
+          # into every VC++ BuildCustomizations folder found for VS 2022.
+          $bcDirs = Get-ChildItem -Path 'C:\Program Files\Microsoft Visual Studio\2022' -Recurse -Directory -Filter 'BuildCustomizations' -ErrorAction SilentlyContinue
+          foreach ($d in $bcDirs) {
+            Get-ChildItem -Path $tmp -Recurse -Include 'vsyasm.props','vsyasm.targets','vsyasm.xml' |
+              ForEach-Object { Copy-Item $_.FullName $d.FullName -Force }
+            Write-Host "Installed vsyasm build customization to $($d.FullName)"
+          }
+      - name: Restore Boost build cache
+        id: cache-boost
+        uses: actions/cache/restore@v4
+        with:
+          path: BoostPackages/boost_1_61_0/stage
+          key: boost-1.61.0-static-x64-msvc143-v6
+
+      - name: Extract and patch Boost headers
+        shell: pwsh
+        working-directory: BoostPackages
+        run: |
+          if (-not (Test-Path 'boost_1_61_0/boost')) {
+            Write-Host "Extracting boost_1_61_0.7z headers..."
+            & 7z x boost_1_61_0.7z -y | Out-Null
+          }
+
+          # 1. Patch boost/config/compiler/nvcc.hpp for modern CUDA (11.8+):
+          # In CUDA 9+, __CUDACC_VER__ is deprecated/removed in favor of __CUDACC_VER_MAJOR__,
+          # causing "fatal error C1017: invalid integer constant expression" on line 22.
+          $nvccHpp = 'boost_1_61_0/boost/config/compiler/nvcc.hpp'
+          if (Test-Path $nvccHpp) {
+            Write-Host "Patching nvcc.hpp for modern CUDA..."
+            $content = Get-Content $nvccHpp -Raw
+            $content = $content -replace '#if\s*!defined\(__CUDACC_VER__\)\s*\|\|\s*\(__CUDACC_VER__\s*<\s*70500\)', '#if 0'
+            Set-Content -Path $nvccHpp -Value $content
+          }
+
+          # 2. Patch boost/iostreams for modern MSVC STL:
+          # VS2022 removed non-standard member std::fpos::seekpos() and macro _FPOSOFF.
+          # Disabling legacy Dinkumware FPOS switches boost::iostreams to standard C++ streampos/streamoff.
+          $fposHpp = 'boost_1_61_0/boost/iostreams/detail/config/fpos.hpp'
+          if (Test-Path $fposHpp) {
+            Write-Host "Patching fpos.hpp for modern MSVC STL..."
+            $content = Get-Content $fposHpp -Raw
+            $content = $content -replace 'BOOST_IOSTREAMS_HAS_DINKUMWARE_FPOS', 'BOOST_IOSTREAMS_DISABLED_DINKUMWARE_FPOS'
+            Set-Content -Path $fposHpp -Value $content
+          }
+
+          $positioningHpp = 'boost_1_61_0/boost/iostreams/positioning.hpp'
+          if (Test-Path $positioningHpp) {
+            Write-Host "Patching positioning.hpp for modern MSVC STL..."
+            $content = Get-Content $positioningHpp -Raw
+            $content = $content -replace 'return pos\.seekpos\(\);', 'return static_cast<std::streamoff>(pos);'
+            $content = $content -replace '_FPOSOFF\(', 'static_cast<stream_offset>('
+            Set-Content -Path $positioningHpp -Value $content
+          }
+
+      - name: Build Boost 1.61.0 libraries
+        if: steps.cache-boost.outputs.cache-hit != 'true'
+        shell: pwsh
+        working-directory: BoostPackages
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Push-Location boost_1_61_0
+
+          # Patch tools/build/src/tools/msvc.jam:
+          # In GitHub Actions, the MSVC x64 compiler environment (cl.exe, LIB, INCLUDE)
+          # is already fully initialized by ilammy/msvc-dev-cmd.
+          # Boost's 'maybe-rewrite-setup' tries to invoke vcvarsall for multiple architectures
+          # and fails on modern VS2022 with: rule 'errors.error' unknown in module 'msvc'.
+          # Overriding maybe-rewrite-setup to return an empty prefix instructs b2 to invoke
+          # cl.exe directly at native speed without running external batch wrappers.
+          $msvcJam = "tools/build/src/tools/msvc.jam"
+          if (Test-Path $msvcJam) {
+            Write-Host "Patching msvc.jam to use active MSVC dev environment directly..."
+            $content = Get-Content $msvcJam -Raw
+            $pattern = 'rule maybe-rewrite-setup\s*\([^\)]*\)\s*\{[\s\S]*?\n\}'
+            $replacement = "rule maybe-rewrite-setup ( toolset : setup-script ? : setup-options * : version ? : rewrite-setup ? )`r`n{`r`n    return `"`" ;`r`n}"
+            $content = [System.Text.RegularExpressions.Regex]::Replace($content, $pattern, $replacement)
+            Set-Content -Path $msvcJam -Value $content
+          }
+
+          # Patch boost/iostreams for modern MSVC STL:
+          # VS2022 removed non-standard member std::fpos::seekpos() and macro _FPOSOFF.
+          # Disabling legacy Dinkumware FPOS switches boost::iostreams to standard C++ streampos/streamoff.
+          $fposHpp = "boost/iostreams/detail/config/fpos.hpp"
+          if (Test-Path $fposHpp) {
+            Write-Host "Patching fpos.hpp for modern MSVC STL..."
+            $content = Get-Content $fposHpp -Raw
+            $content = $content -replace 'BOOST_IOSTREAMS_HAS_DINKUMWARE_FPOS', 'BOOST_IOSTREAMS_DISABLED_DINKUMWARE_FPOS'
+            Set-Content -Path $fposHpp -Value $content
+          }
+
+          $positioningHpp = "boost/iostreams/positioning.hpp"
+          if (Test-Path $positioningHpp) {
+            Write-Host "Patching positioning.hpp for modern MSVC STL..."
+            $content = Get-Content $positioningHpp -Raw
+            $content = $content -replace 'return pos\.seekpos\(\);', 'return static_cast<std::streamoff>(pos);'
+            $content = $content -replace '_FPOSOFF\(', 'static_cast<stream_offset>('
+            Set-Content -Path $positioningHpp -Value $content
+          }
+
+          # Bootstrap Boost.Build with cl.exe
+          Write-Host "Bootstrapping Boost.Build with cl.exe..."
+          cmd /c "bootstrap.bat"
+          if (-not (Test-Path "b2.exe")) {
+            Write-Error "bootstrap.bat failed to generate b2.exe!"
+            if (Test-Path "bootstrap.log") { Get-Content "bootstrap.log" }
+            exit 1
+          }
+
+          # Configure project-config.jam for msvc 14.0
+          $projectConfig = @(
+            'import option ;',
+            'using msvc : 14.0 ;'
+          ) -join "`r`n"
+          Set-Content -Path "project-config.jam" -Value $projectConfig
+
+          Write-Host "Building Boost static libraries with b2..."
+          .\b2 link=static runtime-link=static address-model=64 toolset=msvc-14.0 `
+               -j 4 --stagedir=stage/x64 `
+               --with-system --with-iostreams --with-filesystem --with-locale
+
+          # Check output libs
+          Write-Host "Built Boost libraries in stage/x64/lib:"
+          if (Test-Path stage/x64/lib) {
+            Get-ChildItem -Path stage/x64/lib -Filter *.lib | Select-Object Name
+
+            # Ensure libraries are accessible whether auto-link requests vc140 or vc143
+            Get-ChildItem -Path stage/x64/lib -Filter *vc140*.lib | ForEach-Object {
+              $alias = $_.Name -replace 'vc140', 'vc143'
+              $dest = Join-Path $_.Directory $alias
+              if (-not (Test-Path $dest)) { Copy-Item $_.FullName $dest -Force }
+            }
+            Get-ChildItem -Path stage/x64/lib -Filter *vc143*.lib | ForEach-Object {
+              $alias = $_.Name -replace 'vc143', 'vc140'
+              $dest = Join-Path $_.Directory $alias
+              if (-not (Test-Path $dest)) { Copy-Item $_.FullName $dest -Force }
+            }
+          } else {
+            Write-Error "stage/x64/lib was not created by b2!"
+            exit 1
+          }
+          Pop-Location
+
+      - name: Save Boost build cache
+        if: steps.cache-boost.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: BoostPackages/boost_1_61_0/stage
+          key: boost-1.61.0-static-x64-msvc143-v6
+
+      - name: Configure Boost environment and library aliases
+        shell: pwsh
+        run: |
+          $pkgDir = (Resolve-Path 'BoostPackages').Path
+          $boostDir = Join-Path $pkgDir 'boost_1_61_0'
+          $extraInc = Join-Path $pkgDir 'include'
+          $boostLib = Join-Path $boostDir 'stage\x64\lib'
+
+          # Ensure libraries have both vc140 and vc143 aliases
+          if (Test-Path $boostLib) {
+            Get-ChildItem -Path $boostLib -Filter *vc140*.lib | ForEach-Object {
+              $alias = $_.Name -replace 'vc140', 'vc143'
+              $dest = Join-Path $_.Directory $alias
+              if (-not (Test-Path $dest)) { Copy-Item $_.FullName $dest -Force }
+            }
+            Get-ChildItem -Path $boostLib -Filter *vc143*.lib | ForEach-Object {
+              $alias = $_.Name -replace 'vc143', 'vc140'
+              $dest = Join-Path $_.Directory $alias
+              if (-not (Test-Path $dest)) { Copy-Item $_.FullName $dest -Force }
+            }
+          }
+
+          Add-Content -Path $env:GITHUB_ENV -Value "INCLUDE=$boostDir;$extraInc;$env:INCLUDE"
+          Add-Content -Path $env:GITHUB_ENV -Value "LIB=$boostLib;$env:LIB"
+
+      # ------------------------------------------------------------------
+      # Build the engine (NVIDIA multi-kernel, 16 launchers, sm_86 only)
+      # ------------------------------------------------------------------
+      - name: Build (Release_English_NVIDIA | x64, sm_86 multi-kernel, maxrregcount=192)
+        shell: pwsh
+        run: |
+          msbuild $env:SOLUTION `
+            /m `
+            /p:Configuration=$env:CONFIGURATION `
+            /p:Platform=$env:PLATFORM `
+            /p:WindowsTargetPlatformVersion=10.0 `
+            /p:PlatformToolset=v143 `
+            /p:MteMaxRegCount=192 `
+            /verbosity:minimal
+
+      - name: Locate build output
+        id: find-exe
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem -Path . -Recurse -Filter 'MerikensTripcodeEngine*.exe' -ErrorAction SilentlyContinue |
+                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
+          if (-not $exe) { Write-Error "No MerikensTripcodeEngine*.exe produced."; exit 1 }
+          Write-Host "Built: $($exe.FullName)"
+          "exe_path=$($exe.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+          "exe_dir=$($exe.Directory.FullName)" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
+
+      # ------------------------------------------------------------------
+      # Package: exe + OpenCL kernels + CUDA runtime DLL
+      # ------------------------------------------------------------------
+      - name: Stage release package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $pkg = Join-Path $env:GITHUB_WORKSPACE 'package'
+          New-Item -ItemType Directory -Force -Path $pkg | Out-Null
+
+          # Executable
+          Copy-Item '${{ steps.find-exe.outputs.exe_path }}' $pkg -Force
+
+          # OpenCL kernels / GCN binaries required at runtime
+          if (Test-Path 'SourceFiles/OpenCL') {
+            Copy-Item 'SourceFiles/OpenCL' (Join-Path $pkg 'OpenCL') -Recurse -Force
+          }
+
+          # CUDA runtime DLL so the exe runs without a full CUDA install
+          $cudart = Get-ChildItem -Path "$env:CUDA_PATH\bin" -Filter 'cudart64_*.dll' -ErrorAction SilentlyContinue | Select-Object -First 1
+          if ($cudart) { Copy-Item $cudart.FullName $pkg -Force }
+
+          # A sample patterns.txt if present
+          Get-ChildItem -Path . -Recurse -Filter 'patterns.txt' -ErrorAction SilentlyContinue |
+            Select-Object -First 1 | ForEach-Object { Copy-Item $_.FullName $pkg -Force }
+
+          Write-Host "Package contents:"
+          Get-ChildItem -Recurse $pkg | Select-Object FullName
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: MerikensTripcodeEngine-sm86-nvidia-x64-rreg192
+          path: package/**
+          if-no-files-found: error
